@@ -24,15 +24,22 @@ This is the magic "robottino" by Castellani Davide & Sabaini Chiara
  - python3 create_structure.py
 
 # Changelog
+ - [02.01_2020-3-24](#01.01_2020-3-24)
  - [01.01_2020-3-24](#01.01_2020-3-24)
 									 
+
+
+### 02.01_2020-3-24
+ #### Changes
+   - adjusted some bugs
+   - improved the program
 
 ### 01.01_2020-3-24
  - Initial version
 
 ---
 Made by Castellani Davide 
-If you have any problem please contact our:
+If you have any problem please contact us:
 - help@castellanidavide.it
 - [Issue](https://github.com/CastellaniDavide/create_structure/issues)
 - chiara@sabaini.com
