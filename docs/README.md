@@ -32,7 +32,7 @@ This is the magic "robottino" by Castellani Davide & Sabaini Chiara
 
 ---
 Made by Castellani Davide 
-If you have any problem please contact me:
+If you have any problem please contact our:
 - help@castellanidavide.it
 - [Issue](https://github.com/CastellaniDavide/create_structure/issues)
 - chiara@sabaini.com
