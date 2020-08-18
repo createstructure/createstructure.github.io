@@ -1,0 +1,4 @@
+DateTime>=4.3
+PyGithub>=1.53
+pygit2>=1.2.1
+requests>=2.24.0

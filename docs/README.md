@@ -6,8 +6,7 @@ This is the magic "robottino" by Castellani Davide & Sabaini Chiara
 
 ## Required
  - python3
- - PyGithub (pip3 install PyGithub)
- - pygit2 (pip3 install pygit2)
+ - some pip pakeges, to install it go in requirements folder and execute: pip3 install -r requirements.txt
  - Internet connection
  - GitHub account
  
@@ -17,25 +16,33 @@ This is the magic "robottino" by Castellani Davide & Sabaini Chiara
      - bug_report.md
      - feature-request.md
  - bin
-	 - create_structure.py
+   - create_structure.py
  - doc
    - LICENSE
    - README.md
  - log
-	 - trace.log
+   - trace.log
+ - requirements
+   - requirements.txt
    
 ### Execution examples
  - python3 create_structure.py
 
 # Changelog
+ - [3.0_2020-8-18](#3.0_2020-8-18)	
  - [3.0_2020-8-15](#3.0_2020-8-15)								 
  - [2.0_2020-3-24](#2.0_2020-3-24)
  - [1.0_2020-3-24](#1.0_2020-3-24)
-									 
+
+### 3.1_2020-8-18
+ #### Changes
+   - optimized the code
+   - added requirements.txt 
 
 ### 3.0_2020-8-15
- - #### Changes
+ #### Changes
    - add GitHub support with a lot of options (eg. repo private or public)
+   
 ### 2.0_2020-3-24
  #### Changes
    - adjusted some bugs
