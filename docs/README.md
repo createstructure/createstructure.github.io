@@ -24,9 +24,10 @@ This is the magic "robottino" by Castellani Davide & Sabaini Chiara
  - python3 create_structure.py
 
 # Changelog
- - [Version_1.0_2020-8-18](#Version_10_2020-8-18)
+ - [01.01_2020-3-24](#01.01_2020-3-24)
+									 
 
-## Version_1.0_2020-8-18
+### 01.01_2020-3-24
  - Initial version
 
 ---
@@ -34,3 +35,4 @@ Made by Castellani Davide
 If you have any problem please contact me:
 - help@castellanidavide.it
 - [Issue](https://github.com/CastellaniDavide/create_structure/issues)
+- chiara@sabaini.com
