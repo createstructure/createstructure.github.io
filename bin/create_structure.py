@@ -3,53 +3,54 @@
 # Imports
 import os
 from datetime import *
+from github import Github
+import pygit2
+from getpass import getpass
 
 __author__ = "davidecastellani@castellanidavide.it", "chiara@sabaini.com"
-__version__ = "02.01 2020-03-24"
+__version__ = "03.01 2020-08-15"
 
-class create_structure_02_01:
+class create_structure_03_01:
 	def __init__ (self):
 		"""Main function
 		"""
-		questions = [	"Inserisci nome progetto (es. create_structur): ",	#0
-						"Inserisci estensione file principale (es. py): "]	#1
+		questions = [	"Inserisci nome progetto (es. create_structur): ",																	#0
+						"Inserisci estensione file principale (es. py): ",																	#1
+						"Inserisci una descrizione del progetto: ",																			#2
+						"Il progetto è con Boscaini (<nome della classe>-<numero consegna>), Bellini (b) o qualcunaltro(lasciare vuoto)? ",	#3
+						"Questo progetto è con la Chiara?(Y/N): ",																			#4
+						"Questo progetto è privato?(Y/N): ",																				#5
+						"Inserisci il tuo username di GitHub: ",																			#6
+						"Inserisci la tua password su GitHub: "																				#7
+					]
 		results = []
-		for current_quest in questions:
-			results.append(input(current_quest))
-		
-		main_folder_name = create_structure_02_01.create_folder_structure(results)
-		print(f"Folders built in {main_folder_name}")
 
-		create_structure_02_01.create_source(main_folder_name, results)
+		for i, current_quest in enumerate(questions):
+			if i == len(questions) - 1:
+				results.append(getpass(prompt=current_quest))
+			else:
+				results.append(input(current_quest))
+		
+		print()
+
+		folder_name = f"./{results[0].lower()}_01_01" if (results[3] == "b") else (f"./{results[0]}" if(results[3] == "") else f"./{results[3]}-{results[0]}")
+		create_structure_03_01.create_folder(folder_name)
+		print(f"Folder built")
+
+		repo = create_structure_03_01.create_repo(results)
+		print(f"Repo built")
+
+		create_structure_03_01.create_source(repo, results)
 		print(f"Source file built")
 
-		create_structure_02_01.create_README(main_folder_name, results)
+		create_structure_03_01.create_README(repo, results)
 		print(f"README.md built")
 
-		create_structure_02_01.create_log(main_folder_name)
+		create_structure_03_01.create_log(repo)
 		print(f"trace.log built")
 
-
-	def create_folder_structure(results):
-		"""Creates del directories structure
-		"""
-		# Create main folder
-		main_folder_name = "./" + results[0].lower() + "_01_01"
-		create_structure_02_01.create_folder(main_folder_name)
-
-		# Create bin folder
-		bin_folder_name = main_folder_name + "/bin"
-		create_structure_02_01.create_folder(bin_folder_name)
-
-		# Create doc folder
-		doc_folder_name = main_folder_name + "/doc"
-		create_structure_02_01.create_folder(doc_folder_name)
-
-		# Create log folder
-		doc_folder_name = main_folder_name + "/log"
-		create_structure_02_01.create_folder(doc_folder_name)
-
-		return main_folder_name
+		create_structure_03_01.download_repo(repo, folder_name)
+		print(f"repo downloaded")
 
 	def create_folder(directory):
 		"""Creates a folder
@@ -60,11 +61,21 @@ class create_structure_02_01:
 		except OSError:
 			print ('Error: Creating directory. ' +  directory)
 
-	def create_source(main_folder_name, results):
+	def create_repo(results):
+		"""Create the repo in CastellaniDavide repository
+		"""
+		if results[4] == "Y":
+			repo = Github(results[6], results[7]).get_organization("CastellaniDavide").create_repo(results[0], description=results[2], private=results[5] == "Y", has_issues=False, has_wiki=False, has_downloads=True, has_projects=False, team_id=4008430)
+		else:
+			repo = Github(results[6], results[7]).get_organization("CastellaniDavide").create_repo(results[0], description=results[2], private=results[5] == "Y", has_issues=False, has_wiki=False, has_downloads=True, has_projects=False)
+
+		return repo
+
+	def create_source(repo, results):
 		"""Writes the standards line of code based on the extension
 		"""
 		time = datetime.now()
-		file_name_and_path = f"{main_folder_name}/bin/{results[0]}.{results[1]}"
+
 		if(results[1] == "py"):
 			text = f'"""{results[0]}\n"""\n\n__author__ = "davidecastellani@castellanidavide.it", "chiara@sabaini.com"\n__version__ = "01.01 {str(time.day)}-{str(time.month)}-{str(time.day)}"\n\n'	# first part
 			text += f'class {results[0]}:\n\tdef __init__ (self):\n\nif __name__ == "__main__":\n\t{results[0]}()'
@@ -87,18 +98,19 @@ class create_structure_02_01:
 		else:
 			text = f"# {results[0]}"
 
-		f = open(file_name_and_path, "w+")
-		f.write(text)
-		f.close()
+		if(results[4] == "N"):
+			text = text.replace(" & Sabaini Chiara", "").replace(', "chiara@sabaini.com"', "")
 
-	def create_README(main_folder_name, results):
+		repo.create_file(f"bin/{results[0]}.{results[1]}", f"Created {results[0]}.{results[1]}", text)
+
+	def create_README(repo, results):
 		"""Creates the README.md
 		"""
 		time = datetime.now()
-		file_name_and_path = main_folder_name + "/doc/README.md"
+
 		init = f"# {results[0]}\n"
 		tags = f"\n## Tags\n #tag1, #tag2\n"
-		desc = f"\n## Description\n"
+		desc = f"\n## Description\n{results[2]}\n"
 		req = f"\n## Required\n - \n"
 		dir_structure = f"\n### Directories structure\n - bin\n\t - {results[0]}.{results[1]}\n - doc\n\t - README.md\n - log\n\t - trace.log\n"
 		exe_examples = f"\n### Execution examples\n - {results[0]}.{results[1]}\n\t - \n"		
@@ -107,19 +119,24 @@ class create_structure_02_01:
 		finish = f"\nMade by Castellani Davide & Sabaini Chiara\nIf you have any problem please contact us:\n- davidecastellani@castellanidavide.it\n- chiara@sabaini.com"
 		sep = f"\n---"
 		text = init + tags + desc + req + sep + dir_structure + sep + exe_examples + sep + changelog + sep + version + sep + finish
-		with open(file_name_and_path, "w+") as f:
-			f.write(text)
 
-	def create_log(main_folder_name):
+		if(results[4] == "N"):
+			text = text.replace(" & Sabaini Chiara", "").replace("\n- chiara@sabaini.com", "")
+		
+		repo.create_file("docs/README.md", f"Created README.md", text)
+
+	def create_log(repo):
 		"""Creates the trace.log
 		"""
-		file_name_and_path = main_folder_name + "/log/trace.log"
-		with open(file_name_and_path, "w+"):
-			pass
+		repo.create_file("log/trace.log", f"Created trace.log", "")
 		
+	def download_repo(repo, folder_name):
+		"""Downloads the repo into folder_name
+		"""
+		pygit2.clone_repository(repo.git_url, folder_name)
 
 if __name__ == "__main__":
 	try:
-		create_structure_02_01()
+		create_structure_03_01()
 	except:
 		print("There is an error, try again.")

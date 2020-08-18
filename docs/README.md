@@ -1,11 +1,15 @@
 # create_structure
-[![GitHub license](https://img.shields.io/badge/licence-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v2.0-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure)
+[![GitHub license](https://img.shields.io/badge/licence-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v3.0-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure)
 
 # Description
 This is the magic "robottino" by Castellani Davide & Sabaini Chiara
 
 ## Required
  - python3
+ - PyGithub (pip3 install PyGithub)
+ - pygit2 (pip3 install pygit2)
+ - Internet connection
+ - GitHub account
  
 ## Directories structure
  - .github
@@ -24,11 +28,14 @@ This is the magic "robottino" by Castellani Davide & Sabaini Chiara
  - python3 create_structure.py
 
 # Changelog
- - [02.01_2020-3-24](#2.0_2020-3-24)
- - [01.01_2020-3-24](#1.0_2020-3-24)
+ - [3.0_2020-8-15](#3.0_2020-8-15)								 
+ - [2.0_2020-3-24](#2.0_2020-3-24)
+ - [1.0_2020-3-24](#1.0_2020-3-24)
 									 
 
-
+### 3.0_2020-8-15
+ - #### Changes
+   - add GitHub support with a lot of options (eg. repo private or public)
 ### 2.0_2020-3-24
  #### Changes
    - adjusted some bugs
