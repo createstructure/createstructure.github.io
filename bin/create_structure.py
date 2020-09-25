@@ -8,8 +8,10 @@ import pygit2
 from getpass import getpass
 import requests
 
-__author__ = "davidecastellani@castellanidavide.it", "chiara@sabaini.com"
-__version__ = "3.1 2020-08-18"
+__author__ = "help@castellanidavide.it"
+__version__ = "4.0 2020-09-25"
+
+TOKEN = "<INSERT_YOUR_TOKEN>"
 
 class create_structure:
 	def __init__ (self):
@@ -20,17 +22,16 @@ class create_structure:
 						"Inserisci una descrizione del progetto: ",																			#2
 						"Il progetto è con Boscaini (<nome della classe>-<numero consegna>), Bellini (b) o qualcunaltro(lasciare vuoto)? ",	#3
 						"Questo progetto è con la Chiara?(Y/N): ",																			#4
-						"Questo progetto è privato?(Y/N): ",																				#5
-						"Inserisci il tuo username di GitHub: ",																			#6
-						"Inserisci la tua password su GitHub: "																				#7
+						"Questo progetto è privato?(Y/N): ",																				#5																		#7
 					]
 		results = []
 
 		for i, current_quest in enumerate(questions):
-			if i == len(questions) - 1:
+			"""if i == len(questions) - 1:
 				results.append(getpass(prompt=current_quest))
 			else:
-				results.append(input(current_quest))
+				results.append(input(current_quest))"""
+			results.append(input(current_quest))
 		
 		print()
 
@@ -51,16 +52,13 @@ class create_structure:
 		template = g.get_repo(f"CastellaniDavide/{typerepo}-template")
 		create_structure.scan_and_elaborate(repo, template, "", typerepo, results)
 
-		if results[5] == "N":
-			create_structure.download_repo(repo, folder_name)
-			print(f"repo downloaded")
-		else:
-			print(f"Your repo is redy online")
+		os.system(f"git clone git@github.com:CastellaniDavide/{results[0]}.git", shell=False)
+		print(f"repo downloaded")
 	
 	def login(results):
 		"""Made the login in GitHub
 		"""
-		return Github(results[6], results[7])
+		return Github(TOKEN)
 
 	def create_folder(directory):
 		"""Creates a folder
@@ -75,9 +73,9 @@ class create_structure:
 		"""Create the repo in CastellaniDavide repository
 		"""
 		if results[4] == "Y":
-			repo = g.get_organization("CastellaniDavide").create_repo(results[0] if(results[3] == "") else f"{results[3]}-{results[0]}", description=results[2], private=results[5] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=4008430)
+			repo = g.get_organization("CastellaniDavide").create_repo(results[0] if(results[3] == "" or results[3] == "b") else f"{results[3]}-{results[0]}", description=results[2], private=results[5] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=4008430)
 		else:
-			repo = g.get_organization("CastellaniDavide").create_repo(results[0] if(results[3] == "") else f"{results[3]}-{results[0]}", description=results[2], private=results[5] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+			repo = g.get_organization("CastellaniDavide").create_repo(results[0] if(results[3] == "" or results[3] == "b") else f"{results[3]}-{results[0]}", description=results[2], private=results[5] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 			
 		return repo
 
@@ -140,6 +138,7 @@ class create_structure:
 		pygit2.clone_repository(repo.git_url, folder_name)
 
 if __name__ == "__main__":
+	assert(TOKEN == "<INSERT_YOUR_TOKEN>", "You must to put your tocken into TOKEN variable")
 	try:
 		create_structure()
 	except:
