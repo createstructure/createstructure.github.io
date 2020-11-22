@@ -1,6 +1,9 @@
-"""This is the magic "robottino" by Castellani Davide & Sabaini Chiara
+"""This is the magic "robottino" by Castellani Davide
+With this programm you can easly create a repository on GitHub with a basic template, personalized for your use.
+
+If there was any type of problem you can contact me on my help email: help@castellanidavide.it
 """
-# Imports
+# Some imports
 import os
 from datetime import *
 from github import Github
@@ -9,39 +12,32 @@ from getpass import getpass
 import requests
 
 __author__ = "help@castellanidavide.it"
-__version__ = "4.0 2020-09-25"
+__version__ = "5.0 2020-11-21"
 
-TOKEN = "<INSERT_YOUR_TOKEN>"
+TOKEN = "TODO"
+SOUCES_OF_TEMPLATES = ["TODO", "CastellaniDavide"]
+ORGANIZATION_NAME = "TODO" # Leave empty if you want to add into your personal GitHub account
 
 class create_structure:
 	def __init__ (self):
 		"""Main function
 		"""
-		questions = [	"Inserisci nome progetto (es. create_structure): ",																	#0
-						"Inserisci estensione file principale (es. py): ",																	#1
-						"Inserisci una descrizione del progetto: ",																			#2
-						"Il progetto è con Boscaini (<nome della classe>-<numero consegna>), Bellini (b) o qualcunaltro(lasciare vuoto)? ",	#3
-						"Questo progetto è con la Chiara?(Y/N): ",																			#4
-						"Questo progetto è privato?(Y/N): ",																				#5																		#7
+		questions = [["name",		"Name of the project (es. create_structure): "],
+					 ["extention",	"Extenction of the main programm (es. py): "],
+					 ["descr",		"Description of the project: "],
+					 ["prefix",		"Insert the prefix of the repository (or don't insert something): "],
+					 ["private",	"Is that private?(Y/N): "],
 					]
-		results = []
+		results = {}
 
-		for i, current_quest in enumerate(questions):
-			"""if i == len(questions) - 1:
-				results.append(getpass(prompt=current_quest))
-			else:
-				results.append(input(current_quest))"""
-			results.append(input(current_quest))
+		# Get infos
+		for question_tag, current_quest in questions:
+			results[question_tag] = input(current_quest)
 		
 		print()
 
 		g = create_structure.login(results)
 		print(f"Credentials OK")
-
-		folder_name = f"./{results[0].lower()}_01_01" if (results[3] == "b") else (f"./{results[0]}" if(results[3] == "") else f"./{results[3]}-{results[0]}")
-		if results[5] == "N":
-			create_structure.create_folder(folder_name)
-			print(f"Folder built")
 
 		repo = create_structure.create_repo(results, g)
 		print(f"Repo built")
@@ -49,11 +45,7 @@ class create_structure:
 		typerepo = create_structure.choose_template(results, g)
 		print(f"Template founded ({typerepo})")
 
-		template = g.get_repo(f"CastellaniDavide/{typerepo}-template")
-		create_structure.scan_and_elaborate(repo, template, "", typerepo, results)
-
-		os.system(f"git clone git@github.com:CastellaniDavide/{results[0]}.git", shell=False)
-		print(f"repo downloaded")
+		create_structure.scan_and_elaborate(repo, g.get_repo(typerepo), "", typerepo, results)
 	
 	def login(results):
 		"""Made the login in GitHub
@@ -72,21 +64,32 @@ class create_structure:
 	def create_repo(results, g):
 		"""Create the repo in CastellaniDavide repository
 		"""
-		if results[4] == "Y":
-			repo = g.get_organization("CastellaniDavide").create_repo(results[0] if(results[3] == "" or results[3] == "b") else f"{results[3]}-{results[0]}", description=results[2], private=results[5] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=4008430)
+		if ORGANIZATION_NAME == "":
+			return g.get_user().create_repo(results['name'] if(results['prefix'] == "" or results['prefix'] == "b") else f"{results['prefix']}-{results['name']}", description=results['descr'], private=results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 		else:
-			repo = g.get_organization("CastellaniDavide").create_repo(results[0] if(results[3] == "" or results[3] == "b") else f"{results[3]}-{results[0]}", description=results[2], private=results[5] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
-			
-		return repo
+			return g.get_organization(ORGANIZATION_NAME).create_repo(results['name'] if(results['prefix'] == "" or results['prefix'] == "b") else f"{results['prefix']}-{results['name']}", description=results['descr'], private=results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 
 	def choose_template(results, g):
 		"""This helps to find the correct template
 		"""
-		try:
-			g.get_repo(f"CastellaniDavide/{results[1]}-template")
-			return f"{results[1]}"
-		except:
-			return "default"
+		# Check if there is my template
+		for source in SOUCES_OF_TEMPLATES:
+			if source != "TODO":
+				try:
+					return g.get_repo(f"{source}/{results['extention']}-template").full_name
+				except:
+					pass
+
+		# Check if there was a default template
+		for source in SOUCES_OF_TEMPLATES:
+			if source != "TODO":
+				try:
+					return g.get_repo(f"{source}/default-template").full_name
+				except:
+					pass
+
+		# If there wasn't any template for your type of extention and no one default into SOURCES list, give my default code
+		return "CastellaniDavide\default"
 
 	def scan_and_elaborate(repo, template, loc, typerepo, results):
 		"""Scan all files in the repository and push it in the new directory (cahanging the necessary)
@@ -104,20 +107,21 @@ class create_structure:
 
 	def elaborate_file(repo, typerepo, filepath, results):
 		"""Elaborate the file
-		"""
+		"""		
+		page = requests.get(f"https://raw.githubusercontent.com/{typerepo}/master/{filepath}").text
+				
 		try:
-			page = requests.get(f"https://raw.githubusercontent.com/CastellaniDavide/{typerepo}-template/master/{filepath}").text
 			page = create_structure.change(page, typerepo, results)
-			repo.create_file(filepath.replace("template", results[0]), f"Created {filepath}", f"{page}")
-			print(f"Created {filepath.replace('template', results[0])}")
+			repo.create_file(filepath.replace("template", results['name']), f"Created {filepath}", f"{page}")
+			print(f"Created {filepath.replace('template', results['name'])}")
 		except:
-			print(f"Error {filepath.replace('template', results[0])}\t{type(page)}\n{page}")
+			print(f"Error {filepath.replace('template', results['name'])}\t{type(page)}\n{page}")
 
 	def change(page, typerepo, results):
 		"""Returns the changed page
 		"""
-		data = eval(requests.get(f"https://raw.githubusercontent.com/CastellaniDavide/{typerepo}-template/master/.castellanidavide/change.json").text)
-		advanced_values = { f"sol{i}sol" : j for i, j in enumerate(results)}
+		data = eval(requests.get(f"https://raw.githubusercontent.com/{typerepo}/master/.castellanidavide/change.json").text)
+		advanced_values = { f"sol{i}sol" : j for i, j in results.items()}
 		time = datetime.now()
 		time = f"{str(time.year)}-{str(time.month)}-{str(time.day)}"
 
@@ -128,17 +132,14 @@ class create_structure:
 			page = page.replace(i, advanced_values[i])
 
 		page = page.replace("time__now", time)
-		page = page.replace("time_now", time.replace("_", ""))
+		page = page.replace("time_now", time.replace("_", "").replace("-", ""))
 		
 		return page
-		
-	def download_repo(repo, folder_name):
-		"""Downloads the repo into folder_name
-		"""
-		pygit2.clone_repository(repo.git_url, folder_name)
 
 if __name__ == "__main__":
-	assert(TOKEN == "<INSERT_YOUR_TOKEN>", "You must to put your tocken into TOKEN variable")
+	assert TOKEN != "TODO", "You must to put your tocken into TOKEN variable"
+	assert ORGANIZATION_NAME != "TODO", "You must to set ORGANIZATION_NAME variable"
+	
 	try:
 		create_structure()
 	except:
