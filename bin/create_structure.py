@@ -22,23 +22,32 @@ class create_structure:
 	def __init__ (self):
 		"""Main function
 		"""
+		g = create_structure.login() # Login
+
+		# Make questions
 		questions = [["name",		"Name of the project (es. create_structure): "],
 					 ["extention",	"Extenction of the main programm (es. py): "],
 					 ["descr",		"Description of the project: "],
 					 ["prefix",		"Insert the prefix of the repository (or don't insert something): "],
+					 ["team",		"Do you want insert this repo into a team? [Y/n]: "],
 					 ["private",	"Is that private?(Y/N): "],
 					]
 		results = {}
 
 		# Get infos
 		for question_tag, current_quest in questions:
-			results[question_tag] = input(current_quest)
+			if question_tag == "team":
+				if ORGANIZATION_NAME != "":	# If there is an organization
+					if input(current_quest) == "Y":
+						create_structure.choose_team(g, results)
+					else:
+						results["team"] = ""
+			else:
+				results[question_tag] = input(current_quest)
 		
 		print()
 
-		g = create_structure.login(results)
-		print(f"Credentials OK")
-
+		# Make repo
 		repo = create_structure.create_repo(results, g)
 		print(f"Repo built")
 
@@ -47,27 +56,34 @@ class create_structure:
 
 		create_structure.scan_and_elaborate(repo, g.get_repo(typerepo), "", typerepo, results)
 	
-	def login(results):
+	def login():
 		"""Made the login in GitHub
 		"""
 		return Github(TOKEN)
 
-	def create_folder(directory):
-		"""Creates a folder
+	def choose_team(g, results):
+		"""Choose a team
 		"""
+		teams = g.get_organization('CastellaniDavide').get_teams()
+		for i, team in enumerate(teams):
+			print(f"{i})\t{team.name}")
+
 		try:
-			if not os.path.exists(directory):
-				os.makedirs(directory)
-		except OSError:
-			print ('Error: Creating directory. ' +  directory)
+			results["team"] = teams[int(input("Insert your team number: "))].id
+		except:
+			print("This team didn't exist, try again")
+			create_structure.choose_team(g, results)
 
 	def create_repo(results, g):
 		"""Create the repo in CastellaniDavide repository
 		"""
 		if ORGANIZATION_NAME == "":
-			return g.get_user().create_repo(results['name'] if(results['prefix'] == "" or results['prefix'] == "b") else f"{results['prefix']}-{results['name']}", description=results['descr'], private=results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+			return g.get_user().create_repo(results['name'] if(results['prefix'] == "") else f"{results['prefix']}-{results['name']}", description=results['descr'], private=results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 		else:
-			return g.get_organization(ORGANIZATION_NAME).create_repo(results['name'] if(results['prefix'] == "" or results['prefix'] == "b") else f"{results['prefix']}-{results['name']}", description=results['descr'], private=results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+			if results["team"] == "":
+				return g.get_organization(ORGANIZATION_NAME).create_repo(results['name'] if(results['prefix'] == "") else f"{results['prefix']}-{results['name']}", description=results['descr'], private=results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+			else:
+				return g.get_organization(ORGANIZATION_NAME).create_repo(results['name'] if(results['prefix'] == "") else f"{results['prefix']}-{results['name']}", description=results['descr'], private=results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=results["team"])
 
 	def choose_template(results, g):
 		"""This helps to find the correct template
@@ -97,8 +113,12 @@ class create_structure:
 		contents = template.get_contents(f"{loc}")
 		for content_file in contents:
 			if not content_file.path in [".castellanidavide", "", ".vs"]:
-				if "." in content_file.path and not content_file.path[0] == ".":
-					create_structure.elaborate_file(repo, typerepo, content_file.path, results)
+				print(content_file.path)
+				if "." in content_file.path and not content_file.path[0] == "." and not "default" in content_file.path:
+					try:
+						create_structure.scan_and_elaborate(repo, template, content_file.path, typerepo, results)
+					except:
+						create_structure.elaborate_file(repo, typerepo, content_file.path, results)
 				else:
 					try:
 						create_structure.scan_and_elaborate(repo, template, content_file.path, typerepo, results)
@@ -143,4 +163,4 @@ if __name__ == "__main__":
 	try:
 		create_structure()
 	except:
-		print("There is an error, try again.")
+		print("There is an error, try to check if the repo name is already used.")
