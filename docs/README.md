@@ -1,5 +1,5 @@
 # create_structure
-[![GitHub license](https://img.shields.io/badge/licence-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v5.1-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure)
+[![GitHub license](https://img.shields.io/badge/licence-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v5.2-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure)
 
 ## Description
 This is the magic "robottino" by Castellani Davide
@@ -56,13 +56,18 @@ With this programm you can easly create a repository on GitHub with a basic temp
  - Try to execute this programm and check correct use
 
 # Changelog
- - [5.1_2020-11-28](#5.1_2020-11-28)
- - [5.0_2020-11-21](#5.0_2020-11-21)
- - [4.0_2020-9-25](#4.0_2020-9-25)	
- - [3.1_2020-8-18](#3.1_2020-8-18)	
- - [3.0_2020-8-15](#3.0_2020-8-15)								 
- - [2.0_2020-3-24](#2.0_2020-3-24)
- - [1.0_2020-3-24](#1.0_2020-3-24)
+ - [5.2_2020-11-28](#52_2020-11-28)
+ - [5.1_2020-11-28](#51_2020-11-28)
+ - [5.0_2020-11-21](#50_2020-11-21)
+ - [4.0_2020-9-25](#40_2020-9-25)	
+ - [3.1_2020-8-18](#31_2020-8-18)	
+ - [3.0_2020-8-15](#30_2020-8-15)								 
+ - [2.0_2020-3-24](#20_2020-3-24)
+ - [1.0_2020-3-24](#10_2020-3-24)
+
+### 5.2_2020-11-28
+   - Added the website documentation
+   - Fixed a bug
 
 ### 5.1_2020-11-28
    - Fixed a bug
