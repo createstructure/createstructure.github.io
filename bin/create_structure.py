@@ -10,14 +10,10 @@ from github import Github
 from re import escape, compile
 from requests import get as wget
 from threading import Thread
+import settings # Import project settings
 
 __author__ = "help@castellanidavide.it"
-__version__ = "5.3 2020-11-29"
-
-TOKEN = "TODO"
-SOUCES_OF_TEMPLATES = ["TODO", "CastellaniDavide"]
-ORGANIZATION_NAME = "TODO" # Leave empty if you want to add into your personal GitHub account
-IGNORE_FOLDERS = ["TODO", ".vs"]
+__version__ = "5.4 2020-12-12"
 
 class create_structure:
 	def __init__ (self):
