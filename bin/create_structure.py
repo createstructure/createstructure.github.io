@@ -10,17 +10,21 @@ from github import Github
 from re import escape, compile
 from requests import get as wget
 from threading import Thread
-import settings # Import project settings
+from sys import argv
 
 __author__ = "help@castellanidavide.it"
 __version__ = "5.4 2020-12-12"
 
 class create_structure:
-	def __init__ (self):
+	def __init__ (self, TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS):
 		"""Main function
 		"""
-
-		Thread(target = self.login()).start() # Login
+		self.TOKEN = TOKEN
+		self.SOUCES_OF_TEMPLATES = SOUCES_OF_TEMPLATES
+		self.ORGANIZATION_NAME = ORGANIZATION_NAME
+		self.IGNORE_FOLDERS = IGNORE_FOLDERS
+		
+		self.login() # Login
 
 		# Make questions
 		self.asks()
@@ -40,7 +44,7 @@ class create_structure:
 	def login(self):
 		"""Made the login in GitHub
 		"""
-		self.g = Github(TOKEN)
+		self.g = Github(self.TOKEN)
 	
 	def asks(self):
 		questions = [["name",		"Name of the project (es. create_structure): "],
@@ -56,7 +60,7 @@ class create_structure:
 		for question_tag, current_quest in questions:
 			if question_tag == "team":
 				self.results["team"] = ""	# default value
-				if ORGANIZATION_NAME != "":	# If there is an organization
+				if self.ORGANIZATION_NAME != "":	# If there is an organization
 					if input(current_quest) == "Y":
 						self.choose_team()						
 			else:
@@ -67,30 +71,37 @@ class create_structure:
 	def choose_team(self):
 		"""Choose a team
 		"""
-		try:	# No teams
-			teams = self.g.get_organization(ORGANIZATION_NAME).get_teams()
-			enumerate(teams)[0]
+		try:
+			# Search teams
+			teams = self.g.get_organization(self.ORGANIZATION_NAME).get_teams()
+			
+			nteams = 0
+			# Give the option to the user
 			for i, team in enumerate(teams):
+				nteams += 1
 				print(f"{i})\t{team.name}")
 
+			assert (nteams != 0)
+
+			# Save the team choosen
 			try:
 				self.results["team"] = teams[int(input("Insert your team number: "))].id
 			except:
 				print("This team didn't exist, try again")
 				self.choose_team()
-		except:
+		except:	# No teams
 			print("Sorry, you didn't have any team. Create a new team to use this option")
 
 	def create_repo(self):
 		"""Create the repo
 		"""
-		if ORGANIZATION_NAME == "":
+		if self.ORGANIZATION_NAME == "":
 			self.repo = self.g.get_user().create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 		else:
 			if self.results["team"] == "":
-				self.repo = self.g.get_organization(ORGANIZATION_NAME).create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 			else:
-				self.repo = self.g.get_organization(ORGANIZATION_NAME).create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=self.results["team"])
+				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=self.results["team"])
 		
 		print(f"Repo built")
 
@@ -100,20 +111,21 @@ class create_structure:
 		# If there wasn't any other template for your type of extention and no one default into SOURCES list, give my default code
 		self.template_name = "CastellaniDavide/default-template" 
 
-		# Check if there is my template
-		for source in SOUCES_OF_TEMPLATES:
+		# Check if there is wanted template
+		for source in self.SOUCES_OF_TEMPLATES:
 			if source != "TODO" and self.template_name == "CastellaniDavide/default-template":
 				try:
-					self.template_name = self.g.get_repo(f"{source}/{results['extention']}-template").full_name
+					self.template_name = self.g.get_repo(f"{source}/{self.results['extention']}-template").full_name
 					break
 				except:
 					pass
 
 		# Check if there was a default template
 		if self.template_name == "CastellaniDavide/default-template":
-			for source in SOUCES_OF_TEMPLATES:
+			for source in self.SOUCES_OF_TEMPLATES:
 				if source != "TODO" and self.template_name == "CastellaniDavide/default-template":
 					try:
+						print (f"Try: {source}/default-template")
 						self.template_name = self.g.get_repo(f"{source}/default-template").full_name
 						break
 					except:
@@ -127,7 +139,7 @@ class create_structure:
 		"""
 		contents = self.template.get_contents(f"{loc}")
 		for content_file in contents:
-			if not content_file.path in [".castellanidavide", ""] + IGNORE_FOLDERS:
+			if not content_file.path in [".castellanidavide", ""] + self.IGNORE_FOLDERS:
 				if content_file.type == "file":
 					Thread(target = self.create_file, args = (self.change(content_file.path), f"{self.change(wget(f'https://raw.githubusercontent.com/{self.template_name}/master/{content_file.path}').text)}")).start()
 				else:
@@ -169,10 +181,63 @@ class create_structure:
 			self.create_file (path, file)
 
 if __name__ == "__main__":
-	assert TOKEN != "TODO", "You must to put your tocken into TOKEN variable"
-	assert ORGANIZATION_NAME != "TODO", "You must to set ORGANIZATION_NAME variable"
-	
+	""" Read the argv, and sometimes writes the documentation
+	"""
+
+	# Default
+	TOKEN = None
+	SOUCES_OF_TEMPLATES = ['CastellaniDavide']
+	ORGANIZATION_NAME = ""
+	IGNORE_FOLDERS = []
+
+	# Check if there were all argv
 	try:
-		create_structure()
+		# Go to documentation if requested
+		assert (not("-h" in argv or "--help" in argv))
+
+		# Read arguments
+		for arg in argv:
+			# find tocken
+			if "--token=" in arg or "-t=" in arg:
+				TOKEN = arg.replace("--token=", "").replace("-t=", "")
+			# find souces
+			if "--sources=" in arg or "-s=" in arg:
+				SOUCES_OF_TEMPLATES = [i for i in arg.replace("--sources=", "").replace("-s=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
+			# find tocken
+			if "--organization=" in arg or "-o=" in arg:
+				ORGANIZATION_NAME = arg.replace("--organization=", "").replace("-o=", "")
+			# find tocken
+			if "--ignore=" in arg or "-i=" in arg:
+				IGNORE_FOLDERS = [i for i in arg.replace("--ignore=", "").replace("-i=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
+	
+		# Check all data
+		assert(TOKEN != None)
+		
+		# Start with code
+		try:
+			create_structure(TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS)
+		except:
+			print("There is an error, try to check if the repo name is already used.")
+
 	except:
-		print("There is an error, try to check if the repo name is already used.")
+
+		documentation = ["usage create_structure",
+						 "\t[--token= | -t=]",
+						 "\t[--sources= | -s=]",
+						 "\t[--organization= | -o=]",
+						 "\t[--ignore= | -i=]",
+						 "",
+						 "These are the create_structure arguments:",
+						 "\t--token= or -t=			The GitHub tocken with repo and organization permission",
+						 "\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
+						 "\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
+						 "\t--ignore= or -i=		(optional) The folders to be ignored",
+						 "",
+						 "Extra situation(s):",
+						 "\t--help or -h			To see the documentation",
+						 "",
+						 "Made with ❤  by Castellani Davide (@DavideC03)",
+						 ""]
+
+		for line in documentation:
+			print(line)
