@@ -1,0 +1,32 @@
+# Check installations
+name: Test Installations
+
+on: push
+
+jobs:
+  ubuntu-install:
+    name: Try to install on ubuntu
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Default
+        uses: actions/checkout@v2
+
+      # Runs the installation
+      - name: Run installation
+        run: sudo apt install git python3 python3-pip; cd ~; git clone https://github.com/CastellaniDavide/create_structure.git; cd create_structure; git pull --force; pip3 install -r requirements/requirements.txt; alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=<TOCKEN> -s=<(optional)_ARRAY_OF_TEMPLATE_SOURCES> -o=<(optional)_ORGANIZATION> -i=<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>"
+        
+  windows-install:
+    name: Try to install on Windows
+    # Set the type of machine to run on
+    runs-on: windows-latest
+
+    steps:
+      - name: Default
+        uses: actions/checkout@v2
+
+      # Runs the installation
+      - name: Run installation
+        run: sudo apt install git python3 python3-pip; cd ~; git clone https://github.com/CastellaniDavide/create_structure.git; cd create_structure; git pull --force; pip3 install -r requirements/requirements.txt; alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=<TOCKEN> -s=<(optional)_ARRAY_OF_TEMPLATE_SOURCES> -o=<(optional)_ORGANIZATION> -i=<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>"
+        
