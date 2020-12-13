@@ -214,11 +214,11 @@ if __name__ == "__main__":
 		assert(TOKEN != None and TOKEN != "***")
 		
 		# Start with code
-		try:
+		"""try:
 			pass
 		except:
 			print("There is an error, try to check if the repo name is already used.")
-
+"""
 	except:
 		documentation = ["usage create_structure",
 						 "\t[--token= | -t=]",
