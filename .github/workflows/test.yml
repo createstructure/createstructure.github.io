@@ -19,7 +19,7 @@ jobs:
         alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest"
         python3 ~/create_structure/bin/create_test.py
         cat ./testfile.txt
-        create_structure < ./testfile.txt
+        python3 ~/create_structure/bin/ < ./testfile.txt
 
   test-windows:
     runs-on: windows-latest
@@ -38,4 +38,4 @@ jobs:
         echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
         echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile
         python3 C:\Program Files/create_structure/bin/create_test.py
-        create_structure < ./testfile.txt
+        # create_structure < ./testfile.txt
