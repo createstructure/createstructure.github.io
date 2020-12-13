@@ -27,7 +27,7 @@ jobs:
         echo >> n
     - name: Test execution
       run: |
-        create_structure < ./testfile.txt
+        python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest < ./testfile.txt
 
   test-windows:
     runs-on: windows-latest
