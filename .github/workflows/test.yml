@@ -18,6 +18,16 @@ jobs:
         pip3 install -r requirements/requirements.txt
         alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest"
         python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest #create_structure
+    - name: Create test file
+      run: |
+        echo $(($(date +%s%N)/1000000)) > testfile.txt
+        echo default >> testfile.txt
+        echo https://github.com/CastellaniDavide/create_structure/blob/master/.github/workflows/test.yml >> testfile.txt
+        echo >> testfile.txt
+        echo >> n
+        echo >> n
+    - name: Test execution
+      run: create_structure < testfile.txt
 
   test-windows:
     runs-on: windows-latest
