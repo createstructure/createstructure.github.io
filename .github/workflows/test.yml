@@ -16,7 +16,7 @@ jobs:
         git pull --force
         pip3 install setuptools
         pip3 install -r requirements/requirements.txt
-        alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest"
+        alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest"
     - name: Create test file
       run: |
         echo $(($(date +%s%N)/1000000)) > testfile.txt
@@ -27,7 +27,7 @@ jobs:
         echo >> n
     - name: Test execution
       run: |
-        python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest < ./testfile.txt
+        python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest < ./testfile.txt
 
   test-windows:
     runs-on: windows-latest
@@ -43,6 +43,6 @@ jobs:
         git pull --force
         pip3 install -r requirements/requirements.txt
         New-Item -Path $Profile -Type File -Force
-        echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
+        echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
         echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile
-        python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest #create_structure 
+        # python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest #create_structure 
