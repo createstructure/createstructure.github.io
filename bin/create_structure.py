@@ -211,14 +211,14 @@ if __name__ == "__main__":
 				IGNORE_FOLDERS = [i for i in arg.replace("--ignore=", "").replace("-i=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
 	
 		# Check all data
-		# assert(TOKEN != None and TOKEN != "***")
+		assert(TOKEN != None and TOKEN != "***")
 		
 		# Start with code
-		"""try:
-			pass
+		try:
+			create_structure(TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS)
 		except:
 			print("There is an error, try to check if the repo name is already used.")
-"""
+
 	except:
 		documentation = ["usage create_structure",
 						 "\t[--token= | -t=]",
@@ -240,4 +240,4 @@ if __name__ == "__main__":
 
 		for line in documentation:
 			print(line)
-	create_structure(TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS)
+	
