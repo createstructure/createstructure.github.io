@@ -18,6 +18,7 @@ jobs:
         pip3 install -r requirements/requirements.txt
         alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest"
         python3 ~/create_structure/bin/create_structure.py
+        cat ./testfile.txt
         create_structure < ./testfile.txt
 
   test-windows:
@@ -36,6 +37,5 @@ jobs:
         New-Item -Path $Profile -Type File -Force
         echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
         echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile
-        python3 ~/create_structure/bin/create_structure.py
+        python3 C:\Program Files/create_structure/bin/create_structure.py
         create_structure < ./testfile.txt
-        
