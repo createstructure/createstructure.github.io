@@ -26,7 +26,7 @@ jobs:
         echo >> n
         echo >> n
     - name: Test execution
-      run: create_structure < testfile.txt
+      run: ls # create_structure < testfile.txt
 
   test-windows:
     runs-on: windows-latest
