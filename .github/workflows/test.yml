@@ -19,7 +19,7 @@ jobs:
         alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest"
         python3 ~/create_structure/bin/create_test.py
         cat ./testfile.txt
-        python3 ~/create_structure/bin/ < ./testfile.txt
+        python3 ~/create_structure/bin/create_structure.py < ./testfile.txt
 
   test-windows:
     runs-on: windows-latest
