@@ -28,7 +28,7 @@ jobs:
     - name: Test execution
       run: |
         python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest < ./testfile.txt
-
+        
   test-windows:
     runs-on: windows-latest
     steps:
