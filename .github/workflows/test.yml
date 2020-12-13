@@ -14,6 +14,7 @@ jobs:
         git clone https://github.com/CastellaniDavide/create_structure.git
         cd create_structure
         git pull --force
+        pip3 install wheel
         pip3 install -r requirements/requirements.txt
         alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest"
     
