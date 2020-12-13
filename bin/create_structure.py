@@ -220,7 +220,6 @@ if __name__ == "__main__":
 			print("There is an error, try to check if the repo name is already used.")
 
 	except:
-
 		documentation = ["usage create_structure",
 						 "\t[--token= | -t=]",
 						 "\t[--sources= | -s=]",
