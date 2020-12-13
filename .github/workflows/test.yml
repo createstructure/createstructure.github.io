@@ -1,4 +1,4 @@
-name: Check use
+name: Check installation
 
 on:
     push
