@@ -4,7 +4,7 @@ on:
     push
 
 jobs:
-  test:
+  test-ubuntu-debian:
     runs-on: ubuntu-latest
     steps:
     - name: Installation
@@ -17,4 +17,20 @@ jobs:
         pip3 install setuptools
         pip3 install -r requirements/requirements.txt
         alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest"
-    
+
+  test-windows:
+    runs-on: windows-latest
+    steps:
+    - name: Installation
+      run: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        choco install git.install -y
+        choco install python3 --pre -y
+        cd "C:\Program Files"
+        git clone https://github.com/CastellaniDavide/create_structure.git
+        cd create_structure
+        git pull --force
+        pip3 install -r requirements/requirements.txt
+        New-Item -Path $Profile -Type File -Force
+        echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
+        echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile
