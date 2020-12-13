@@ -215,7 +215,7 @@ if __name__ == "__main__":
 		
 		# Start with code
 		try:
-			create_structure(TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS)
+			pass
 		except:
 			print("There is an error, try to check if the repo name is already used.")
 
@@ -241,3 +241,4 @@ if __name__ == "__main__":
 
 		for line in documentation:
 			print(line)
+	create_structure(TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS)
