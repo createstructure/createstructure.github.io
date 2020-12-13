@@ -1,5 +1,5 @@
 # create_structure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v5.4-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure) ![Check installation](https://github.com/CastellaniDavide/create_structure/workflows/Check%20installation/badge.svg)
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v5.5-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure) ![Check installation](https://github.com/CastellaniDavide/create_structure/workflows/Check%20installation/badge.svg)
 
 ## Contents
  - [Description](#description)
@@ -76,6 +76,7 @@ With this programm you can easly create a repository on GitHub :octocat: with a 
  - Try to execute this programm and check correct use
 
 ### Changelog
+ - [5.5_2020-12-13](#55_2020-12-13)
  - [5.4_2020-12-12](#54_2020-12-12)
  - [5.3_2020-11-29](#53_2020-11-29)
  - [5.2_2020-11-28](#52_2020-11-28)
@@ -86,6 +87,9 @@ With this programm you can easly create a repository on GitHub :octocat: with a 
  - [3.0_2020-8-15](#30_2020-8-15)								 
  - [2.0_2020-3-24](#20_2020-3-24)
  - [1.0_2020-3-24](#10_2020-3-24)
+
+#### 5._2020-12-13
+  - Add first version of GitHub Actions
 
 #### 5.4_2020-12-12
   - Fixed some bugs

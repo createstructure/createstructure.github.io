@@ -13,7 +13,7 @@ from threading import Thread
 from sys import argv
 
 __author__ = "help@castellanidavide.it"
-__version__ = "5.4 2020-12-12"
+__version__ = "5.5 2020-12-13"
 
 class create_structure:
 	def __init__ (self, TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS):
