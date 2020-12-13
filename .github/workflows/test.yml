@@ -21,8 +21,8 @@ jobs:
         echo default >> testfile.txt
         echo https://github.com/CastellaniDavide/create_structure/blob/master/.github/workflows/test.yml >> testfile.txt
         echo test >> testfile.txt
-        echo >> n
-        echo >> n
+        echo n >> testfile.txt
+        echo n >> testfile.txt
         cat testfile.txt
         create_structure < ./testfile.txt
 
