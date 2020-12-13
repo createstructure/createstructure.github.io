@@ -17,8 +17,7 @@ jobs:
         pip3 install setuptools
         pip3 install -r requirements/requirements.txt
         alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest"
-    - name: Check if all is done
-      run: create_structure
+        create_structure
 
   test-windows:
     runs-on: windows-latest
@@ -37,5 +36,4 @@ jobs:
         echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.GITHUB_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
         echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile
         Set-Alias -Name create_structure -Value CreateStructureFunction
-    - name: Check if all is done
-      run: create_structure 
+        create_structure 
