@@ -211,7 +211,7 @@ if __name__ == "__main__":
 				IGNORE_FOLDERS = [i for i in arg.replace("--ignore=", "").replace("-i=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
 	
 		# Check all data
-		assert(TOKEN != None and TOKEN != "***")
+		# assert(TOKEN != None and TOKEN != "***")
 		
 		# Start with code
 		"""try:
