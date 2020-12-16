@@ -35,22 +35,15 @@ jobs:
         echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
         echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile
 
-  test-install-using-pypi-linux:
-    runs-on: ubuntu-latest
-      
+  pypi:
+    runs-on: [ubuntu-latest, ubuntu-18.04, windows-latest]
+
     steps:
-    - name:  Install & Test
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name:  Install
       run: |
-          sudo apt install git python3 python3-pip
-          pip install createstructure --force
-    
-  test-install-using-pypi-windows:
-    runs-on: windows-latest
-      
-    steps:
-    - name:  Install & Test
-      run: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-          choco install git.install -y
-          choco install python3 --pre -y
-          pip install createstructure --force
+          pip3.8 install createstructure

@@ -15,16 +15,20 @@ This is the magic :octocat: bot :octocat: by Castellani Davide
 With this programm you can easly create a repository on GitHub :octocat: with a basic template, personalized for your use.
 
 ### Required
+ - required python3 (>=3.8)
+ - pip3
  - Internet connection
  - GitHub account
 	- [GitHub Token](https://github.com/settings/tokens) with repo and organization permission
 
-### Setup/ Update
+### Setup
 #### Attention: replace <SOME_WORDS> with your values
- - Debian/Ubuntu: ```sudo apt install git python3 python3-pip; cd ~; git clone https://github.com/CastellaniDavide/create_structure.git; cd create_structure; git pull --force; pip3 install -r requirements/requirements.txt; alias create_structure="python3 ~/create_structure/bin/create_structure.py -t=<TOCKEN> -s=<(optional)_ARRAY_OF_TEMPLATE_SOURCES> -o=<(optional)_ORGANIZATION> -i=<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>"```
- - Windows (on PowerShell as Adminastrator): ```Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); choco install git.install -y; choco install python3 --pre -y; cd "C:\Program Files";  git clone https://github.com/CastellaniDavide/create_structure.git; cd create_structure; git pull --force; pip3 install -r requirements/requirements.txt;New-Item -Path $Profile -Type File -Force; echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=<TOCKEN> -s='<(optional)_ARRAY_OF_TEMPLATE_SOURCES>' -o=<(optional)_ORGANIZATION> -i='<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>'}" > $Profile; echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile```
-  - open another powershell window on you PC and start to use code
- - Others:
+ - All OS using pypi:
+    - ```pip install createstructure```
+    - Made an alias of use
+      - Value of the alias: ```python3 -c "exec(\"from create_structure import create_structure\ncreate_structure()\")"  -t=<TOCKEN> -s='<(optional)_ARRAY_OF_TEMPLATE_SOURCES>' -o=<(optional)_ORGANIZATION> -i='<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>```
+      - Eg. ubuntu/debian: ```alias createstucture='python3 -c "exec(\"from create_structure import create_structure\ncreate_structure()\")"  -t=<TOCKEN> -s='<(optional)_ARRAY_OF_TEMPLATE_SOURCES>' -o=<(optional)_ORGANIZATION> -i='<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>'```
+ - Manual by source:
     - [install git](https://git-scm.com/download)
     - download the repo ```git clone https://github.com/CastellaniDavide/create_structure.git```
     - [install python3](https://www.python.org/)
@@ -33,6 +37,9 @@ With this programm you can easly create a repository on GitHub :octocat: with a 
     - create an alias
       - name: create_structure
       - attribute: python3 <ABSOLUTE_PATH_OF_REPO>/bin/create_structure.py -t=<TOCKEN> -s=<ARRAY_OF_SOURCES> -o=<(optional)_ORGANIZATION> -i=<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>
+
+### Update
+ - With pypi method: ```pip3 install [package_name] --upgrade```
 
 ### Directories structure
  - .github
