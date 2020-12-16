@@ -35,9 +35,11 @@ jobs:
         echo "Function CreateStructureFunction {python 'C:\Program Files/create_structure/bin/create_structure.py' -t=${{ secrets.REPO_TOKEN }} -o=CastellaniDavideTest'}" > $Profile
         echo "Set-Alias -Name create_structure -Value CreateStructureFunction" >> $Profile
 
-  pypi:
-    runs-on: [ubuntu-latest, ubuntu-18.04, windows-latest]
-
+  pypi-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-latest, ubuntu-latest]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
