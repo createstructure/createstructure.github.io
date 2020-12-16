@@ -32,4 +32,3 @@ jobs:
     - name: Test installation
       run: |
         pip install create-structure
- 
