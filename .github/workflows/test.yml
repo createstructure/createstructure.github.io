@@ -47,14 +47,14 @@ jobs:
         if [ "$RUNNER_OS" == "Linux" ]; then
           sudo apt install git python3 python3-pip
           pip install createstructure
-          python3 -c "exec(\"from create_structure import create_structure\ncreate_structure()\")"
+          
         elif [ "$RUNNER_OS" == "Windows" ]; then
           Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
           choco install git.install -y
           choco install python3 --pre -y
           pip install createstructure
-          python3 -c "exec(\"from create_structure import create_structure\ncreate_structure()\")"
         else
           echo "$RUNNER_OS not supported"
           exit 1
         fi
+      shell: bash
