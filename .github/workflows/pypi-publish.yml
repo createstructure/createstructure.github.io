@@ -1,10 +1,7 @@
-# This workflows will upload a Python Package using Twine when a release is created
-# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
-
 name: Upload Python Package to pypi
 
 on:
-  push #release
+  release
 
 jobs:
   test-and-publish:
@@ -23,7 +20,7 @@ jobs:
         pip install setuptools wheel twine
     - name: Build and publish
       env:
-        STACKMANAGER_VERSION: 1.0.0 #{{ github.event.release.tag_name }}
+        STACKMANAGER_VERSION: {{ github.event.release.tag_name }}
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |

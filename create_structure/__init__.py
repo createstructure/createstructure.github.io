@@ -1,4 +1,4 @@
-"""This is the magic "robottino" by Castellani Davide
+"""This is the magic bot by Castellani Davide
 With this programm you can easly create a repository on GitHub with a basic template, personalized for your use.
 
 If there was any type of problem you can contact me on my help email: help@castellanidavide.it
@@ -13,7 +13,7 @@ from threading import Thread
 from sys import argv
 
 __author__ = "help@castellanidavide.it"
-__version__ = "5.5 2020-12-13"
+__version__ = "6.0 2020-12-16"
 
 class create_structure:
 	def __init__ (self):
