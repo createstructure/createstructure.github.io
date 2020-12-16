@@ -39,7 +39,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-latest, ubuntu-latest]
+        os: [ubuntu-18.04, ubuntu-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
