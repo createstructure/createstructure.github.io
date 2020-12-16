@@ -1,9 +1,11 @@
 from setuptools import setup, find_packages
+from requests import get
 
 setup(
       name='createstructure',
-      version='5.6',
+      version='0.0.1',
       description='This is the magic bot by Castellani Davide. With this programm you can easly create a repository on GitHub with a basic template, personalized for your use.',
+      long_description=get("https://raw.githubusercontent.com/CastellaniDavide/create_structure/master/docs/README.md").text,
       url='https://github.com/CastellaniDavide/create_structure',
       author='CastellaniDavide',
       author_email='help@castellanidavide.it',
