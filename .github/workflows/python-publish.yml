@@ -23,7 +23,7 @@ jobs:
         pip install setuptools wheel twine
     - name: Build and publish
       env:
-        STACKMANAGER_VERSION: 5.6.1 #{{ github.event.release.tag_name }}
+        STACKMANAGER_VERSION: 0.0.1 #{{ github.event.release.tag_name }}
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
@@ -31,4 +31,4 @@ jobs:
         twine upload dist/* --verbose
     - name: Test installation
       run: |
-        pip install create-structure
+        pip install createstructure

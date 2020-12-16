@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-      name='create_structure',
+      name='createstructure',
       version='5.6',
       description='This is the magic bot by Castellani Davide. With this programm you can easly create a repository on GitHub with a basic template, personalized for your use.',
       url='https://github.com/CastellaniDavide/create_structure',
