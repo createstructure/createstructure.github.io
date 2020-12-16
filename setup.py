@@ -3,7 +3,7 @@ from requests import get
 
 setup(
       name='createstructure',
-      version='0.0.1',
+      version='0.0.2',
       description='This is the magic bot by Castellani Davide. With this programm you can easly create a repository on GitHub with a basic template, personalized for your use.',
       long_description=get("https://raw.githubusercontent.com/CastellaniDavide/create_structure/master/docs/README.md").text,
       long_description_content_type="text/markdown",
