@@ -41,6 +41,7 @@ jobs:
         matrix:
             os: [ubuntu-latest, windows-latest]
     
+    steps:
     - name:  Install & Test
     run:   |
         if [ "$RUNNER_OS" == "Linux" ]; then
