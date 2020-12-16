@@ -1,4 +1,4 @@
-"""This is the magic "robottino" by Castellani Davide
+"""This is the magic bot by Castellani Davide
 With this programm you can easly create a repository on GitHub with a basic template, personalized for your use.
 
 If there was any type of problem you can contact me on my help email: help@castellanidavide.it
@@ -13,33 +13,88 @@ from threading import Thread
 from sys import argv
 
 __author__ = "help@castellanidavide.it"
-__version__ = "5.5 2020-12-13"
+__version__ = "6.0 2020-12-16"
 
 class create_structure:
-	def __init__ (self, TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS):
+	def __init__ (self):
 		"""Main function
 		"""
-		self.TOKEN = TOKEN
-		self.SOUCES_OF_TEMPLATES = SOUCES_OF_TEMPLATES
-		self.ORGANIZATION_NAME = ORGANIZATION_NAME
-		self.IGNORE_FOLDERS = IGNORE_FOLDERS
+		# Initial inputs
+		self.initial_inputs()
+
+		if self.CONTINUE:
+			self.login() # Login
+
+			# Make questions
+			self.asks()
+
+			# Make repo
+			Thread(target = self.create_repo()).start()
+
+			# Get template
+			self.choose_template()
+
+			# Get changes
+			self.change_map()
+			
+			# Make all
+			Thread(target = self.scan_and_elaborate()).start()
+
+	def initial_inputs(self):
+		"""Initial input read
+		"""
+		# Default
+		self.CONTINUE = True
+		self.TOKEN = None
+		self.SOUCES_OF_TEMPLATES = ['CastellaniDavide']
+		self.ORGANIZATION_NAME = ""
+		self.IGNORE_FOLDERS = []
+
+		# Check if there were all argv
+		try:
+			# Go to documentation if requested
+			assert (not("-h" in argv or "--help" in argv))
+
+			# Read arguments
+			for arg in argv:
+				# find tocken
+				if "--token=" in arg or "-t=" in arg:
+					self.TOKEN = arg.replace("--token=", "").replace("-t=", "")
+				# find souces
+				if "--sources=" in arg or "-s=" in arg:
+					self.SOUCES_OF_TEMPLATES = [i for i in arg.replace("--sources=", "").replace("-s=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
+				# find tocken
+				if "--organization=" in arg or "-o=" in arg:
+					self.ORGANIZATION_NAME = arg.replace("--organization=", "").replace("-o=", "")
+				# find tocken
+				if "--ignore=" in arg or "-i=" in arg:
+					self.IGNORE_FOLDERS = [i for i in arg.replace("--ignore=", "").replace("-i=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
 		
-		self.login() # Login
+			# Check all data
+			assert(self.TOKEN != "TODO" and self.TOKEN != None and self.TOKEN != "***")
 
-		# Make questions
-		self.asks()
+		except:
+			self.CONTINUE = False
+			documentation = ["usage create_structure",
+							"\t[--token= | -t=]",
+							"\t[--sources= | -s=]",
+							"\t[--organization= | -o=]",
+							"\t[--ignore= | -i=]",
+							"",
+							"These are the create_structure arguments:",
+							"\t--token= or -t=			The GitHub tocken with repo and organization permission",
+							"\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
+							"\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
+							"\t--ignore= or -i=		(optional) The folders to be ignored",
+							"",
+							"Extra situation(s):",
+							"\t--help or -h			To see the documentation",
+							"",
+							"Made with ❤  by Castellani Davide (@DavideC03)",
+							""]
 
-		# Make repo
-		Thread(target = self.create_repo()).start()
-
-		# Get template
-		self.choose_template()
-
-		# Get changes
-		self.change_map()
-		
-		# Make all
-		Thread(target = self.scan_and_elaborate()).start()
+			for line in documentation:
+				print(line)
 	
 	def login(self):
 		"""Made the login in GitHub
@@ -184,60 +239,5 @@ if __name__ == "__main__":
 	""" Read the argv, and sometimes writes the documentation
 	"""
 
-	# Default
-	TOKEN = None
-	SOUCES_OF_TEMPLATES = ['CastellaniDavide']
-	ORGANIZATION_NAME = ""
-	IGNORE_FOLDERS = []
-
-	# Check if there were all argv
-	try:
-		# Go to documentation if requested
-		assert (not("-h" in argv or "--help" in argv))
-
-		# Read arguments
-		for arg in argv:
-			# find tocken
-			if "--token=" in arg or "-t=" in arg:
-				TOKEN = arg.replace("--token=", "").replace("-t=", "")
-			# find souces
-			if "--sources=" in arg or "-s=" in arg:
-				SOUCES_OF_TEMPLATES = [i for i in arg.replace("--sources=", "").replace("-s=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
-			# find tocken
-			if "--organization=" in arg or "-o=" in arg:
-				ORGANIZATION_NAME = arg.replace("--organization=", "").replace("-o=", "")
-			# find tocken
-			if "--ignore=" in arg or "-i=" in arg:
-				IGNORE_FOLDERS = [i for i in arg.replace("--ignore=", "").replace("-i=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
 	
-		# Check all data
-		assert(TOKEN != None and TOKEN != "***")
-		
-		# Start with code
-		try:
-			create_structure(TOKEN, SOUCES_OF_TEMPLATES, ORGANIZATION_NAME, IGNORE_FOLDERS)
-		except:
-			print("There is an error, try to check if the repo name is already used.")
-
-	except:
-		documentation = ["usage create_structure",
-						 "\t[--token= | -t=]",
-						 "\t[--sources= | -s=]",
-						 "\t[--organization= | -o=]",
-						 "\t[--ignore= | -i=]",
-						 "",
-						 "These are the create_structure arguments:",
-						 "\t--token= or -t=			The GitHub tocken with repo and organization permission",
-						 "\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
-						 "\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
-						 "\t--ignore= or -i=		(optional) The folders to be ignored",
-						 "",
-						 "Extra situation(s):",
-						 "\t--help or -h			To see the documentation",
-						 "",
-						 "Made with ❤  by Castellani Davide (@DavideC03)",
-						 ""]
-
-		for line in documentation:
-			print(line)
 	
