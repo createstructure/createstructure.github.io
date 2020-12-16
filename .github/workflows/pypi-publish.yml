@@ -1,7 +1,9 @@
 name: Upload Python Package to pypi
 
 on:
-  push
+  create:
+    tags:
+      - v*
 
 jobs:
   test-and-publish:
