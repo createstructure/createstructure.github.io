@@ -1,2 +1,7 @@
 .vs
 .vscode
+.venv
+__pycache__
+build
+createstructure.egg-info
+dist

@@ -1,5 +1,5 @@
-"""This is the magic bot by Castellani Davide
-With this programm you can easly create a repository on GitHub with a basic template, personalized for your use.
+"""This is the magic bot by Castellani Davide :)
+With this programm you can easily create a repository on GitHub with a basic template, personalized for your use.
 
 If there was any type of problem you can contact me on my help email: help@castellanidavide.it
 """
@@ -9,16 +9,25 @@ from getpass import getpass
 from github import Github
 from re import escape, compile
 from requests import get as wget
-from threading import Thread
+from threading import Thread, active_count
 from sys import argv
 
 __author__ = "help@castellanidavide.it"
-__version__ = "6.0 2020-12-16"
+__version__ = "6.1 2021-01-03"
 
 class create_structure:
-	def __init__ (self):
+	def __init__ (self, tocken=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, answers=None):
 		"""Main function
 		"""
+		# Set main variabiles
+		self.CONTINUE = True
+		self.TOKEN = tocken
+		self.SOURCES_OF_TEMPLATES = souces
+		self.ORGANIZATION_NAME = organization_name
+		self.IGNORE = IGNORE
+		self.VERBOSE = verbose
+		self.ANSWERS = answers
+
 		# Initial inputs
 		self.initial_inputs()
 
@@ -38,17 +47,11 @@ class create_structure:
 			self.change_map()
 			
 			# Make all
-			Thread(target = self.scan_and_elaborate()).start()
+			self.scan_and_elaborate()
 
 	def initial_inputs(self):
 		"""Initial input read
 		"""
-		# Default
-		self.CONTINUE = True
-		self.TOKEN = None
-		self.SOUCES_OF_TEMPLATES = ['CastellaniDavide']
-		self.ORGANIZATION_NAME = ""
-		self.IGNORE_FOLDERS = []
 
 		# Check if there were all argv
 		try:
@@ -57,35 +60,42 @@ class create_structure:
 
 			# Read arguments
 			for arg in argv:
+				# find folders and files
+				if "--ignore=" in arg or "-i=" in arg:
+					self.IGNORE = [i for i in arg.replace("--ignore=", "").replace("-i=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
+				# find organization
+				if "--organization=" in arg or "-o=" in arg:
+					self.ORGANIZATION_NAME = arg.replace("--organization=", "").replace("-o=", "")
+				# find souces
+				if "--sources=" in arg or "-s=" in arg:
+					self.SOURCES_OF_TEMPLATES = [i for i in arg.replace("--sources=", "").replace("-s=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
 				# find tocken
 				if "--token=" in arg or "-t=" in arg:
 					self.TOKEN = arg.replace("--token=", "").replace("-t=", "")
-				# find souces
-				if "--sources=" in arg or "-s=" in arg:
-					self.SOUCES_OF_TEMPLATES = [i for i in arg.replace("--sources=", "").replace("-s=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
-				# find tocken
-				if "--organization=" in arg or "-o=" in arg:
-					self.ORGANIZATION_NAME = arg.replace("--organization=", "").replace("-o=", "")
-				# find tocken
-				if "--ignore=" in arg or "-i=" in arg:
-					self.IGNORE_FOLDERS = [i for i in arg.replace("--ignore=", "").replace("-i=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
+				# find verbose
+				if "--vebose" in arg or "-v" in arg:
+					self.VERBOSE = True
 		
 			# Check all data
 			assert(self.TOKEN != "TODO" and self.TOKEN != None and self.TOKEN != "***")
 
+			if self.VERBOSE : print(f"self.CONTINUE\t\t\t{self.CONTINUE}\nself.TOKEN\t\t\t{self.TOKEN}\nself.SOURCES_OF_TEMPLATES\t{self.SOURCES_OF_TEMPLATES}\nself.ORGANIZATION_NAME\t\t{self.ORGANIZATION_NAME}\nself.IGNORE\t\t{self.IGNORE}\nself.VERBOSE\t\t\t{self.VERBOSE}")
+
 		except:
 			self.CONTINUE = False
 			documentation = ["usage create_structure",
-							"\t[--token= | -t=]",
-							"\t[--sources= | -s=]",
-							"\t[--organization= | -o=]",
 							"\t[--ignore= | -i=]",
+							"\t[--organization= | -o=]",
+							"\t[--sources= | -s=]",
+							"\t[--token= | -t=]",
+							"\t[--verbose | -v]",
 							"",
 							"These are the create_structure arguments:",
-							"\t--token= or -t=			The GitHub tocken with repo and organization permission",
-							"\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
-							"\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
 							"\t--ignore= or -i=		(optional) The folders to be ignored",
+							"\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
+							"\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
+							"\t--token= or -t=			The GitHub tocken with repo and organization permission",
+							"\t--verbose or -v			Verbose option, you will see the main variabiles and lots more"
 							"",
 							"Extra situation(s):",
 							"\t--help or -h			To see the documentation",
@@ -102,26 +112,29 @@ class create_structure:
 		self.g = Github(self.TOKEN)
 	
 	def asks(self):
-		questions = [["name",		"Name of the project (es. create_structure): "],
-					 ["extention",	"Extenction of the main programm (es. py): "],
-					 ["descr",		"Description of the project: "],
-					 ["prefix",		"Insert the prefix of the repository (or don't insert anything): "],
-					 ["team",		"Do you want insert this repo into a team? [Y/n]: "],
-					 ["private",	"Is that private? [Y/n]: "],
-					]
-		self.results = {}
-		
-		# Get infos
-		for question_tag, current_quest in questions:
-			if question_tag == "team":
-				self.results["team"] = ""	# default value
-				if self.ORGANIZATION_NAME != "":	# If there is an organization
-					if input(current_quest) == "Y":
-						self.choose_team()						
-			else:
-				self.results[question_tag] = input(current_quest)
+		"""Manage the run variabiles
+		"""
+		if self.ANSWERS == None: # Make questions
+			questions = [["name",		"Name of the project (es. create_structure): "],
+						["extention",	"Extenction of the main programm (es. py): "],
+						["descr",		"Description of the project: "],
+						["prefix",		"Insert a prefix for the repository (or don't insert anything): "],
+						["team",		"Do you want insert this repo into a team? [y/N]: "],
+						["private",	"Is that private? [y/N]: "],
+						]
+			self.ANSWERS = {}
+			
+			# Get infos
+			for question_tag, current_quest in questions:
+				if question_tag == "team":
+					self.ANSWERS["team"] = ""	# default value
+					if self.ORGANIZATION_NAME != "":	# If there is an organization
+						if create_structure.is_positive(input(current_quest)):
+							self.choose_team()						
+				else:
+					self.ANSWERS[question_tag] = input(current_quest)
 
-		print()
+			print()
 
 	def choose_team(self):
 		"""Choose a team
@@ -140,7 +153,7 @@ class create_structure:
 
 			# Save the team choosen
 			try:
-				self.results["team"] = teams[int(input("Insert your team number: "))].id
+				self.ANSWERS["team"] = teams[int(input("Insert your team number: "))].id
 			except:
 				print("This team didn't exist, try again")
 				self.choose_team()
@@ -151,12 +164,12 @@ class create_structure:
 		"""Create the repo
 		"""
 		if self.ORGANIZATION_NAME == "":
-			self.repo = self.g.get_user().create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+			self.repo = self.g.get_user().create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 		else:
-			if self.results["team"] == "":
-				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+			if self.ANSWERS["team"] == "":
+				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 			else:
-				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.results['name'] if(self.results['prefix'] == "") else f"{self.results['prefix']}-{self.results['name']}", description=self.results['descr'], private=self.results['private'] == "Y", has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=self.results["team"])
+				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=self.ANSWERS["team"])
 		
 		print(f"Repo built")
 
@@ -167,17 +180,17 @@ class create_structure:
 		self.template_name = "CastellaniDavide/default-template" 
 
 		# Check if there is wanted template
-		for source in self.SOUCES_OF_TEMPLATES:
+		for source in self.SOURCES_OF_TEMPLATES:
 			if source != "TODO" and self.template_name == "CastellaniDavide/default-template":
 				try:
-					self.template_name = self.g.get_repo(f"{source}/{self.results['extention']}-template").full_name
+					self.template_name = self.g.get_repo(f"{source}/{self.ANSWERS['extention']}-template").full_name
 					break
 				except:
 					pass
 
 		# Check if there was a default template
 		if self.template_name == "CastellaniDavide/default-template":
-			for source in self.SOUCES_OF_TEMPLATES:
+			for source in self.SOURCES_OF_TEMPLATES:
 				if source != "TODO" and self.template_name == "CastellaniDavide/default-template":
 					try:
 						print (f"Try: {source}/default-template")
@@ -193,13 +206,24 @@ class create_structure:
 		"""Scan all files in the repository and push it in the new directory (cahanging the necessary)
 		"""
 		contents = self.template.get_contents(f"{loc}")
-		for content_file in contents:
-			if not content_file.path in [".castellanidavide", ""] + self.IGNORE_FOLDERS:
+		for content_file in sorted(contents, reverse=True, key=create_structure.name_of_path): # Put .folders at the end
+			if not content_file.path in [".castellanidavide", ""] + self.IGNORE:
+				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
+					while (active_count() != 2): pass
+
 				if content_file.type == "file":
 					Thread(target = self.create_file, args = (self.change(content_file.path), f"{self.change(wget(f'https://raw.githubusercontent.com/{self.template_name}/master/{content_file.path}').text)}")).start()
 				else:
-					Thread(target = self.scan_and_elaborate, args = (content_file.path, )).start()				
-					
+					Thread(target = self.scan_and_elaborate, args = (content_file.path, )).start()		
+
+	def name_of_path(item):
+		"""For sorting the folders, gives the path attributes
+		"""
+		if item.path == ".github/workflows":
+			return "..." # move to the end
+		else:
+			return item.path
+
 	def change_map(self):
 		"""Returns a map of changes
 		"""
@@ -209,7 +233,7 @@ class create_structure:
 		change_map = eval(wget(f"https://raw.githubusercontent.com/{self.template_name}/master/.castellanidavide/change.json").text)
 
 		# answer changes
-		for key, value in self.results.items():
+		for key, value in self.ANSWERS.items():
 			change_map[f"sol{key}sol"] = value
 
 		# special changes
@@ -235,9 +259,13 @@ class create_structure:
 			# If it's an error, possible with multitreading, try again
 			self.create_file (path, file)
 
+	def is_positive(answer):
+		"""Returns true is the answer is affermative
+		"""
+		return answer in ["y", "Y", "yes", "Yes"]
+
 if __name__ == "__main__":
 	""" Read the argv, and sometimes writes the documentation
 	"""
-
-	
+	create_structure() # Entry point	
 	

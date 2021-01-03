@@ -1,5 +1,5 @@
 # create_structure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v6.0-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v6.1-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
 
 ## Contents
  - [Description](#description)
@@ -12,7 +12,7 @@
 
 ### Description
 This is the magic :octocat: bot :octocat: by Castellani Davide
-With this programm you can easly create a repository on GitHub :octocat: with a basic template, personalized for your use.
+With this programm you can easily create a repository on GitHub :octocat: with a basic template, personalized for your use.
 
 ### Required
  - required python3 (>=3.8)
@@ -26,8 +26,11 @@ With this programm you can easly create a repository on GitHub :octocat: with a 
  - All OS using pypi:
     - ```pip install createstructure```
     - Made an alias of use
-      - Value of the alias: ```python3 -c "exec(\"from create_structure import create_structure\ncreate_structure()\")"  -t=<TOCKEN> -s='<(optional)_ARRAY_OF_TEMPLATE_SOURCES>' -o=<(optional)_ORGANIZATION> -i='<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>```
-      - Eg. ubuntu/debian: ```alias createstucture='python3 -c "exec(\"from create_structure import create_structure\ncreate_structure()\")" -t=<TOCKEN> -s='<(optional)_ARRAY_OF_TEMPLATE_SOURCES>' -o=<(optional)_ORGANIZATION> -i='<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>'```
+      - Value of the alias: 
+      ```python3 -c "exec(\"from create_structure import create_structure;create_structure()\")" -t=<TOCKEN> -s=<(optional)_ARRAY_OF_TEMPLATE_SOURCES> -o=<(optional)_ORGANIZATION> -i=<(optional)_FOLDERS_AND_FILES_TO_BE_IGNORED_BY_TEMPLATE>```
+      - Eg. ubuntu/debian (after this reload the terminal): 
+      ```echo alias createstructure='python3 -c "exec(\"from create_structure import create_structure;create_structure()\")" -t=<TOCKEN> -s=<(optional)_ARRAY_OF_TEMPLATE_SOURCES> -o=<(optional)_ORGANIZATION> -i=<(optional)_FOLDERS_AND_FILES_TO_BE_IGNORED_BY_TEMPLATE>' >> ~/.bash_aliases```
+      - Example of use: ```echo "alias createstructure='python3 -c \"exec(\\\"from create_structure import create_structure;create_structure()\\\")\" -t=abcb1234 -s=[CastellaniDavide] -o=CastellaniDavideTest -i=[.vs,.vscode]'" >> ~/.bash_aliases```
  - Manual by source:
     - [install git](https://git-scm.com/download)
     - download the repo ```git clone https://github.com/CastellaniDavide/create_structure.git```
@@ -87,6 +90,7 @@ With this programm you can easly create a repository on GitHub :octocat: with a 
  - Try to execute this programm and check correct use
 
 ### Changelog
+ - [6.1_2021-01-03](#60_2021-01-03)
  - [6.0_2020-12-16](#60_2020-12-16)
  - [5.5_2020-12-13](#55_2020-12-13)
  - [5.4_2020-12-12](#54_2020-12-12)
@@ -94,14 +98,21 @@ With this programm you can easly create a repository on GitHub :octocat: with a 
  - [5.2_2020-11-28](#52_2020-11-28)
  - [5.1_2020-11-28](#51_2020-11-28)
  - [5.0_2020-11-21](#50_2020-11-21)
- - [4.0_2020-9-25](#40_2020-9-25)	
- - [3.1_2020-8-18](#31_2020-8-18)	
- - [3.0_2020-8-15](#30_2020-8-15)								 
- - [2.0_2020-3-24](#20_2020-3-24)
- - [1.0_2020-3-24](#10_2020-3-24)
+ - [4.0_2020-09-25](#40_2020-09-25)	
+ - [3.1_2020-08-18](#31_2020-08-18)	
+ - [3.0_2020-08-15](#30_2020-08-15)								 
+ - [2.0_2020-03-24](#20_2020-03-24)
+ - [1.0_2020-03-24](#10_2020-03-24)
 
-#### 6.0_2020-12-16
-  - Added pypi support [https://pypi.org/project/createstructure/](https://pypi.org/project/createstructure/)
+#### 6.1_2021-01-03
+  - Fixed a bug
+  - Adjusted variable names
+  - Added a method to understand when an answer is positive, this for a more centralized control
+  - Added developer/ verbose setting
+  - Update .gitignore
+  - Added the possibility to add automatically the answers
+  - Optimized README.md
+  - Now the workflows file are loaded at the end
 
 #### 5.5_2020-12-13
   - Add first version of GitHub Actions
@@ -138,33 +149,33 @@ With this programm you can easly create a repository on GitHub :octocat: with a 
     - Organization name (if you want to save into an Organization)
   - Removed some ununtil variables
 
-#### 4.0_2020-9-25
+#### 4.0_2020-09-25
  ##### Changes
   - Fixed a bug
   - Remove the necessity of insert credentials any time
   - Download in any case, before only if public repo
   - removed unused files
 
-#### 3.1_2020-8-18
+#### 3.1_2020-08-18
  ##### Changes
   - optimized the code
   - added requirements.txt 
 
-#### 3.0_2020-8-15
+#### 3.0_2020-08-15
  ##### Changes
   - add GitHub support with a lot of options (eg. repo private or public)
    
-#### 2.0_2020-3-24
+#### 2.0_2020-03-24
  ##### Changes
   - adjusted some bugs
   - improved the program
 
-#### 1.0_2020-3-24
+#### 1.0_2020-03-24
   - Initial version
 
 ---
 Made by Castellani Davide 
-If you have any problem please contact us:
-- help@castellanidavide.it
+If you have any problem or ask please contact me:
+- [help@castellanidavide.it](mailto:help@castellanidavide.it)
 - [Discussion](https://github.com/CastellaniDavide/create_structure/discussions)
 - [Issue](https://github.com/CastellaniDavide/create_structure/issues) 
