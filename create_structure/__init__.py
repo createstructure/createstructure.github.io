@@ -9,6 +9,7 @@ from getpass import getpass
 from github import Github
 from re import escape, compile
 from requests import get as wget
+from time import sleep
 from threading import Thread, active_count
 from sys import argv
 
@@ -261,6 +262,7 @@ class create_structure:
 			print(f"Created {path}")
 		except:
 			# If it's an error, possible with multitreading, try again
+			sleep(0.5)
 			self.create_file (path, file)
 
 	def is_positive(answer):
