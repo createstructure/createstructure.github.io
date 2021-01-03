@@ -5,10 +5,7 @@ on:
 
 jobs:
   test-pip:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-18.04, ubuntu-latest, windows-latest]
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -26,4 +23,4 @@ jobs:
         python setup.py sdist bdist_wheel
     - name: Try a run
       run: |
-        python -c "exec(\"from datetime import datetime as dt;from create_structure import create_structure;create_structure(answers={'name':str(int(dt.now().timestamp())),'extention':'py','descr':str(int(dt.now().timestamp())),'prefix':'push-test','team':'','private':'N'})\")" -t=${{ secrets.GITHUB_TOKEN }} -s=[CastellaniDavide] -o=CastellaniDavideTest -i=[.vs,.vscode]
+        python -c "exec(\"from datetime import datetime as dt;from create_structure import create_structure;create_structure(answers={'name':str(int(dt.now().timestamp())),'extention':'py','descr':str(int(dt.now().timestamp())),'prefix':'push-test','team':'','private':'N'})\")" -t=${{ secrets.TEST_TOKEN }} -s=[CastellaniDavide] -o=CastellaniDavideTest -i=[.vs,.vscode]
