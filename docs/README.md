@@ -113,6 +113,7 @@ With this programm you can easily create a repository on GitHub :octocat: with a
   - Added the possibility to add automatically the answers
   - Optimized README.md
   - Now the workflows file are loaded at the end
+  - Update workflows
 
 #### 5.5_2020-12-13
   - Add first version of GitHub Actions
