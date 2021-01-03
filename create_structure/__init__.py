@@ -210,7 +210,7 @@ class create_structure:
 			if not content_file.path in [".castellanidavide", ""] + self.IGNORE:
 				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
 					initial_wait = dt.now()
-					while (active_count() != 2 or (dt.now() - initial_wait).seconds < 10): pass
+					while (active_count() != 2 and  (dt.now() - initial_wait).seconds < 10): pass
 
 				if content_file.type == "file":
 					Thread(target = self.create_file, args = (self.change(content_file.path), f"{self.change(wget(f'https://raw.githubusercontent.com/{self.template_name}/master/{content_file.path}').text)}")).start()
