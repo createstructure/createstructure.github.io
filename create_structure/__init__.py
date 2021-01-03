@@ -209,7 +209,7 @@ class create_structure:
 		for content_file in sorted(contents, reverse=True, key=create_structure.name_of_path): # Put .folders at the end
 			if not content_file.path in [".castellanidavide", ""] + self.IGNORE:
 				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
-					while (active_count() != 2): pass
+					while (active_count() != 2): print(active_count())
 
 				if content_file.type == "file":
 					Thread(target = self.create_file, args = (self.change(content_file.path), f"{self.change(wget(f'https://raw.githubusercontent.com/{self.template_name}/master/{content_file.path}').text)}")).start()
