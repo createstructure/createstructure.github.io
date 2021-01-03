@@ -26,4 +26,4 @@ jobs:
         python setup.py sdist bdist_wheel
     - name: Try a run
       run: |
-        python -c "exec(\"from datetime import datetime as dt;from create_structure import create_structure;create_structure(answers={'name':dt.now().timestamp(),'extention':'py','descr':dt.now().timestamp(),'prefix':'push-test','team':'',private:'N'})\")" -t=${{ secrets.GITHUB_TOKEN }} -s=[CastellaniDavide] -o=CastellaniDavideTest -i=[.vs,.vscode]
+        python -c "exec(\"from datetime import datetime as dt;from create_structure import create_structure;create_structure(answers={'name':dt.now().timestamp(),'extention':'py','descr':dt.now().timestamp(),'prefix':'push-test','team':'','private':'N'})\")" -t=${{ secrets.GITHUB_TOKEN }} -s=[CastellaniDavide] -o=CastellaniDavideTest -i=[.vs,.vscode]
