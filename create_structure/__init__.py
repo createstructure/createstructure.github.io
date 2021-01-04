@@ -80,7 +80,7 @@ class create_structure:
 			# Check all data
 			assert(self.TOKEN != "TODO" and self.TOKEN != None and self.TOKEN != "***")
 
-			if self.VERBOSE : print(f"self.CONTINUE\t\t\t{self.CONTINUE}\nself.TOKEN\t\t\t{self.TOKEN}\nself.SOURCES_OF_TEMPLATES\t{self.SOURCES_OF_TEMPLATES}\nself.ORGANIZATION_NAME\t\t{self.ORGANIZATION_NAME}\nself.IGNORE\t\t{self.IGNORE}\nself.VERBOSE\t\t\t{self.VERBOSE}")
+			if self.VERBOSE : print(f"\u2139 self.CONTINUE\t\t\t{self.CONTINUE}\n\u2139 self.TOKEN\t\t\t{self.TOKEN}\n\u2139 self.SOURCES_OF_TEMPLATES\t{self.SOURCES_OF_TEMPLATES}\n\u2139 self.ORGANIZATION_NAME\t{self.ORGANIZATION_NAME}\n\u2139 self.IGNORE\t\t\t{self.IGNORE}\n\u2139 self.VERBOSE\t\t\t{self.VERBOSE}")
 
 		except:
 			self.CONTINUE = False
@@ -121,7 +121,7 @@ class create_structure:
 						["descr",		"Description of the project: "],
 						["prefix",		"Insert a prefix for the repository (or don't insert anything): "],
 						["team",		"Do you want insert this repo into a team? [y/N]: "],
-						["private",	"Is that private? [y/N]: "],
+						["private",		"Is that private? [y/N]: "],
 						]
 			self.ANSWERS = {}
 			
@@ -130,10 +130,10 @@ class create_structure:
 				if question_tag == "team":
 					self.ANSWERS["team"] = ""	# default value
 					if self.ORGANIZATION_NAME != "":	# If there is an organization
-						if create_structure.is_positive(input(current_quest)):
+						if create_structure.is_positive(input(f"\u2753 {current_quest}")):
 							self.choose_team()						
 				else:
-					self.ANSWERS[question_tag] = input(current_quest)
+					self.ANSWERS[question_tag] = input(f"\u2753 {current_quest}")
 
 			print()
 
@@ -148,13 +148,13 @@ class create_structure:
 			# Give the option to the user
 			for i, team in enumerate(teams):
 				nteams += 1
-				print(f"{i})\t{team.name}")
+				print(f"\t{i})\t{team.name}")
 
 			assert (nteams != 0)
 
 			# Save the team choosen
 			try:
-				self.ANSWERS["team"] = teams[int(input("Insert your team number: "))].id
+				self.ANSWERS["team"] = teams[int(input("\u2753 Insert your team number: "))].id
 			except:
 				print("This team didn't exist, try again")
 				self.choose_team()
@@ -172,7 +172,7 @@ class create_structure:
 			else:
 				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=self.ANSWERS["team"])
 		
-		print(f"Repo built")
+		print(f"\u2714 Repo built")
 
 	def choose_template(self):
 		"""This helps to find the correct template
@@ -201,7 +201,7 @@ class create_structure:
 						pass
 		
 		self.template = self.g.get_repo(self.template_name)
-		print(f"Template founded ({self.template_name})")
+		print(f"\u2714 Template founded ({self.template_name})")
 		
 	def scan_and_elaborate(self, loc=""):
 		"""Scan all files in the repository and push it in the new directory (cahanging the necessary)
@@ -255,7 +255,7 @@ class create_structure:
 		"""
 		try:
 			self.repo.create_file(path, f"Created {path}", file)
-			print(f"Created {path}")
+			print(f"\u2714 Created {path}")
 		except:
 			# If it's an error, possible with multitreading, try again
 			sleep(0.5)
