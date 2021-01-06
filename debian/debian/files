@@ -1,0 +1,3 @@
+createstructure-dbgsym_7.0_amd64.ddeb debug optional automatic=yes
+createstructure_7.0_amd64.buildinfo python extra
+createstructure_7.0_amd64.deb python extra
