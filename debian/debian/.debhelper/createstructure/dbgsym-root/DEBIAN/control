@@ -5,9 +5,9 @@ Version: 7.0
 Auto-Built-Package: debug-symbols
 Architecture: amd64
 Maintainer: Castellani Davide <help@castellanidavide.it>
-Installed-Size: 16
+Installed-Size: 17
 Depends: createstructure (= 7.0)
 Section: debug
 Priority: optional
 Description: debug symbols for createstructure
-Build-Ids: 0642bbc7016a95460892cdb30093be2c87837bee
+Build-Ids: 93a687cf5ac06a6776c7b233f56b5475370a1608

@@ -6,4 +6,5 @@ Installed-Size: 30
 Pre-Depends: dpkg (>= 1.16.1), python3.8
 Section: python
 Priority: extra
-Description: https://github.com/CastellaniDavide/create_structure
+Description: Lets see https://github.com/CastellaniDavide/create_structure
+    That is my project hosted on GitHub

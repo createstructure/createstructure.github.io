@@ -5,9 +5,10 @@ all:
 
 install:
 	gcc -o createstructure createstructure.c
-	ls
+	echo $(DESTDIR)
+	echo $(prefix)
 	install createstructure $(DESTDIR)$(prefix)/bin
-	install createstructure $(DESTDIR)$(prefix)/share/man/man1
+	install createstructure.1 $(DESTDIR)$(prefix)/share/man/man1
 
 clean:
 	rm -f createstructure
