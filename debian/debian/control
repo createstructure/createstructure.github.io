@@ -8,6 +8,6 @@ Standards-Version: 4.5.0
 Package: createstructure
 Architecture: any
 Pre-Depends: dpkg (>= 1.16.1), python3.8, ${misc:Pre-Depends}
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Lets see https://github.com/CastellaniDavide/create_structure
     That is my project hosted on GitHub
