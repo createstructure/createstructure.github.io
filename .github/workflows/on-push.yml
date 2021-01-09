@@ -26,6 +26,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Install dependences
+        run: |
+          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+          sudo apt-get update
+          sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv
+
       - run: |
           cd debian
           sudo debuild -us -uc
