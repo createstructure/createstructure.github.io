@@ -26,12 +26,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: kentik/pkg@v1
+      - uses: actions/checkout@v2
+
+      - name: create sample script
+        run: |
+          cd debian
+          mkdir -p .debpkg/usr/bin
+          mkdir -p .debpkg/usr/lib/createstructure
+          echo -e "echo sample" > .debpkg/usr/bin/createstructure
+          chmod +x .debpkg/usr/bin/createstructure
+          echo -e "a=1" > .debpkg/usr/lib/createstructure/createstructure.conf
+      - uses: jiro4989/build-deb-action@v2
         with:
-          name: 
-          version: 7.0
-          arch: x86_64
-          format: deb
-          package: debian/package.yaml  
+          package: createstructure
+          package_root: debian/.debpkg
+          maintainer: Davide Castellani
+          version: ${{ github.ref }} # refs/tags/v*.*.*
+          arch: 'amd64'
+          desc: 'this is sample package.'
     - run: ls
     

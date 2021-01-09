@@ -4,7 +4,7 @@ meta:
   maintainer: Me
 files:
   "/usr/bin/my-package":
-    file: my-package
+    file: docker
     mode: "0755"
     user: "root"
   "/etc/my-package/config":
