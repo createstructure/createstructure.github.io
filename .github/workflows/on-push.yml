@@ -36,5 +36,5 @@ jobs:
           cd debian
           sudo debuild -us -uc
           
-      - run: sudo dpkg -i ../createstructure_7.0_amd64.deb
+      - run: sudo dpkg -i ./createstructure_7.0_amd64.deb
     
