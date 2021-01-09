@@ -28,21 +28,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: create sample script
+      - name: install dependences
         run: |
-          cd debian
-          mkdir -p .debpkg/usr/bin
-          mkdir -p .debpkg/usr/lib/createstructure
-          echo -e "echo sample" > .debpkg/usr/bin/createstructure
-          chmod +x .debpkg/usr/bin/createstructure
-          echo -e "a=1" > .debpkg/usr/lib/createstructure/createstructure.conf
-      - uses: jiro4989/build-deb-action@v2
-        with:
-          package: createstructure
-          package_root: debian/.debpkg
-          maintainer: Davide Castellani
-          version: ${{ github.ref }} # refs/tags/v*.*.*
-          arch: 'amd64'
-          desc: 'this is sample package.'
-      - run: ls
+          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+          sudo apt-get update
+          sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv
+
+      - name: Tree
+        run: |
+          sudo apt install tree
+          tree
     
