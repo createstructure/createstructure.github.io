@@ -1,4 +1,4 @@
-createstructure (7.0) stable; urgency=medium
+createstructure (7.0) unstable; urgency=medium
 
   * Initial release.
 

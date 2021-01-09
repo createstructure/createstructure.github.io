@@ -7,4 +7,4 @@ echo "-----------------------------------"
 echo "---createstructure-configuration---"
 echo "-----------------------------------"
 
-#createstructure -v -l
+createstructure -v -l
