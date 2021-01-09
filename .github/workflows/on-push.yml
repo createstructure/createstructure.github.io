@@ -32,14 +32,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8
 
-      - run: |
+      - name: Create Debian package
+        run: |
           cd debian
           sudo debuild -us -uc
           
-      - run: sudo dpkg -i ./createstructure_7.0_amd64.deb
+      - name: Install package
+        run: sudo dpkg -i ./createstructure_7.0_amd64.deb
 
-      - run: |
-          upload_url=$(curl -sL https://api.github.com/repos/actions/checkout/releases/latest | jq -r '.upload_url')
+      - name: Get upload link
+        run: |
+          upload_url=$(curl -sL https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest | jq -r '.upload_url')
           echo ::set-env name=UPLOAD_URL::$upload_url
         shell: bash
       - name: Upload Release Asset
