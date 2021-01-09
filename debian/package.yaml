@@ -1,0 +1,19 @@
+meta:
+  description: My Package
+  vendor: Me
+  maintainer: Me
+files:
+  "/usr/bin/my-package":
+    file: my-package
+    mode: "0755"
+    user: "root"
+  "/etc/my-package/config":
+    file: etc/config
+    mode: "0644"
+    user: "foo"
+    keep: true
+units:
+  - etc/systemd/system/my-package.service
+scripts:
+  "post-install": scripts/post-inst
+user: foo
