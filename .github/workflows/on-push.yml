@@ -29,7 +29,7 @@ jobs:
     - name: Build Debian package
       uses: dawidd6/action-debian-package@v1
       with:
-        source_directory: ./debian # optional, relative to workspace directory
+        source_directory: debian # optional, relative to workspace directory
         artifacts_directory: output # optional, relative to workspace directory
     - run: ls
     
