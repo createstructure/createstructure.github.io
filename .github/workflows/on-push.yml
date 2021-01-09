@@ -44,5 +44,5 @@ jobs:
           version: ${{ github.ref }} # refs/tags/v*.*.*
           arch: 'amd64'
           desc: 'this is sample package.'
-    - run: ls
+      - run: ls
     
