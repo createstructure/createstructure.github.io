@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: curl -sL https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest | jq -r '.upload_url'
+          upload_url: curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url'
           asset_path: ./createstructure_7.0_amd64.deb
           asset_name: createstructure_7.0_amd64.deb
           asset_content_type: application/zip
