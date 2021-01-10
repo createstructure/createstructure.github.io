@@ -1,0 +1,5 @@
+createstructure (7.0) focal; urgency=medium
+
+  * Initial version for Debian packaging
+
+ -- Castellani Davide <help@castellanidavide.it>  Sun, 10 Jan 2021 11:07:17 +0000

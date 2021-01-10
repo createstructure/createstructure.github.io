@@ -1,0 +1,13 @@
+Source: createstructure
+Section: devel
+Priority: extra
+Maintainer: Castellani Davide <help@castellanidavide.it>
+Build-Depends: debhelper (>= 9), python3.8, dh-virtualenv (>= 0.8)
+Standards-Version: 4.5.0
+
+Package: createstructure
+Architecture: any
+Pre-Depends: dpkg (>= 1.16.1), python3.8, ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Lets see https://github.com/CastellaniDavide/create_structure
+    That is my project hosted on GitHub

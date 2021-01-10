@@ -1,0 +1,8 @@
+Format: https://github.com/CastellaniDavide/create_structure/blob/master/docs/LICENSE
+Upstream-Name: Castellani Davide
+Upstream-Contact: Castellani Davide <help@castellanidavide.it>
+Source: https://github.com/CastellaniDavide/create_structure/blob/master/docs/LICENSE
+
+Files: *
+Copyright: 2020-2021 Castellani Davide <help@castellanidavide.it>
+License: GNU

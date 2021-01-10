@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "Install supplementary parts"
+pip3 install createstructure==6.2
+echo "Installed createstructure"
+
+echo "-----------------------------------"
+echo "---createstructure-configuration---"
+echo "-----------------------------------"
+
+createstructure -v -l
