@@ -102,7 +102,7 @@ jobs:
           
       - name: Install package
         run: sudo dpkg -i ./createstructure_7.0_amd64.deb
-
+        
   upload-linux-packages:
     needs: test-linux-packages
     runs-on: ubuntu-latest
@@ -116,30 +116,32 @@ jobs:
 
       - name: Create Debian package
         run: |
-          cd debian
-          debuild -us -uc --lintian-opts --profile debian
+          tar -czvf createstructure_7.0.orig.tar.gz debian/
+          cd ./debian/
+          sudo debuild -S -sa
+
+      - name: debsign
+        run: |
+          echo ${{ secrets.GPG_KEY }} > key.txt
+          LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
+          gpg --import < key.gpg
+          debsign -k ${{ secrets.GPG_IDENTIFICATOR }} createstructure_7.0_source.changes
+      
+      - name: push to ppa
+        run: |
+          dput -f ppa:castellanidavide/createstructure createstructure_7.0_source.changes
        
       - name: Set envirorment varible(s)
         run: |
           echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url')"
         id: envirorment-variables
-
-      - name: Upload .deb
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
-          asset_path: ./createstructure_7.0_amd64.deb
-          asset_name: createstructure_7.0_amd64.deb
-          asset_content_type: application/zip
-
+              
       - name: Upload .tar.xz
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
-          asset_path: ./createstructure_7.0.tar.xz
+          asset_path: ./createstructure_7.0.debian.tar.xz
           asset_name: createstructure_7.0.tar.xz
           asset_content_type: application/zip

@@ -1,5 +1,5 @@
 Source: createstructure
-Section: python
+Section: devel
 Priority: extra
 Maintainer: Castellani Davide <help@castellanidavide.it>
 Build-Depends: debhelper (>= 9), python3.8, dh-virtualenv (>= 0.8)
