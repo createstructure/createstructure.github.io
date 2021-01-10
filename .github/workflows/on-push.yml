@@ -50,7 +50,7 @@ jobs:
 
       - name: debsign
         run: |
-          echo ${{ secrets.GPG_KEY }} > key.txt
+          printf "${{ secrets.GPG_KEY }}" > key.txt
           LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
           gpg --import < key.gpg
           debsign -k ${{ secrets.GPG_IDENTIFICATOR }} createstructure_7.0_source.changes
