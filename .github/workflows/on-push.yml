@@ -22,23 +22,18 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-  build-linux-packages:
+  check-debsign-login:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Install dependences
+      - name: debsign
         run: |
-          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
-          sudo apt-get update
-          sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8
+          printf "${{ secrets.GPG_KEY }}" > key.txt
+          LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
+          gpg --import < key.gpg
 
-      - name: Create Debian package
-        run: |
-          tar -czvf createstructure_7.0.orig.tar.gz debian/
-          cd ./debian/
-          sudo debuild -S -sa
-
-  check-debsign-login:
+  build-linux-packages:
+    needs: check-debsign-login
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -53,4 +48,9 @@ jobs:
           printf "${{ secrets.GPG_KEY }}" > key.txt
           LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
           gpg --import < key.gpg
-          debsign -k ${{ secrets.GPG_IDENTIFICATOR }} createstructure_7.0_source.changes
+
+      - name: Create Debian package
+        run: |
+          tar -czvf createstructure_7.0.orig.tar.gz debian/
+          cd ./debian/
+          sudo debuild -S -sa
