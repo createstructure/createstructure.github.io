@@ -22,37 +22,37 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-  check-debsign-login:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: debsign
-        run: |
-          printf "${{ secrets.GPG_KEY }}" > key.txt
-          LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
-          gpg --import < key.gpg
-          gpg --fingerprint
+#   check-debsign-login:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: debsign
+#         run: |
+#           printf "${{ secrets.GPG_KEY }}" > key.txt
+#           LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
+#           gpg --import < key.gpg
+#           gpg --fingerprint
 
-  build-linux-packages:
-    needs: check-debsign-login
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install dependences
-        run: |
-          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
-          sudo apt-get update
-          sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8
+#   build-linux-packages:
+#     needs: check-debsign-login
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Install dependences
+#         run: |
+#           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+#           sudo apt-get update
+#           sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8
 
-      - name: debsign
-        run: |
-          printf "${{ secrets.GPG_KEY }}" > key.txt
-          LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
-          gpg --import < key.gpg
-          gpg --fingerprint
+#       - name: debsign
+#         run: |
+#           printf "${{ secrets.GPG_KEY }}" > key.txt
+#           LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
+#           gpg --import < key.gpg
+#           gpg --fingerprint
 
-      - name: Create Debian package
-        run: |
-          tar -czvf createstructure_7.0.orig.tar.gz debian/
-          cd ./debian/
-          sudo debuild -S -sa
+#       - name: Create Debian package
+#         run: |
+#           tar -czvf createstructure_7.0.orig.tar.gz debian/
+#           cd ./debian/
+#           sudo debuild -S -sa
