@@ -22,27 +22,37 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-  build-linux-packages:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install dependences
-        run: |
-          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
-          sudo apt-get update
-          sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8
+#   check-debsign-login:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: debsign
+#         run: |
+#           printf "${{ secrets.GPG_KEY }}" > key.txt
+#           LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
+#           gpg --import < key.gpg
+#           gpg --fingerprint
 
-      - name: Create Debian package
-        run: |
-          cd debian
-          sudo debuild -us -uc
+#   build-linux-packages:
+#     needs: check-debsign-login
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Install dependences
+#         run: |
+#           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+#           sudo apt-get update
+#           sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8
 
-      - name: Create fake inputs
-        run: |
-          echo "fake-token" > answers
-          echo "[fake-source1,fake-source2,fake-sourcen]" >> answers
-          echo "fake-organization" >> answers
-          echo "[fake-ignore1,fake-ignore2,fake-ignoren]" >> answers
+#       - name: debsign
+#         run: |
+#           printf "${{ secrets.GPG_KEY }}" > key.txt
+#           LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
+#           gpg --import < key.gpg
+#           gpg --fingerprint
 
-      - name: Install package
-        run: sudo dpkg -i ./createstructure_7.0_amd64.deb < answers
+#       - name: Create Debian package
+#         run: |
+#           tar -czvf createstructure_7.0.orig.tar.gz debian/
+#           cd ./debian/
+#           sudo debuild -S -sa
