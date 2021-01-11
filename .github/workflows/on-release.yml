@@ -145,3 +145,13 @@ jobs:
 #           asset_path: ./createstructure_7.0.debian.tar.xz
 #           asset_name: createstructure_7.0.tar.xz
 #           asset_content_type: application/zip
+        
+  publish-choco:
+    runs-on: windows-latest
+    steps:
+    - name: Build and publish
+      run: |
+        cd choco
+        choco apikey --key ${{ secrets.CHOCO_APIKEY }} --source https://push.chocolatey.org/
+        choco pack
+        choco push .\createstructure.7.0.nupkg --source https://push.chocolatey.org/

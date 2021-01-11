@@ -56,3 +56,14 @@ jobs:
 #           tar -czvf createstructure_7.0.orig.tar.gz debian/
 #           cd ./debian/
 #           sudo debuild -S -sa
+
+  test-choco:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Try to build
+      run: |
+        cd choco 
+        choco pack
+        choco install createstructure -d-v -s . --pre -y --force
