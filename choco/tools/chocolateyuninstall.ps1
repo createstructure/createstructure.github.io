@@ -50,7 +50,5 @@ if ($new_path -like "*$ppath*")
 {
 	echo "Delate unwanted path"
 	$new_path = $new_path.Replace("$ppath", "").Replace(";;", ";")
-
-	echo $new_path
 	Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $new_path
 }

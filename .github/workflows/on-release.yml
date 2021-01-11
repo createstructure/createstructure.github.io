@@ -145,8 +145,19 @@ jobs:
 #           asset_path: ./createstructure_7.0.debian.tar.xz
 #           asset_name: createstructure_7.0.tar.xz
 #           asset_content_type: application/zip
-        
+
+  test-choco:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Try to build
+      run: |
+        cd choco 
+        choco pack
+        choco install createstructure -d-v -s . --pre -y --force
+
   publish-choco:
+    needs: test-choco
     runs-on: windows-latest
     steps:
     - name: Build and publish
