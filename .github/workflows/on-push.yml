@@ -65,7 +65,7 @@ jobs:
         echo "::set-output name=VERSION_TAG::$(echo ${{ github.event.release.tag_name }} | sed 's/v//')"
       id: envirorment-variables
               
-    - run: echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}"
+    - run: echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}
 
   test-choco:
     runs-on: windows-latest
