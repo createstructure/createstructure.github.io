@@ -61,7 +61,7 @@ jobs:
     steps:
     - name: Set envirorment varible(s)
         run: |
-          echo "::set-output name=VERSION_TAG::${GITHUB_REF##*/v}"
+          echo "::set-output name=VERSION_TAG::$(git describe --tags --abbrev=0 | sed 's/v//')"
         id: envirorment-variables
               
     - run: echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}"
