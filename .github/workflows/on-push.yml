@@ -56,6 +56,15 @@ jobs:
 #           tar -czvf createstructure_7.0.orig.tar.gz debian/
 #           cd ./debian/
 #           sudo debuild -S -sa
+  test-enviroment-variabiles:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set envirorment varible(s)
+        run: |
+          echo "::set-output name=VERSION_TAG::${GITHUB_REF##*/v}"
+        id: envirorment-variables
+              
+    - run: echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}"
 
   test-choco:
     runs-on: windows-latest
