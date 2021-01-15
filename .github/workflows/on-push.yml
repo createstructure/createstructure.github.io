@@ -63,7 +63,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: oprypin/find-latest-tag@v1
       with:
-        repository: $GITHUB_REPOSITORY
+        repository: CastellaniDavide/create_structure
         releases-only: true 
       id : latest
 
