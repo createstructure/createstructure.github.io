@@ -60,9 +60,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Set envirorment varible(s)
-        run: |
-          echo "::set-output name=VERSION_TAG::$(git describe --tags --abbrev=0 | sed 's/v//')"
-        id: envirorment-variables
+      run: |
+        echo "::set-output name=VERSION_TAG::$(git describe --tags --abbrev=0 | sed 's/v//')"
+      id: envirorment-variables
               
     - run: echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}"
 
