@@ -59,10 +59,9 @@ jobs:
   test-enviroment-variabiles:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - name: Set envirorment varible(s)
       run: |
-        echo "::set-output name=VERSION_TAG::$(git describe --tags --abbrev=0 | sed 's/v//')"
+        echo "::set-output name=VERSION_TAG::$(echo ${{ github.event.release.tag_name }} | sed 's/v//')"
       id: envirorment-variables
               
     - run: echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}"
