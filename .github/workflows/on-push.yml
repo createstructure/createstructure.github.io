@@ -60,9 +60,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      - name: 'Get Previous tag'
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@master" 
+    - name: 'Get Previous tag'
+      id: previoustag
+      uses: "WyriHaximus/github-action-get-previous-tag@master" 
     - name: Set envirorment varible(s)
       run: |
         echo "::set-output name=VERSION_TAG::$(echo${{ steps.previoustag.outputs.tag }} | sed 's/v//')"
