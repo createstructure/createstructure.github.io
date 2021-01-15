@@ -56,18 +56,23 @@ jobs:
 #           tar -czvf createstructure_7.0.orig.tar.gz debian/
 #           cd ./debian/
 #           sudo debuild -S -sa
+
   test-enviroment-variabiles:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: 'Get Previous tag'
-      id: previoustag
-      uses: "WyriHaximus/github-action-get-previous-tag@master" 
+    - uses: oprypin/find-latest-tag@v1
+      with:
+        repository: $GITHUB_REPOSITORY
+        releases-only: true 
+      id : latest
+
+    - run: echo "Octokit is at version ${{ steps.latest.outputs.tag }}"
     - name: Set envirorment varible(s)
-      run: |
-        echo "::set-output name=VERSION_TAG::$(echo${{ steps.previoustag.outputs.tag }} | sed 's/v//')"
-      id: envirorment-variables
-              
+        run: |
+          echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
+        id: envirorment-variables
+                
     - run: echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}
 
   test-choco:
