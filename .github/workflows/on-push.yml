@@ -31,6 +31,12 @@ jobs:
         sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
         sudo apt-get update
         sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
+        
+    - uses: oprypin/find-latest-tag@v1
+      with:
+        repository: CastellaniDavide/create_structure
+        releases-only: true 
+      id : latest
 
     - name: Set envirorment varible(s)
       run: |
