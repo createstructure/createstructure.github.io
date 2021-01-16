@@ -92,7 +92,7 @@ jobs:
         repository: CastellaniDavide/create_structure
         releases-only: true 
       id : latest
-      
+
     - name: Set envirorment varible(s)
       run: |
         echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url')"  
@@ -114,14 +114,13 @@ jobs:
       run: |
         cd choco 
         choco pack
-        choco install createstructure -d-v -s . --pre -y --force
-              
-      - name: Upload nupkg
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
-          asset_path: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
-          asset_name: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
-          asset_content_type: application/zip
+        choco install createstructure -d-v -s . --pre -y --force    
+    - name: Upload nupkg
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
+        asset_path: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        asset_name: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        asset_content_type: application/zip
