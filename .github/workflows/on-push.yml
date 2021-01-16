@@ -66,10 +66,9 @@ jobs:
         repository: CastellaniDavide/create_structure
         releases-only: true 
       id : latest
-
-    - run: echo "Octokit is at version ${{ steps.latest.outputs.tag }}"
     - name: Set envirorment varible(s)
       run: |
+        echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url')"  
         echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
         echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
         echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
@@ -78,6 +77,7 @@ jobs:
                 
     - name: Print envirorment variables
       run: |
+        echo ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
         echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}
         echo ${{ steps.envirorment-variables.outputs.TAR_FILE }}
         echo ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
@@ -87,8 +87,41 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: oprypin/find-latest-tag@v1
+      with:
+        repository: CastellaniDavide/create_structure
+        releases-only: true 
+      id : latest
+      
+    - name: Set envirorment varible(s)
+      run: |
+        echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url')"  
+        echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
+        echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
+        echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
+        echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+      id: envirorment-variables
+                
+    - name: Print envirorment variables
+      run: |
+        echo ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
+        echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}
+        echo ${{ steps.envirorment-variables.outputs.TAR_FILE }}
+        echo ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
+        echo ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+
     - name: Try to build
       run: |
         cd choco 
         choco pack
         choco install createstructure -d-v -s . --pre -y --force
+              
+      - name: Upload nupkg
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
+          asset_path: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+          asset_name: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+          asset_content_type: application/zip
