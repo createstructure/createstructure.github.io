@@ -22,10 +22,10 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-  check-debsign-login:
+  create-and-update-deb:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Set envirorment varible(s)
       run: |
         echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url')"  
@@ -67,7 +67,7 @@ jobs:
 #     needs: check-debsign-login
 #     runs-on: ubuntu-latest
 #     steps:
-#       - uses: actions/checkout@v1
+#       - uses: actions/checkout@v2
 #       - name: Install dependences
 #         run: |
 #           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
