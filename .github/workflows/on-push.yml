@@ -77,7 +77,7 @@ jobs:
                 
     - name: Print envirorment variables
       run: |
-        echo ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
+        echo "${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
         echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}
         echo ${{ steps.envirorment-variables.outputs.TAR_FILE }}
         echo ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
@@ -104,7 +104,7 @@ jobs:
                 
     - name: Print envirorment variables
       run: |
-        echo ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
+        echo "${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
         echo ${{ steps.envirorment-variables.outputs.VERSION_TAG }}
         echo ${{ steps.envirorment-variables.outputs.TAR_FILE }}
         echo ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
