@@ -118,13 +118,15 @@ jobs:
       run: |
         cd choco 
         choco pack
-        choco install createstructure -d-v -s . --pre -y --force    
+        choco install createstructure -d-v -s . --pre -y --force
+        tree
+           
     - name: Upload nupkg
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
+        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
         asset_path: ${{ steps.envirorment-variables.outputs.NUPKG_FILE_PATH }}
         asset_name: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
         asset_content_type: application/zip
