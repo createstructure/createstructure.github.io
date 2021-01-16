@@ -73,6 +73,7 @@ jobs:
         echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
         echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
         echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+        echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
       id: envirorment-variables
                 
     - name: Print envirorment variables
@@ -82,6 +83,7 @@ jobs:
         echo ${{ steps.envirorment-variables.outputs.TAR_FILE }}
         echo ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
         echo ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        echo ${{ steps.envirorment-variables.outputs.NUPKG_FILE_PATH }}
 
   test-choco:
     runs-on: windows-latest
@@ -100,6 +102,7 @@ jobs:
         echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
         echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
         echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+        echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
       id: envirorment-variables
                 
     - name: Print envirorment variables
@@ -109,6 +112,7 @@ jobs:
         echo ${{ steps.envirorment-variables.outputs.TAR_FILE }}
         echo ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
         echo ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        echo ${{ steps.envirorment-variables.outputs.NUPKG_FILE_PATH }}
 
     - name: Try to build
       run: |
@@ -121,6 +125,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}"
-        asset_path: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        asset_path: ${{ steps.envirorment-variables.outputs.NUPKG_FILE_PATH }}
         asset_name: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
         asset_content_type: application/zip
