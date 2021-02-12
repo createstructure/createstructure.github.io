@@ -113,12 +113,12 @@ jobs:
         echo ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
         echo ${{ steps.envirorment-variables.outputs.NUPKG_FILE_PATH }}
 
-      - name: gpg import 
-        run: |
-          printf "${{ secrets.GPG_KEY }}" > key.txt
-          LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
-          gpg --import < key.gpg
-          gpg --fingerprint
+    - name: gpg import 
+      run: |
+        printf "${{ secrets.GPG_KEY }}" > key.txt
+        LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.gpg
+        gpg --import < key.gpg
+        gpg --fingerprint
 
 #       - name: Create Debian package
 #         run: |
