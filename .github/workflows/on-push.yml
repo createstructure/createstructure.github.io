@@ -65,15 +65,15 @@ jobs:
         sudo echo "3.0 (native)" > debian/source/format
         dpkg-buildpackage -us -uc
 
-    - name: Upload deb
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
-        asset_path: ${{ steps.envirorment-variables.outputs.DEB_FILE }}
-        asset_name: ${{ steps.envirorment-variables.outputs.DEB_FILE }}
-        asset_content_type: application/zip
+#    - name: Upload deb
+#      uses: actions/upload-release-asset@v1
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      with:
+#        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
+#        asset_path: ${{ steps.envirorment-variables.outputs.DEB_FILE }}
+#        asset_name: ${{ steps.envirorment-variables.outputs.DEB_FILE }}
+#        asset_content_type: application/zip
 
 #  build-linux-packages-for-ppa:
 #    needs: check-debsign-login
