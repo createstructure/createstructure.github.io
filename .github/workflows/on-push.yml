@@ -75,16 +75,16 @@ jobs:
         asset_name: ${{ steps.envirorment-variables.outputs.DEB_FILE }}
         asset_content_type: application/zip
 
-  build-linux-packages-for-ppa:
-    needs: check-debsign-login
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
-        sudo apt-get update
-        sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
+#  build-linux-packages-for-ppa:
+#    needs: check-debsign-login
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Install dependencies
+#      run: |
+#        sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+#        sudo apt-get update
+#        sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
 
     - uses: oprypin/find-latest-tag@v1
       with:
