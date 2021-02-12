@@ -5,3 +5,12 @@ __pycache__
 build
 createstructure.egg-info
 dist
+*.build
+*.buildinfo
+*.changes
+*.tar.xz
+*.dsc
+*.orig.tar.gz
+*.asc
+*.openpgpkey
+otrust.txt
