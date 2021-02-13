@@ -194,13 +194,13 @@ jobs:
         echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
         echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
       id: envirorment-variables
-    - name: Build and publish
+    - name: Build & Pusblish
       run: |
         cd choco
         choco apikey --key ${{ secrets.CHOCO_APIKEY }} --source https://push.chocolatey.org/
         choco pack
         choco push .\${{ steps.envirorment-variables.outputs.NUPKG_FILE }} --source https://push.chocolatey.org/
-        move ${{ steps.envirorment-variables.outputs.NUPKG_FILE }} ../${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        move ./* ../
     - name: Upload nupkg
       uses: actions/upload-release-asset@v1
       env:
