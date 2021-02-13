@@ -160,6 +160,7 @@ jobs:
         cd choco 
         choco pack
         choco install createstructure -d-v -s . --pre -y --force
+        ls
         move ${{ steps.envirorment-variables.outputs.NUPKG_FILE }} ..
 
 #    - name: Upload nupkg
