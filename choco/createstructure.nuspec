@@ -8,6 +8,9 @@
     <projectUrl>https://github.com/CastellaniDavide/create_structure</projectUrl>
     <tags>createstructure template bot</tags>
     <description>With this program, you can easily create a repository on GitHub :octocat: with a basic template, personalized for your use.</description>
+    <dependencies>
+      <dependency id="python" version="3.10.0-a5" />
+    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

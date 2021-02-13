@@ -1,2 +1,3 @@
 #!/bin/bash
 sudo rm /etc/createstructure.conf
+pip uninstall createstructure

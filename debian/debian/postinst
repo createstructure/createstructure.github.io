@@ -1,10 +1,8 @@
 #!/bin/bash
 echo "Install supplementary parts"
-pip3 install createstructure==6.2
+pip3 install createstructure==7.1
 echo "Installed createstructure"
 
-echo "-----------------------------------"
-echo "---createstructure-configuration---"
-echo "-----------------------------------"
-
-createstructure -v -l
+echo "-----------------------------------------------------------"
+echo "---createstructure-remember-to-do: createstructure -v -l---"
+echo "-----------------------------------------------------------"
