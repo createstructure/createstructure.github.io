@@ -14,7 +14,7 @@ from threading import Thread, active_count, Lock
 from sys import argv
 
 __author__ = "help@castellanidavide.it"
-__version__ = "7.0 2021-01-11"
+__version__ = "7.1 2021-02-13"
 
 class create_structure:
 	def __init__ (self, tocken=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
