@@ -1,3 +1,12 @@
+createstructure (7.1) focal; urgency=medium
+
+  * Change internal team variable (team pointer => team name)
+  * Adjust emoji
+  * Add a parameter to create a template eg. -temp --template
+  * Optimized multithreading on push
+
+ -- castellanidavide <castellanidavide@castellanidavide>  Sat, 13 Feb 2021 16:04:03 +0100
+
 createstructure (7.0) focal; urgency=medium
 
   * Initial version for Debian packaging

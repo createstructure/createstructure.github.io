@@ -10,14 +10,14 @@ from github import Github
 from re import escape, compile
 from requests import get as wget
 from time import sleep
-from threading import Thread, active_count
+from threading import Thread, active_count, Lock
 from sys import argv
 
 __author__ = "help@castellanidavide.it"
-__version__ = "7.0 2021-01-11"
+__version__ = "7.1 2021-02-13"
 
 class create_structure:
-	def __init__ (self, tocken=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, answers=None):
+	def __init__ (self, tocken=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
 		"""Main function
 		"""
 		# Set main variabiles
@@ -27,7 +27,9 @@ class create_structure:
 		self.ORGANIZATION_NAME = organization_name
 		self.IGNORE = IGNORE
 		self.VERBOSE = verbose
+		self.TEMPLATE = template
 		self.ANSWERS = answers
+		self.PUSH = Lock()
 
 		# Initial inputs
 		self.initial_inputs()
@@ -76,11 +78,14 @@ class create_structure:
 				# find verbose
 				if "--vebose" in arg or "-v" in arg:
 					self.VERBOSE = True
+				# find verbose
+				if "--template" in arg or "-temp" in arg:
+					self.TEMPLATE = True
 		
 			# Check all data
 			assert(self.TOKEN != "TODO" and self.TOKEN != None and self.TOKEN != "***")
 
-			if self.VERBOSE : print(f"\u2139 self.CONTINUE\t\t\t{self.CONTINUE}\n\u2139 self.TOKEN\t\t\t{self.TOKEN}\n\u2139 self.SOURCES_OF_TEMPLATES\t{self.SOURCES_OF_TEMPLATES}\n\u2139 self.ORGANIZATION_NAME\t{self.ORGANIZATION_NAME}\n\u2139 self.IGNORE\t\t\t{self.IGNORE}\n\u2139 self.VERBOSE\t\t\t{self.VERBOSE}")
+			if self.VERBOSE : print(f"{self.get_emoji('i')}self.CONTINUE\t\t\t{self.CONTINUE}\n{self.get_emoji('i')}self.TOKEN\t\t\t{self.TOKEN}\n{self.get_emoji('i')}self.SOURCES_OF_TEMPLATES\t{self.SOURCES_OF_TEMPLATES}\n{self.get_emoji('i')}self.ORGANIZATION_NAME\t{self.ORGANIZATION_NAME}\n{self.get_emoji('i')}self.IGNORE\t\t\t{self.IGNORE}\n{self.get_emoji('i')}self.VERBOSE\t\t\t{self.VERBOSE}")
 
 		except:
 			self.CONTINUE = False
@@ -88,6 +93,7 @@ class create_structure:
 							"\t[--ignore= | -i=]",
 							"\t[--organization= | -o=]",
 							"\t[--sources= | -s=]",
+							"\t[--template | -temp]"
 							"\t[--token= | -t=]",
 							"\t[--verbose | -v]",
 							"",
@@ -96,6 +102,7 @@ class create_structure:
 							"\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
 							"\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
 							"\t--token= or -t=			The GitHub tocken with repo and organization permission",
+							"\t--template= or -temp=		Create a template",
 							"\t--verbose or -v			Verbose option, you will see the main variabiles and lots more"
 							"",
 							"Extra situation(s):",
@@ -130,10 +137,10 @@ class create_structure:
 				if question_tag == "team":
 					self.ANSWERS["team"] = ""	# default value
 					if self.ORGANIZATION_NAME != "":	# If there is an organization
-						if create_structure.is_positive(input(f"\u2753 {current_quest}")):
+						if create_structure.is_positive(input(f"{self.get_emoji('?')}{current_quest}")):
 							self.choose_team()						
 				else:
-					self.ANSWERS[question_tag] = input(f"\u2753 {current_quest}")
+					self.ANSWERS[question_tag] = input(f"{self.get_emoji('?')}{current_quest}")
 
 			print()
 
@@ -152,27 +159,45 @@ class create_structure:
 
 			assert (nteams != 0)
 
+			# Save answer
+			answer = input(f"{self.get_emoji('?')}Insert your team number or the name of a new team: ")
+
 			# Save the team choosen
 			try:
-				self.ANSWERS["team"] = teams[int(input("\u2753 Insert your team number: "))].id
+				self.ANSWERS["team"] = teams[int(answer)].name
 			except:
-				print("This team didn't exist, try again")
-				self.choose_team()
+				try:
+					int(answer)
+					print("This team didn't exist, try again")
+					self.choose_team()
+				except:
+					self.ANSWERS["team"] = answer	# Create a new team on running
 		except:	# No teams
 			print("Sorry, you didn't have any team. Create a new team to use this option")
 
 	def create_repo(self):
 		"""Create the repo
 		"""
+		if self.TEMPLATE and not self.ANSWERS['name'].endswith("-template"): # Add -template if not exists
+			self.ANSWERS['name'] = self.ANSWERS['name'] + "-template"			
+
 		if self.ORGANIZATION_NAME == "":
 			self.repo = self.g.get_user().create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 		else:
 			if self.ANSWERS["team"] == "":
 				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 			else:
-				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=self.ANSWERS["team"])
+				# Create team if not exists
+				try: 
+					self.g.get_organization(self.ORGANIZATION_NAME).create_team(self.ANSWERS["team"], privacy="closed")
+				except: 
+					pass
+
+				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=[i for i in self.g.get_organization(self.ORGANIZATION_NAME).get_teams() if i.name == self.ANSWERS["team"]][0].id)
 		
-		print(f"\u2714 Repo built")
+		if self.ANSWERS['name'].endswith("-template"):
+			self.ANSWERS['name'] = self.ANSWERS['name'][:len(self.ANSWERS['name']) - len("-template"):]
+		print(f"{self.get_emoji('ok')}Repo built")
 
 	def choose_template(self):
 		"""This helps to find the correct template
@@ -194,23 +219,26 @@ class create_structure:
 			for source in self.SOURCES_OF_TEMPLATES:
 				if source != "TODO" and self.template_name == "CastellaniDavide/default-template":
 					try:
-						print (f"Try: {source}/default-template")
+						if self.VERBOSE : print (f"{self.get_emoji('i')}Try: {source}/default-template")
 						self.template_name = self.g.get_repo(f"{source}/default-template").full_name
 						break
 					except:
 						pass
 		
 		self.template = self.g.get_repo(self.template_name)
-		print(f"\u2714 Template founded ({self.template_name})")
+		print(f"{self.get_emoji('ok')}Template founded ({self.template_name})")
 		
 	def scan_and_elaborate(self, loc=""):
 		"""Scan all files in the repository and push it in the new directory (cahanging the necessary)
 		"""
+		if self.TEMPLATE and loc == "":
+			self.create_file(".castellanidavide/change.json", str(wget(f'https://raw.githubusercontent.com/CastellaniDavide/default-template/master/.castellanidavide/change.json').text))
+
 		contents = self.template.get_contents(f"{loc}")
 		for content_file in sorted(contents, reverse=True, key=create_structure.name_of_path): # Put .folders at the end
 			if not content_file.path in [".castellanidavide", ""] + self.IGNORE:
 				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
-					while (active_count() != 2): pass
+					while (active_count() != 2): print(active_count())
 
 				if content_file.type == "file":
 					Thread(target = self.create_file, args = (self.change(content_file.path), f"{self.change(wget(f'https://raw.githubusercontent.com/{self.template_name}/master/{content_file.path}').text)}")).start()
@@ -254,17 +282,27 @@ class create_structure:
 		"""Create the file into the repo
 		"""
 		try:
-			self.repo.create_file(path, f"Created {path}", file)
-			print(f"\u2714 Created {path}")
+			with self.PUSH:
+				self.repo.create_file(path, f"Created {path}", file)
+				print(f"{self.get_emoji('ok')}Created {path}")
 		except:
-			# If it's an error, possible with multitreading, try again
-			sleep(0.5)
-			self.create_file (path, file)
+			print(f"There was an error to this file: {path}")
 
 	def is_positive(answer):
 		"""Returns true is the answer is affermative
 		"""
 		return answer in ["y", "Y", "yes", "Yes"]
+
+	def get_emoji(self, emoji):
+		"""Returns the selected emoji
+		"""
+		if emoji == "?":
+			return "\u2753 "
+		elif emoji == "i":
+			return "\u2139 "
+		elif emoji == "ok":
+			return "\u2714 "
+		return ""
 
 if __name__ == "__main__":
 	""" Read the argv, and sometimes writes the documentation

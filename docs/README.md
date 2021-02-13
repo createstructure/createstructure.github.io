@@ -1,5 +1,5 @@
 # create_structure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.0-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.1-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
 
 ## Contents
  - [Description](#description)
@@ -99,6 +99,7 @@ With this programm you can easily create a repository on GitHub :octocat: with a
  - Try to execute this programm and check correct use
 
 ### Changelog
+ - [7.1_2021-02-13](#71_2021-02-13)
  - [7.0_2021-01-11](#70_2021-01-11)
  - [6.2_2021-01-04](#62_2021-01-04)
  - [6.1_2021-01-03](#61_2021-01-03)
@@ -114,6 +115,12 @@ With this programm you can easily create a repository on GitHub :octocat: with a
  - [3.0_2020-08-15](#30_2020-08-15)								 
  - [2.0_2020-03-24](#20_2020-03-24)
  - [1.0_2020-03-24](#10_2020-03-24)
+
+#### 7.1_2021-02_13
+  - Change internal team variable (team pointer => team name)
+  - Adjust emoji
+  - Add a parameter to create a template eg. -temp --template
+  - Optimized multithreading on push
 
 #### 7.0_2021-01-11
   - Added Debian package
