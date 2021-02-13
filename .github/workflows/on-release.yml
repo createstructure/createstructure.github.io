@@ -152,6 +152,22 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: oprypin/find-latest-tag@v1
+      with:
+        repository: CastellaniDavide/create_structure
+        releases-only: true 
+      id : latest
+
+    - name: Set envirorment varible(s)
+      run: |
+        echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url')"  
+        echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
+        echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
+        echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
+        echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
+        echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+        echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+      id: envirorment-variables
     - name: Try to build
       run: |
         cd choco 
@@ -163,9 +179,34 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: oprypin/find-latest-tag@v1
+      with:
+        repository: CastellaniDavide/create_structure
+        releases-only: true 
+      id : latest
+    - name: Set envirorment varible(s)
+      run: |
+        echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/CastellaniDavide/create_structure/releases/latest | jq -r '.upload_url')"  
+        echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
+        echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
+        echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
+        echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
+        echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+        echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+      id: envirorment-variables
     - name: Build and publish
       run: |
         cd choco
         choco apikey --key ${{ secrets.CHOCO_APIKEY }} --source https://push.chocolatey.org/
         choco pack
-        choco push .\createstructure.7.1.nupkg --source https://push.chocolatey.org/
+        choco push .\${{ steps.envirorment-variables.outputs.NUPKG_FILE }} --source https://push.chocolatey.org/
+        move ${{ steps.envirorment-variables.outputs.NUPKG_FILE }} ../${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+    - name: Upload nupkg
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
+        asset_path: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        asset_name: ${{ steps.envirorment-variables.outputs.NUPKG_FILE }}
+        asset_content_type: application/zip
