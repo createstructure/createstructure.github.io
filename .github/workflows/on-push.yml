@@ -111,7 +111,7 @@ jobs:
 
     - name: dput
       run: |
-      dput ppa:castellanidavide/test2 ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
+        dput ppa:castellanidavide/test2 ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
 
   test-enviroment-variabiles:
     runs-on: ubuntu-latest
