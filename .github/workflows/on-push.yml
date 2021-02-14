@@ -96,13 +96,13 @@ jobs:
       run: |
         echo "${{ secrets.GPG_KEY }}" > key.txt
         LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
-        gpg --import key.asc
+        gpg --batch --passphrase "${{ secrets.GPG_PWS }}" --import key.asc
 
     - name: Create Debian package
       run: |
         tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
         cd ./debian/
-        sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} 
+        sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase "${{ secrets.GPG_PWS }}" --pinentry-mode loopback"
     
     - name: Checks files
       run: |
