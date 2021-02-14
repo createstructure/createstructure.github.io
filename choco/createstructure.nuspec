@@ -9,7 +9,7 @@
     <tags>createstructure template bot</tags>
     <description>With this program, you can easily create a repository on GitHub :octocat: with a basic template, personalized for your use.</description>
     <dependencies>
-      <dependency id="python" version="3.8.0" />
+      <dependency id="python" />
     </dependencies>
   </metadata>
   <files>
