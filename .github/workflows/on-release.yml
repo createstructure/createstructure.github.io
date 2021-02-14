@@ -177,6 +177,7 @@ jobs:
       run: |
         cd choco 
         choco pack
+        choco install python
         choco install createstructure -d-v -s . --pre -y --force
 
   publish-choco:
