@@ -11,7 +11,7 @@
   - [How to use](#how%20to%20use)
   - [How to create your own template](#how%20to%20create%20your%20own%20template)
     - [1. Install createstructure](#1.%20install%20createstructure)
-    - [2. Use template option](#2.%20yse%20template%20option)
+    - [2. Use template option](#2.%20use%20template%20option)
     - [3. Personalize it](#3.%20personalize%20it)
     - [4. Add your account into research](#4.%20add%20your%20account%20into%20research)
     - [5. Try it](#5.%20try%20it)
@@ -21,7 +21,7 @@
 ### Description
 ![](http://aimhigherafrica.com/wp-content/uploads/2018/09/o6.png)
 This is the magic :octocat: bot :octocat: by Castellani Davide
-With this programm you can easily create a repository on GitHub :octocat: with a basic template, personalized for your use.
+With this program, you can easily create a repository on GitHub :octocat: with a basic template, personalized for your use.
 
 ### Required
 ![](http://jeffnielsen.com/wp-content/uploads/2014/06/required-cropped.png)
@@ -43,7 +43,7 @@ With this programm you can easily create a repository on GitHub :octocat: with a
     - download the repo ```git clone https://github.com/CastellaniDavide/create_structure.git```
     - [install python3](https://www.python.org/)
     - [install pip3](https://www.python.org/)
-    - install requirements.txt (in core of the project): ```pip3 install -r requirements/requirements.txt```
+    - install requirements.txt (in the core of the project): ```pip3 install -r requirements/requirements.txt```
     - create an alias
       - name: createstructure
       - attribute: python3 \<ABSOLUTE_PATH_OF_REPO>/bin/create_structure.py -t=\<TOCKEN> -s=\<ARRAY_OF_SOURCES> -o=\<(optional)_ORGANIZATION> -i=\<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>
@@ -83,7 +83,7 @@ With this programm you can easily create a repository on GitHub :octocat: with a
 ![](https://live.staticflickr.com/5213/5523800294_80f0687af7_b.jpg)
 #### 1. Install createstructure
 ![](https://dctacademy.com/wp-content/uploads/2016/12/install.jpeg)
-  - [Go to install instructions](#install)
+  - [Go to install instructions](#installation)
 
 #### 2. Use template option
 ![](https://cdn1.iconfinder.com/data/icons/accounting-and-taxes/48/easy_to_use_accessible_press_button_gesture_effortless-512.png)
@@ -188,6 +188,7 @@ With this programm you can easily create a repository on GitHub :octocat: with a
     - Debian/ Ubuntu
     - Windows
   - Optimized README.md
+  - Created [wiki](https://github.com/CastellaniDavide/create_structure/wiki)
 
 #### 7.1_2021-02_13
   - Change internal team variable (team pointer => team name)
