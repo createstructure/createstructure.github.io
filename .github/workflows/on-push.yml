@@ -97,13 +97,12 @@ jobs:
         echo "${{ secrets.GPG_KEY }}" > key.txt
         LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
         gpg --import key.asc
-        sudo echo "export GPGKEY=${{ secrets.GPG_IDENTIFICATOR }}" >> ~/.bashrc
 
     - name: Create Debian package
       run: |
         tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
         cd ./debian/
-        sudo debuild -S -sa
+        sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} 
     
     - name: Checks files
       run: |
