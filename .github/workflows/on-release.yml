@@ -152,6 +152,11 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+
     - uses: oprypin/find-latest-tag@v1
       with:
         repository: CastellaniDavide/create_structure
@@ -172,6 +177,7 @@ jobs:
       run: |
         cd choco 
         choco pack
+        choco install python
         choco install createstructure -d-v -s . --pre -y --force
 
   publish-choco:
@@ -179,6 +185,11 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+        
     - uses: oprypin/find-latest-tag@v1
       with:
         repository: CastellaniDavide/create_structure
