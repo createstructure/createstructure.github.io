@@ -238,7 +238,8 @@ class create_structure:
 		for content_file in sorted(contents, reverse=True, key=create_structure.name_of_path): # Put .folders at the end
 			if not content_file.path in [".castellanidavide", ""] + self.IGNORE:
 				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
-					while (active_count() != 2): print(active_count())
+					start_waiting = dt.now().timestamp()
+					while (active_count() != 2 and dt.now().timestamp() - start_waiting < 60): pass # Wait the end of processes or 60 seconds (a minute)
 
 				if content_file.type == "file":
 					Thread(target = self.create_file, args = (self.change(content_file.path), f"{self.change(wget(f'https://raw.githubusercontent.com/{self.template_name}/master/{content_file.path}').text)}")).start()
@@ -257,26 +258,29 @@ class create_structure:
 		"""Returns a map of changes
 		"""
 		time = dt.now()
+		change_map = {}
+		change_map_special = {}
 		
 		# repo changes
 		change_map = eval(wget(f"https://raw.githubusercontent.com/{self.template_name}/master/.castellanidavide/change.json").text)
 
 		# answer changes
 		for key, value in self.ANSWERS.items():
-			change_map[f"sol{key}sol"] = value
+			change_map_special[f"sol{key}sol"] = value
 
 		# special changes
-		change_map["time__now"] = f"{str(time.year)}-{str(time.month)}-{str(time.day)}"
-		change_map["time_now"]  = f"{str(time.year)}{str(time.month)}{str(time.day)}"
+		change_map_special["time__now"] = f"{str(time.year)}-{str(time.month)}-{str(time.day)}"
+		change_map_special["time_now"]  = f"{str(time.year)}{str(time.month)}{str(time.day)}"
 
 		# re dict, because I can use it faster (eg. for changes)
 		self.change_map = dict((escape(k), v) for k, v in change_map.items())
+		self.change_map_special = dict((escape(k), v) for k, v in change_map_special.items())
 
 	def change(self, text):
 		"""Returns the changed page
-		Change two times for special keys
+		Change two times: first one for normal keys, second one for special one
 		"""
-		return compile("|".join(self.change_map.keys())).sub(lambda m: self.change_map[escape(m.group(0))], compile("|".join(self.change_map.keys())).sub(lambda m: self.change_map[escape(m.group(0))], text))
+		return compile("|".join(self.change_map_special.keys())).sub(lambda m: self.change_map_special[escape(m.group(0))], compile("|".join(self.change_map.keys())).sub(lambda m: self.change_map[escape(m.group(0))], text))
 
 	def create_file (self, path, file):
 		"""Create the file into the repo
