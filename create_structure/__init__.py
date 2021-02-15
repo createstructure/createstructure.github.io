@@ -309,7 +309,7 @@ class create_structure:
 		return ""
 
 if __name__ == "__main__":
-	""" Read the argv, and sometimes writes the documentation
+	""" Entry point
 	"""
 	create_structure() # Entry point	
 	

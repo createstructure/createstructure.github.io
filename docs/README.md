@@ -189,6 +189,7 @@ With this program, you can easily create a repository on GitHub :octocat: with a
     - Windows
   - Optimized README.md
   - Created [wiki](https://github.com/CastellaniDavide/create_structure/wiki)
+  - Automate Ubuntu package push to launchpad server
 
 #### 7.1_2021-02_13
   - Change internal team variable (team pointer => team name)
