@@ -1,6 +1,4 @@
 name: Tests on every push
-author: Castellani Davide
-description: Test all
 
 on:
   push

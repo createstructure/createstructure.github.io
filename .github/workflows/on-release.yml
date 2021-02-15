@@ -1,6 +1,4 @@
 name: Action on every release
-author: Castellani Davide
-description: Test and publish all
 
 on:
   create:
