@@ -1,4 +1,6 @@
-﻿                    GNU GENERAL PUBLIC LICENSE
+﻿From: https://github.com/CastellaniDavide/create_structure/blob/master/docs/LICENSE
+
+                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
