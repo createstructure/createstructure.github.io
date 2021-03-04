@@ -79,7 +79,7 @@ jobs:
           pip3.8 install createstructure
           
   create-and-update-deb:
-    needs: test-enviroment-variabiles
+    needs: pypi-install-test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -177,7 +177,7 @@ jobs:
         asset_content_type: application/zip
 
   test-choco:
-    needs: test-enviroment-variabiles
+    needs: pypi-install-test
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -234,7 +234,7 @@ jobs:
         echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
         echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
       id: envirorment-variables
-    - name: Build & Pusblish
+    - name: Build & Publish
       run: |
         cd choco
         choco apikey --key ${{ secrets.CHOCO_APIKEY }} --source https://push.chocolatey.org/
