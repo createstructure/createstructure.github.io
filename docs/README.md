@@ -1,5 +1,7 @@
-# create_structure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-create_structure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.1-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/create_structure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+# createstructure
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.2-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+
+![](https://raw.githubusercontent.com/createstructure/createstructure/master/docs/createstructure.png)
 
 ## Contents
 ![](https://static.thenounproject.com/png/121187-200.png)
@@ -40,13 +42,13 @@ With this program, you can easily create a repository on GitHub :octocat: with a
 
     **Attention: replace <SOME_WORDS> with your values**
     - [install git](https://git-scm.com/download)
-    - download the repo ```git clone https://github.com/CastellaniDavide/create_structure.git```
+    - download the repo ```git clone https://github.com/createstructure/createstructure.git```
     - [install python3](https://www.python.org/)
     - [install pip3](https://www.python.org/)
     - install requirements.txt (in the core of the project): ```pip3 install -r requirements/requirements.txt```
     - create an alias
       - name: createstructure
-      - attribute: python3 \<ABSOLUTE_PATH_OF_REPO>/bin/create_structure.py -t=\<TOCKEN> -s=\<ARRAY_OF_SOURCES> -o=\<(optional)_ORGANIZATION> -i=\<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>
+      - attribute: python3 \<ABSOLUTE_PATH_OF_REPO>/bin/createstructure.py -t=\<TOCKEN> -s=\<ARRAY_OF_SOURCES> -o=\<(optional)_ORGANIZATION> -i=\<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>
 
 ### Update
 ![](https://images.idgesg.net/images/article/2020/07/software_update_by_gocmen_gettyimages-1146311500_2400x1600-100852481-large.jpg)
@@ -132,7 +134,7 @@ With this program, you can easily create a repository on GitHub :octocat: with a
     - createstructure.nuspec
     - ReadMe.md
     - set.txt
-  - create_structure
+  - createstructure
     - __init __.py
   - debian
     - createstructure
@@ -164,10 +166,7 @@ With this program, you can easily create a repository on GitHub :octocat: with a
 
 ### Changelog
 ![](https://www.ashoka.org/sites/default/files/styles/medium_1600x1000/public/old_way_new_way.jpg?itok=3JnbJz4O)
-
-
-Attention change Choco &nd UbuNNNNNtU REadMe.MMMMMMDddddd
-
+  - [7.2_2021-03-04](#71_2021-03-04)
   - [7.1_2021-02-13](#71_2021-02-13)
   - [7.0_2021-01-11](#70_2021-01-11)
   - [6.2_2021-01-04](#62_2021-01-04)
@@ -185,17 +184,20 @@ Attention change Choco &nd UbuNNNNNtU REadMe.MMMMMMDddddd
   - [2.0_2020-03-24](#20_2020-03-24)
   - [1.0_2020-03-24](#10_2020-03-24)
 
-#### 7.2_2021-02_14
+#### 7.2_2021-03-04
   - Optimized the change method
   - Added the auto-generate token option
   - Unified the createstructure.c files for
     - Debian/ Ubuntu
     - Windows
   - Optimized README.md
-  - Created [wiki](https://github.com/CastellaniDavide/create_structure/wiki)
+  - Created [wiki](https://github.com/createstructure/createstructure/wiki)
   - Automate Ubuntu package push to launchpad server
+  - Optimized choco package
+  - Uniformed all to use private templates or the once on createstructure organization
+  - create_structure => createstructure
 
-#### 7.1_2021-02_13
+#### 7.1_2021-02-13
   - Change internal team variable (team pointer => team name)
   - Adjust emoji
   - Add a parameter to create a template eg. -temp --template
@@ -233,7 +235,7 @@ Attention change Choco &nd UbuNNNNNtU REadMe.MMMMMMDddddd
   - removed some untils lines
   - accelerated the code
   - parametrized the folder to be ignored
-  - start to use multitreading (41 sec. -> 10 sec.) (I made this test using [this template](https://github.com/CastellaniDavide/py-template))
+  - start to use multitreading (41 sec. -> 10 sec.) (I made this test using [this template](https://github.com/createstructure/py-template))
   - optimized imports
   - optimised variables
 
@@ -283,5 +285,5 @@ Attention change Choco &nd UbuNNNNNtU REadMe.MMMMMMDddddd
 Made by Castellani Davide 
 If you have any problem or ask please contact me:
   - [help@castellanidavide.it](mailto:help@castellanidavide.it)
-  - [Discussion](https://github.com/CastellaniDavide/create_structure/discussions)
-  - [Issue](https://github.com/CastellaniDavide/create_structure/issues) 
+  - [Discussion](https://github.com/createstructure/createstructure/discussions)
+  - [Issue](https://github.com/createstructure/createstructure/issues) 

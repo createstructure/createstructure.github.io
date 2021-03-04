@@ -34,7 +34,7 @@ void createstructure();
 // Global variables
 bool verbose = false;
 char* TOKEN;
-char* SOURCES;
+//char* SOURCES;
 char* ORGANIZATION_NAME;
 char* IGNORE;
 
@@ -265,7 +265,7 @@ void get_setup()
 
 #ifdef UBUNTU
 	TOKEN = read_by_terminal("cat /etc/createstructure.conf | grep 'token' | sed 's/token=//' | sed 's/token= //'");
-	SOURCES = read_by_terminal("cat /etc/createstructure.conf | grep 'sources' | sed 's/sources=//' | sed 's/sources= //'");
+	//SOURCES = read_by_terminal("cat /etc/createstructure.conf | grep 'sources' | sed 's/sources=//' | sed 's/sources= //'");
 	ORGANIZATION_NAME = read_by_terminal("cat /etc/createstructure.conf | grep 'organization_name' | sed 's/organization_name=//' | sed 's/organization_name= //'");
 	IGNORE = read_by_terminal("cat /etc/createstructure.conf | grep 'ignore' | sed 's/ignore=//' | sed 's/ignore= //'");
 #endif // UBUNTU
@@ -273,8 +273,8 @@ void get_setup()
     char* TO_DELATE = read_by_terminal("powershell -command \"& {echo ''}\"");
 	TOKEN = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'token'} | %{$_ -replace 'token=',''} | %{$_ -replace 'token= ',''} }\"");
 	TOKEN = str_replace(TOKEN, sizeof(TOKEN), TO_DELATE, "");
-	SOURCES = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'sources'} | %{$_ -replace 'sources=',''} | %{$_ -replace 'sources= ',''} }\"");
-    SOURCES = str_replace(SOURCES, sizeof(SOURCES), TO_DELATE, "");
+	//SOURCES = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'sources'} | %{$_ -replace 'sources=',''} | %{$_ -replace 'sources= ',''} }\"");
+    //SOURCES = str_replace(SOURCES, sizeof(SOURCES), TO_DELATE, "");
     ORGANIZATION_NAME = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'organization_name'} | %{$_ -replace 'organization_name=',''} | %{$_ -replace 'organization_name= ',''} }\"");
 	ORGANIZATION_NAME = str_replace(ORGANIZATION_NAME, sizeof(ORGANIZATION_NAME), TO_DELATE, "");
 	IGNORE = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'ignore'} | %{$_ -replace 'ignore=',''} | %{$_ -replace 'ignore= ',''} }\"");
@@ -345,7 +345,7 @@ void login()
 	char TEMP_AUTO[50] = {'\0'};
 	char *TEMP_TOKEN_AUTO = "";
 	char TEMP_TOKEN[50] = {'\0'};
-	char TEMP_SOURCES[200] = {'\0'};
+	//char TEMP_SOURCES[200] = {'\0'};
 	char TEMP_ORGANIZATION_NAME[100] = {'\0'};
 	char TEMP_IGNORE[100] = {'\0'};
 
@@ -375,8 +375,8 @@ void login()
 	}
 	scanf("%50s", TEMP_TOKEN);
 
-	printf("\u2753 Insert your sources (format [item1,item2,...]): ");
-	scanf("%200s", TEMP_SOURCES);
+	//printf("\u2753 Insert your sources (format [item1,item2,...]): ");
+	//scanf("%200s", TEMP_SOURCES);
 
 	printf("\u2753 Insert your organization name or 'p' if you want to use your personal account: ");
 	scanf("%100s", TEMP_ORGANIZATION_NAME);
@@ -387,16 +387,19 @@ void login()
 	scanf("%100s", TEMP_IGNORE);
 
 	if (verbose)
-		printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 SOURCES: %s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", &TEMP_TOKEN, TEMP_TOKEN_AUTO, &TEMP_SOURCES, &TEMP_ORGANIZATION_NAME, &TEMP_IGNORE);
+		//printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 SOURCES: %s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", &TEMP_TOKEN, TEMP_TOKEN_AUTO, &TEMP_SOURCES, &TEMP_ORGANIZATION_NAME, &TEMP_IGNORE);
+		printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", &TEMP_TOKEN, TEMP_TOKEN_AUTO, &TEMP_ORGANIZATION_NAME, &TEMP_IGNORE);
 
 	// Save insert options
 	char execution_string[2048] = {'\0'};
 
 #ifdef UBUNTU
-	sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	sprintf(execution_string, "sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // UBUNTU
 #ifdef WINDOWS
-	sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo sources=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	//sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo sources=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // WINDOWS
 
 	system(execution_string);
@@ -413,10 +416,12 @@ void createstructure()
 	// Compose my string
 	char execution_string[2048] = {'\0'};
 #ifdef UBUNTU
-	sprintf (execution_string, "python3 -c \"exec(\\\"from create_structure import create_structure;create_structure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 #endif // UBUNTU
 #ifdef WINDOWS
-	sprintf (execution_string, "python.exe -c \"exec(\\\"from create_structure import create_structure;create_structure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	//sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 #endif // WINDOWS
 
     if (verbose)

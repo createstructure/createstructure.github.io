@@ -16,14 +16,13 @@ from sys import argv
 __author__ = "help@castellanidavide.it"
 __version__ = "7.1 2021-02-13"
 
-class create_structure:
-	def __init__ (self, tocken=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
+class createstructure:
+	def __init__ (self, token=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
 		"""Main function
 		"""
 		# Set main variabiles
 		self.CONTINUE = True
-		self.TOKEN = tocken
-		self.SOURCES_OF_TEMPLATES = souces
+		self.TOKEN = token
 		self.ORGANIZATION_NAME = organization_name
 		self.IGNORE = IGNORE
 		self.VERBOSE = verbose
@@ -69,10 +68,7 @@ class create_structure:
 				# find organization
 				if "--organization=" in arg or "-o=" in arg:
 					self.ORGANIZATION_NAME = arg.replace("--organization=", "").replace("-o=", "")
-				# find souces
-				if "--sources=" in arg or "-s=" in arg:
-					self.SOURCES_OF_TEMPLATES = [i for i in arg.replace("--sources=", "").replace("-s=", "").replace("'", "").replace('"', "")[1:-1].split(",")]
-				# find tocken
+				# find token
 				if "--token=" in arg or "-t=" in arg:
 					self.TOKEN = arg.replace("--token=", "").replace("-t=", "")
 				# find verbose
@@ -123,8 +119,8 @@ class create_structure:
 		"""Manage the run variabiles
 		"""
 		if self.ANSWERS == None: # Make questions
-			questions = [["name",		"Name of the project (es. create_structure): "],
-						["extention",	"Extenction of the main programm (es. py): "],
+			questions = [["name",		"Name of the project (es. createstructure): "],
+						["template",	"Select the template to use (es. default): "],
 						["descr",		"Description of the project: "],
 						["prefix",		"Insert a prefix for the repository (or don't insert anything): "],
 						["team",		"Do you want insert this repo into a team? [y/N]: "],
@@ -141,6 +137,9 @@ class create_structure:
 							self.choose_team()						
 				else:
 					self.ANSWERS[question_tag] = input(f"{self.get_emoji('?')}{current_quest}")
+
+			if "template" in self.ANSWERS:
+				self.ANSWERS["extention"] = self.ANSWERS["template"].replace("/", "-").split("-")[:-1]
 
 			print()
 
@@ -202,29 +201,25 @@ class create_structure:
 	def choose_template(self):
 		"""This helps to find the correct template
 		"""
-		# If there wasn't any other template for your type of extention and no one default into SOURCES list, give my default code
-		self.template_name = "CastellaniDavide/default-template" 
+		# Add -template if not exists
+		if not self.ANSWERS['template'].endswith("-template"):
+			self.ANSWERS['template'] += "-template"
 
-		# Check if there is wanted template
-		for source in self.SOURCES_OF_TEMPLATES:
-			if source != "TODO" and self.template_name == "CastellaniDavide/default-template":
-				try:
-					self.template_name = self.g.get_repo(f"{source}/{self.ANSWERS['extention']}-template").full_name
-					break
-				except:
-					pass
+		if "/" in self.ANSWERS['template']: # If it's yours
+			try:
+				self.template_name = self.g.get_repo(f"{self.ANSWERS['template']}").full_name
+				assert(self.template.private == True)
+			except:
+				print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
+				self.template_name = "createstructure/default-template"
+		else: # If you want to use the template into createstructure Organization
+			try:
+				self.template_name = self.g.get_repo(f"createstructure/{self.ANSWERS['template']}").full_name
+				assert(self.template.private == True)
+			except:
+				print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
+				self.template_name = "createstructure/default-template"
 
-		# Check if there was a default template
-		if self.template_name == "CastellaniDavide/default-template":
-			for source in self.SOURCES_OF_TEMPLATES:
-				if source != "TODO" and self.template_name == "CastellaniDavide/default-template":
-					try:
-						if self.VERBOSE : print (f"{self.get_emoji('i')}Try: {source}/default-template")
-						self.template_name = self.g.get_repo(f"{source}/default-template").full_name
-						break
-					except:
-						pass
-		
 		self.template = self.g.get_repo(self.template_name)
 		print(f"{self.get_emoji('ok')}Template founded ({self.template_name})")
 		
@@ -232,11 +227,11 @@ class create_structure:
 		"""Scan all files in the repository and push it in the new directory (cahanging the necessary)
 		"""
 		if self.TEMPLATE and loc == "":
-			self.create_file(".castellanidavide/change.json", str(wget(f'https://raw.githubusercontent.com/CastellaniDavide/default-template/master/.castellanidavide/change.json').text))
+			self.create_file(".createstructure/change.json", str(wget(f'https://raw.githubusercontent.com/createstructure/default-template/master/.createstructure/change.json').text))
 
 		contents = self.template.get_contents(f"{loc}")
 		for content_file in sorted(contents, reverse=True, key=create_structure.name_of_path): # Put .folders at the end
-			if not content_file.path in [".castellanidavide", ""] + self.IGNORE:
+			if not content_file.path in [".createstructure", ""] + self.IGNORE:
 				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
 					start_waiting = dt.now().timestamp()
 					while (active_count() != 2 and dt.now().timestamp() - start_waiting < 60): pass # Wait the end of processes or 60 seconds (a minute)
@@ -262,7 +257,7 @@ class create_structure:
 		change_map_special = {}
 		
 		# repo changes
-		change_map = eval(wget(f"https://raw.githubusercontent.com/{self.template_name}/master/.castellanidavide/change.json").text)
+		change_map = eval(wget(f"https://raw.githubusercontent.com/{self.template_name}/master/.createstructure/change.json").text)
 
 		# answer changes
 		for key, value in self.ANSWERS.items():

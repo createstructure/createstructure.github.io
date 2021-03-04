@@ -1,3 +1,16 @@
+createstructure (7.2) focal; urgency=medium
+
+  * Optimized the change method
+  * Added the auto-generate token option
+  * Unified the createstructure.c files
+  * Optimized README.md
+  * Created [wiki](https://github.com/createstructure/createstructure/wiki)
+  * Automate Ubuntu package push to launchpad server
+  * Uniformed all to use private templates or the once on createstructure organization
+  * create_structure => createstructure
+
+ -- Castellani Davide <help@castellanidavide.it>  Thu, 04 Mar 2021 15:58:55 +0000
+
 createstructure (7.1) focal; urgency=medium
 
   * Change internal team variable (team pointer => team name)
