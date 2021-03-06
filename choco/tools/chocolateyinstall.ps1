@@ -36,6 +36,3 @@ if ($new_path -notlike "*$ppath*")
 	$new_path = $new_path.Replace(";;", ";")
 	Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $new_path
 }
-
-# Download pypi library
-pip.exe install createstructure==7.2
