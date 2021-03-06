@@ -85,7 +85,7 @@ class createstructure:
 
 		except:
 			self.CONTINUE = False
-			documentation = ["usage create_structure",
+			documentation = ["usage createstructure",
 							"\t[--ignore= | -i=]",
 							"\t[--organization= | -o=]",
 							"\t[--sources= | -s=]",
@@ -93,7 +93,7 @@ class createstructure:
 							"\t[--token= | -t=]",
 							"\t[--verbose | -v]",
 							"",
-							"These are the create_structure arguments:",
+							"These are the createstructure arguments:",
 							"\t--ignore= or -i=		(optional) The folders to be ignored",
 							"\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
 							"\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
@@ -133,7 +133,7 @@ class createstructure:
 				if question_tag == "team":
 					self.ANSWERS["team"] = ""	# default value
 					if self.ORGANIZATION_NAME != "":	# If there is an organization
-						if create_structure.is_positive(input(f"{self.get_emoji('?')}{current_quest}")):
+						if createstructure.is_positive(input(f"{self.get_emoji('?')}{current_quest}")):
 							self.choose_team()						
 				else:
 					self.ANSWERS[question_tag] = input(f"{self.get_emoji('?')}{current_quest}")
@@ -181,10 +181,10 @@ class createstructure:
 			self.ANSWERS['name'] = self.ANSWERS['name'] + "-template"			
 
 		if self.ORGANIZATION_NAME == "":
-			self.repo = self.g.get_user().create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+			self.repo = self.g.get_user().create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=createstructure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 		else:
 			if self.ANSWERS["team"] == "":
-				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
+				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=createstructure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False)
 			else:
 				# Create team if not exists
 				try: 
@@ -192,7 +192,7 @@ class createstructure:
 				except: 
 					pass
 
-				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=create_structure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=[i for i in self.g.get_organization(self.ORGANIZATION_NAME).get_teams() if i.name == self.ANSWERS["team"]][0].id)
+				self.repo = self.g.get_organization(self.ORGANIZATION_NAME).create_repo(self.ANSWERS['name'] if(self.ANSWERS['prefix'] == "") else f"{self.ANSWERS['prefix']}-{self.ANSWERS['name']}", description=self.ANSWERS['descr'], private=createstructure.is_positive(self.ANSWERS['private']), has_issues=True, has_wiki=False, has_downloads=True, has_projects=False, team_id=[i for i in self.g.get_organization(self.ORGANIZATION_NAME).get_teams() if i.name == self.ANSWERS["team"]][0].id)
 		
 		if self.ANSWERS['name'].endswith("-template"):
 			self.ANSWERS['name'] = self.ANSWERS['name'][:len(self.ANSWERS['name']) - len("-template"):]
@@ -230,7 +230,7 @@ class createstructure:
 			self.create_file(".createstructure/change.json", str(wget(f'https://raw.githubusercontent.com/createstructure/default-template/master/.createstructure/change.json').text))
 
 		contents = self.template.get_contents(f"{loc}")
-		for content_file in sorted(contents, reverse=True, key=create_structure.name_of_path): # Put .folders at the end
+		for content_file in sorted(contents, reverse=True, key=createstructure.name_of_path): # Put .folders at the end
 			if not content_file.path in [".createstructure", ""] + self.IGNORE:
 				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
 					start_waiting = dt.now().timestamp()
@@ -306,5 +306,5 @@ class createstructure:
 if __name__ == "__main__":
 	""" Entry point
 	"""
-	create_structure() # Entry point	
+	createstructure() # Entry point	
 	

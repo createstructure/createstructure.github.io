@@ -164,7 +164,7 @@ jobs:
     
     - name: dput
       run: |
-        dput dput ppa:castellanidavide/createstructure ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
+        dput ppa:castellanidavide/createstructure ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
           
     - name: Upload .tar.xz
       uses: actions/upload-release-asset@v1

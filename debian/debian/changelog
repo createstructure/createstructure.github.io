@@ -9,7 +9,7 @@ createstructure (7.2) focal; urgency=medium
   * Uniformed all to use private templates or the once on createstructure organization
   * create_structure => createstructure
 
- -- Castellani Davide <help@castellanidavide.it>  Thu, 04 Mar 2021 15:58:55 +0000
+ -- Castellani Davide <help@castellanidavide.it>  Thu, 04 Mar 2021 17:35:55 +1000
 
 createstructure (7.1) focal; urgency=medium
 
