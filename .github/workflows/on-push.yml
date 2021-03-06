@@ -120,6 +120,7 @@ jobs:
         echo "${{ secrets.GPG_KEY }}" > key.txt
         LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
         gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import key.asc
+        sudo echo "export GPGKEY=${{ secrets.GPG_KEY }}" >> ~/.bashrc
         gpg --list-secret-keys
 
     - name: Create Debian package
