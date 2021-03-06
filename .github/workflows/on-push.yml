@@ -88,7 +88,7 @@ jobs:
         dpkg-buildpackage -us -uc
 
   build-linux-packages-for-ppa:
-    needs: create-deb
+    needs: test-enviroment-variabiles
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
