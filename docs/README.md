@@ -1,5 +1,5 @@
 # createstructure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.3-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.4-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
 
 ![](https://github.com/CastellaniDavide/createstructure/raw/master/docs/createstructure.png)
 
@@ -166,6 +166,7 @@ With this program, you can easily create a repository on GitHub :octocat: with a
 
 ### Changelog
 ![](https://www.ashoka.org/sites/default/files/styles/medium_1600x1000/public/old_way_new_way.jpg?itok=3JnbJz4O)
+  - [7.4_2021-03-07](#74_2021-03-07)
   - [7.3_2021-03-07](#73_2021-03-07)
   - [7.2_2021-03-04](#72_2021-03-04)
   - [7.1_2021-02-13](#71_2021-02-13)
@@ -184,6 +185,9 @@ With this program, you can easily create a repository on GitHub :octocat: with a
   - [3.0_2020-08-15](#30_2020-08-15)
   - [2.0_2020-03-24](#20_2020-03-24)
   - [1.0_2020-03-24](#10_2020-03-24)
+
+#### 7.4_2021-03-07
+  - Fixed a minor bug
 
 #### 7.3_2021-03-07
   - Fixed few bugs

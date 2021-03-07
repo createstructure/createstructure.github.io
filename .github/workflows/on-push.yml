@@ -21,7 +21,7 @@ jobs:
         echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
         echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
         echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
-        echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+        echo "::set-output name=NUPKG_FILE::createstructure.$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
         echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
       id: envirorment-variables
                 
@@ -69,7 +69,6 @@ jobs:
         repository: createstructure/createstructure
         releases-only: true 
       id : latest
-
     - name: Set envirorment varible(s)
       run: |
         echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
@@ -77,7 +76,7 @@ jobs:
         echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
         echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
         echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
-        echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+        echo "::set-output name=NUPKG_FILE::createstructure.$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
         echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
       id: envirorment-variables
 
@@ -103,16 +102,15 @@ jobs:
   #       repository: createstructure/createstructure
   #       releases-only: true 
   #     id : latest
-
-  #   - name: Set envirorment varible(s)
-  #     run: |
-  #       echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
-  #       echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
-  #       echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
-  #       echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
-  #       echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
-  #       echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
-  #       echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+    # - name: Set envirorment varible(s)
+    #   run: |
+    #     echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
+    #     echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
+    #     echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
+    #     echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
+    #     echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
+    #     echo "::set-output name=NUPKG_FILE::createstructure.$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+    #     echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
   #     id: envirorment-variables
 
   #   - name: gpg import 
