@@ -7,6 +7,7 @@ To check the correct funtionality try to:
     - v7.2 0733B24BDEE31972D12D37C4A6BA115448516037A7B6291592A8CB5F31898EE3
     - v7.3 0733B24BDEE31972D12D37C4A6BA115448516037A7B6291592A8CB5F31898EE3
     - v7.4 0733B24BDEE31972D12D37C4A6BA115448516037A7B6291592A8CB5F31898EE3
+    - v7.5 0733B24BDEE31972D12D37C4A6BA115448516037A7B6291592A8CB5F31898EE3
  - Do the login "createstructure -l" in a shell as An Administrator.
  - Create a repository ""createstructure" 
  - If you want you can check it manually with the source, you can found it in this link: https://github.com/CastellaniDavide/create_structure

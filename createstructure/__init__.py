@@ -81,7 +81,7 @@ class createstructure:
 			# Check all data
 			assert(self.TOKEN != "TODO" and self.TOKEN != None and self.TOKEN != "***")
 
-			if self.VERBOSE : print(f"{self.get_emoji('i')}self.CONTINUE\t\t\t{self.CONTINUE}\n{self.get_emoji('i')}self.TOKEN\t\t\t{self.TOKEN}\n{self.get_emoji('i')}self.SOURCES_OF_TEMPLATES\t{self.SOURCES_OF_TEMPLATES}\n{self.get_emoji('i')}self.ORGANIZATION_NAME\t{self.ORGANIZATION_NAME}\n{self.get_emoji('i')}self.IGNORE\t\t\t{self.IGNORE}\n{self.get_emoji('i')}self.VERBOSE\t\t\t{self.VERBOSE}")
+			if self.VERBOSE : print(f"{self.get_emoji('i')}self.CONTINUE\t\t\t{self.CONTINUE}\n{self.get_emoji('i')}self.TOKEN\t\t\t{self.TOKEN}\n{self.get_emoji('i')}self.ORGANIZATION_NAME\t{self.ORGANIZATION_NAME}\n{self.get_emoji('i')}self.IGNORE\t\t\t{self.IGNORE}\n{self.get_emoji('i')}self.VERBOSE\t\t\t{self.VERBOSE}")
 
 		except:
 			self.CONTINUE = False
@@ -208,7 +208,7 @@ class createstructure:
 		if "/" in self.ANSWERS['template']: # If it's yours
 			try:
 				self.template_name = self.g.get_repo(f"{self.ANSWERS['template']}").full_name
-				assert(self.template.private == True)
+				assert(self.g.get_repo(self.template_name).private == True)
 			except:
 				print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
 				self.template_name = "createstructure/default-template"
@@ -226,7 +226,7 @@ class createstructure:
 		"""Scan all files in the repository and push it in the new directory (cahanging the necessary)
 		"""
 		if self.TEMPLATE and loc == "":
-			self.create_file(".createstructure/change.json", str(wget(f'https://raw.githubusercontent.com/createstructure/default-template/master/.createstructure/change.json').text))
+			self.create_file(".createstructure/change.json", self.g.get_repo("createstructure/default-template").get_contents(".createstructure/change.json").decoded_content.decode())
 
 		contents = self.template.get_contents(f"{loc}")
 		for content_file in sorted(contents, reverse=True, key=createstructure.name_of_path): # Put .folders at the end
@@ -236,7 +236,10 @@ class createstructure:
 					while (active_count() != 2 and dt.now().timestamp() - start_waiting < 60): pass # Wait the end of processes or 60 seconds (a minute)
 
 				if content_file.type == "file":
-					Thread(target = self.create_file, args = (self.change(content_file.path), f"{self.change(wget(f'https://raw.githubusercontent.com/{self.template_name}/master/{content_file.path}').text)}")).start()
+					try:
+						Thread(target = self.create_file, args = (self.change(content_file.path), self.change(self.g.get_repo(self.template_name).get_contents(content_file.path).decoded_content.decode()))).start()
+					except: # If it's not a text file (eg. is an image)
+						Thread(target = self.create_file, args = (self.change(content_file.path), self.g.get_repo(self.template_name).get_contents(content_file.path).decoded_content)).start()
 				else:
 					Thread(target = self.scan_and_elaborate, args = (content_file.path, )).start()		
 
@@ -255,8 +258,11 @@ class createstructure:
 		change_map = {}
 		change_map_special = {}
 		
+		# escape value
+		change_map["solsol"] = "sol"
+
 		# repo changes
-		change_map = eval(wget(f"https://raw.githubusercontent.com/{self.template_name}/master/.createstructure/change.json").text)
+		change_map = eval(self.g.get_repo(self.template_name).get_contents(".createstructure/change.json").decoded_content.decode())
 
 		# answer changes
 		for key, value in self.ANSWERS.items():
@@ -276,7 +282,7 @@ class createstructure:
 		"""
 		return compile("|".join(self.change_map_special.keys())).sub(lambda m: self.change_map_special[escape(m.group(0))], compile("|".join(self.change_map.keys())).sub(lambda m: self.change_map[escape(m.group(0))], text))
 
-	def create_file (self, path, file):
+	def create_file(self, path, file):
 		"""Create the file into the repo
 		"""
 		try:
