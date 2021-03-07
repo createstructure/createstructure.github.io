@@ -122,59 +122,59 @@ jobs:
         asset_name: ${{ steps.envirorment-variables.outputs.DEB_FILE }}
         asset_content_type: application/zip
 
-  build-linux-packages-for-ppa:
-    needs: create-and-update-deb
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
-        sudo apt-get update
-        sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
+  # build-linux-packages-for-ppa:
+  #   needs: create-and-update-deb
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Install dependencies
+  #     run: |
+  #       sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+  #       sudo apt-get update
+  #       sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
 
-    - uses: oprypin/find-latest-tag@v1
-      with:
-        repository: createstructure/createstructure
-        releases-only: true 
-      id : latest
+  #   - uses: oprypin/find-latest-tag@v1
+  #     with:
+  #       repository: createstructure/createstructure
+  #       releases-only: true 
+  #     id : latest
 
-    - name: Set envirorment varible(s)
-      run: |
-        echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
-        echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
-        echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
-        echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
-        echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
-        echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
-        echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
-      id: envirorment-variables
+  #   - name: Set envirorment varible(s)
+  #     run: |
+  #       echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
+  #       echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
+  #       echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
+  #       echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
+  #       echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
+  #       echo "::set-output name=NUPKG_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+  #       echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+  #     id: envirorment-variables
 
-    - name: gpg import 
-      run: |
-        echo "${{ secrets.GPG_KEY }}" > key.txt
-        LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
-        gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import key.asc
+  #   - name: gpg import 
+  #     run: |
+  #       echo "${{ secrets.GPG_KEY }}" > key.txt
+  #       LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
+  #       gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import key.asc
 
-    - name: Create Debian package
-      run: |
-        tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
-        cd ./debian/
-        sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
+  #   - name: Create Debian package
+  #     run: |
+  #       tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
+  #       cd ./debian/
+  #       sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
     
-    - name: dput
-      run: |
-        dput ppa:castellanidavide/createstructure ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
+  #   - name: dput
+  #     run: |
+  #       dput ppa:castellanidavide/createstructure ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
           
-    - name: Upload .tar.xz
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
-        asset_path: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
-        asset_name: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
-        asset_content_type: application/zip
+  #   - name: Upload .tar.xz
+  #     uses: actions/upload-release-asset@v1
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     with:
+  #       upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
+  #       asset_path: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
+  #       asset_name: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
+  #       asset_content_type: application/zip
 
   test-choco:
     needs: pypi-install-test
