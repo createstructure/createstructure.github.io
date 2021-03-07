@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "Install supplementary parts"
-pip3 install createstructure==7.2
+pip3 install createstructure==7.3
 echo "Installed createstructure"
 
-echo "-----------------------------------------------------------"
-echo "---createstructure-remember-to-do: createstructure -v -l---"
-echo "-----------------------------------------------------------"
+echo "----------------------------------------------------------------"
+echo "---createstructure-remember-to-do: sudo createstructure -v -l---"
+echo "----------------------------------------------------------------"

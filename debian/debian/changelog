@@ -1,3 +1,9 @@
+createstructure (7.3) focal; urgency=medium
+
+  * Fixed few bugs
+
+ -- Castellani Davide <help@castellanidavide.it>  Sun, 07 Mar 2021 09:40:00 +1000
+
 createstructure (7.2) focal; urgency=medium
 
   * Optimized the change method
