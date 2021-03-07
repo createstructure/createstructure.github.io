@@ -12,6 +12,7 @@ dist
 *.dsc
 *.orig.tar.gz
 *.asc
+*.ppa.upload
 *.openpgpkey
 otrust.txt
 file
@@ -19,3 +20,5 @@ file2
 my-key-secr copy 2.txt
 my-key-secr copy.txt
 my-key-secr.txt
+*pub.*
+*sec.*

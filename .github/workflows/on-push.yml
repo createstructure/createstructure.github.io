@@ -117,10 +117,16 @@ jobs:
 
     - name: gpg import 
       run: |
-        echo "${{ secrets.GPG_KEY }}" > key.txt
-        LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
-        gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import key.asc
-        sudo echo "export GPGKEY=${{ secrets.GPG_KEY }}" >> ~/.bashrc
+        #echo "${{ secrets.GPG_KEY }}" > key.txt
+        #LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
+        #gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import key.asc
+        #sudo echo "export GPGKEY=${{ secrets.GPG_KEY }}" >> ~/.bashrc
+        echo "${{ secrets.GPG_PUBKEY }}" > pubkey.txt
+        echo "${{ secrets.GPG_SECKEY }}" > seckey.txt
+        LC_ALL=C tr -cd 0-9a-fA-F < pubkey.txt | xxd -r -p > pubkey.asc
+        LC_ALL=C tr -cd 0-9a-fA-F < seckey.txt | xxd -r -p > seckey.asc
+        gpg --batch --import pubkey.asc
+        gpg --batch --passphrase ${{ secrets.GPG_PWS }} --allow-secret-key-import --import seckey.asc
         gpg --list-secret-keys
 
     - name: Create Debian package

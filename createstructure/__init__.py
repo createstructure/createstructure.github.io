@@ -215,7 +215,6 @@ class createstructure:
 		else: # If you want to use the template into createstructure Organization
 			try:
 				self.template_name = self.g.get_repo(f"createstructure/{self.ANSWERS['template']}").full_name
-				assert(self.template.private == True)
 			except:
 				print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
 				self.template_name = "createstructure/default-template"
