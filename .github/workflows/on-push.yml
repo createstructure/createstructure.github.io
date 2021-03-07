@@ -126,14 +126,15 @@ jobs:
         LC_ALL=C tr -cd 0-9a-fA-F < pubkey.txt | xxd -r -p > pubkey.asc
         LC_ALL=C tr -cd 0-9a-fA-F < seckey.txt | xxd -r -p > seckey.asc
         gpg --batch --import pubkey.asc
-        #gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import seckey.asc
+        gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import seckey.asc
         gpg --list-secret-keys
+        sudo echo "export GPGKEY=${{ secrets.GPG_KEY_ID }}" >> ~/.bashrc
 
     - name: Create Debian package
       run: |
         tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
         cd ./debian/
-        sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
+        sudo debuild -S -sa -k${{ secrets.GPG_KEY_ID }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
     
     - name: Checks files
       run: |
