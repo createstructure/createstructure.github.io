@@ -129,12 +129,12 @@ jobs:
         gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import seckey.asc
         gpg --list-secret-keys
         sudo echo "export GPGKEY=${{ secrets.GPG_KEY_ID }}" >> ~/.bashrc
+        gpgconf --kill gpg-agent
 
     - name: Create Debian package
       run: |
         tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
         cd ./debian/
-        gpg --list-secret-keys
         sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
     
     - name: Checks files
