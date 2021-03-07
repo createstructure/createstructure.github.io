@@ -125,7 +125,7 @@ jobs:
         echo "${{ secrets.GPG_SECKEY }}" > seckey.txt
         LC_ALL=C tr -cd 0-9a-fA-F < pubkey.txt | xxd -r -p > pubkey.asc
         LC_ALL=C tr -cd 0-9a-fA-F < seckey.txt | xxd -r -p > seckey.asc
-        gpg --batch --import pubkey.asc
+        #gpg --batch --import pubkey.asc
         gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import seckey.asc
         gpg --list-secret-keys
 
