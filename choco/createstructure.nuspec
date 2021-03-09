@@ -3,10 +3,10 @@
   <metadata>
     <id>createstructure</id>
     <version>7.5</version>
-    <title>createstructure (Install)</title>
+    <title>createstructure</title>
     <authors>Castellani Davide</authors>
     <projectUrl>https://github.com/createstructure/createstructure</projectUrl>
-    <iconUrl>https://github.com/createstructure/createstructure/raw/master/docs/createstructure.png</iconUrl>
+    <iconUrl>https://cdn.statically.io/gh/createstructure/createstructure/master/docs/createstructure.png</iconUrl>
     <tags>createstructure template bot</tags>
     <description>
       With this program, you can easily create a repository on GitHub with a basic template, personalized for your use.
