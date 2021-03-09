@@ -15,4 +15,3 @@ name: createstructure
   apps:
     createstructure:
       command: createstructure
-      
