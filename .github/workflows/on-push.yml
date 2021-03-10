@@ -141,6 +141,10 @@ jobs:
         sudo apt install tree
         tree
 
+    - name: dput
+      run: |
+        dput ppa:castellanidavide/ppa-test ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
+
   test-choco:
     needs: test-enviroment-variabiles
     runs-on: windows-latest
