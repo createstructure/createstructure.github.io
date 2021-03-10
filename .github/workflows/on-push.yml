@@ -134,7 +134,7 @@ jobs:
       run: |
         tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
         cd ./debian/
-        debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
+        debuild -S -sa -k${{ secrets.GPG_KEY_ID }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
     
     - name: Checks files
       run: |
