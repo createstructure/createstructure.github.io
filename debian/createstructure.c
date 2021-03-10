@@ -434,4 +434,6 @@ void createstructure()
     if (verbose)
         printf("%s\n", execution_string);
 	system(execution_string);
+	system("python3 -m pip freeze");
+	puts(read_by_terminal("python3 -m pip freeze"));
 }
