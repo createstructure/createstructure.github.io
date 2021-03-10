@@ -424,7 +424,7 @@ void createstructure()
 	char execution_string[2048] = {'\0'};
 #ifdef UBUNTU
 	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
-	sprintf (execution_string, "pip3 freeze | grep createstructure | sed 's/createstructure==//'; python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	sprintf (execution_string, "python3 -m pip3 freeze | grep createstructure | sed 's/createstructure==//'; python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 #endif // UBUNTU
 #ifdef WINDOWS
 	//sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
