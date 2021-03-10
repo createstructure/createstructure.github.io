@@ -97,11 +97,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
 
-  - uses: oprypin/find-latest-tag@v1
-      with:
-        repository: createstructure/createstructure
-        releases-only: true 
-      id : latest
+    - uses: oprypin/find-latest-tag@v1
+        with:
+          repository: createstructure/createstructure
+          releases-only: true 
+        id : latest
     - name: Set envirorment varible(s)
       run: |
         echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
