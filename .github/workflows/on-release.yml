@@ -179,16 +179,6 @@ jobs:
     - name: dput
       run: |
         dput ppa:castellanidavide/createstructure ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
-          
-    - name: Upload .tar.xz
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
-        asset_path: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
-        asset_name: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
-        asset_content_type: application/zip
 
   test-choco:
     needs: pypi-install-test
