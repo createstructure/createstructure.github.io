@@ -86,59 +86,58 @@ jobs:
         sudo echo "3.0 (native)" > debian/source/format
         dpkg-buildpackage -us -uc
 
-  # build-linux-packages-for-ppa:
-  #   needs: test-enviroment-variabiles
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Install dependencies
-  #     run: |
-  #       sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
-  #       sudo apt-get update
-  #       sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
+  build-linux-packages-for-ppa:
+    #needs: test-enviroment-variabiles
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+        sudo apt-get update
+        sudo apt-get install build-essential debhelper devscripts equivs dh-virtualenv python3.8 gnupg gnupg2
 
-  #   - uses: oprypin/find-latest-tag@v1
-  #     with:
-  #       repository: createstructure/createstructure
-  #       releases-only: true 
-  #     id : latest
-    # - name: Set envirorment varible(s)
-    #   run: |
-    #     echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
-    #     echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
-    #     echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
-    #     echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
-    #     echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
-    #     echo "::set-output name=NUPKG_FILE::createstructure.$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
-    #     echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
-  #     id: envirorment-variables
+  - uses: oprypin/find-latest-tag@v1
+      with:
+        repository: createstructure/createstructure
+        releases-only: true 
+      id : latest
+    - name: Set envirorment varible(s)
+      run: |
+        echo "::set-output name=PUSH_PATH::$(curl -sL https://api.github.com/repos/createstructure/createstructure/releases/latest | jq -r '.upload_url')"  
+        echo "::set-output name=VERSION_TAG::$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')"
+        echo "::set-output name=TAR_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').orig.tar.gz"
+        echo "::set-output name=DEB_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_amd64.deb"
+        echo "::set-output name=CHANGES_FILE::createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//')_source.changes"
+        echo "::set-output name=NUPKG_FILE::createstructure.$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+        echo "::set-output name=NUPKG_FILE_PATH::./choco/createstructure_$(echo ${{ steps.latest.outputs.tag }} | sed 's/v//').nupkg"
+      id: envirorment-variables
 
-  #   - name: gpg import 
-  #     run: |
-  #       #echo "${{ secrets.GPG_KEY }}" > key.txt
-  #       #LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
-  #       #gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import key.asc
-  #       #sudo echo "export GPGKEY=${{ secrets.GPG_KEY }}" >> ~/.bashrc
-  #       echo "${{ secrets.GPG_PUBKEY }}" > pubkey.txt
-  #       echo "${{ secrets.GPG_SECKEY }}" > seckey.txt
-  #       LC_ALL=C tr -cd 0-9a-fA-F < pubkey.txt | xxd -r -p > pubkey.asc
-  #       LC_ALL=C tr -cd 0-9a-fA-F < seckey.txt | xxd -r -p > seckey.asc
-  #       gpg --batch --import pubkey.asc
-  #       gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import seckey.asc
-  #       gpg --list-secret-keys
-  #       sudo echo "export GPGKEY=${{ secrets.GPG_KEY_ID }}" >> ~/.bashrc
-  #       gpgconf --kill gpg-agent
+    - name: gpg import 
+      run: |
+        #echo "${{ secrets.GPG_KEY }}" > key.txt
+        #LC_ALL=C tr -cd 0-9a-fA-F < key.txt | xxd -r -p > key.asc
+        #gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import key.asc
+        #sudo echo "export GPGKEY=${{ secrets.GPG_KEY }}" >> ~/.bashrc
+        echo "${{ secrets.GPG_PUBKEY }}" > pubkey.txt
+        echo "${{ secrets.GPG_SECKEY }}" > seckey.txt
+        LC_ALL=C tr -cd 0-9a-fA-F < pubkey.txt | xxd -r -p > pubkey.asc
+        LC_ALL=C tr -cd 0-9a-fA-F < seckey.txt | xxd -r -p > seckey.asc
+        gpg --batch --import pubkey.asc
+        gpg --batch --passphrase ${{ secrets.GPG_PWS }} --import seckey.asc
+        gpg --list-secret-keys
+        sudo echo "export GPGKEY=${{ secrets.GPG_KEY_ID }}" >> ~/.bashrc
 
-  #   - name: Create Debian package
-  #     run: |
-  #       tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
-  #       cd ./debian/
-  #       sudo debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
+    - name: Create Debian package
+      run: |
+        tar -czvf ${{ steps.envirorment-variables.outputs.TAR_FILE }} debian/
+        cd ./debian/
+        debuild -S -sa -k${{ secrets.GPG_IDENTIFICATOR }} -p"gpg --batch --passphrase ${{ secrets.GPG_PWS }} --pinentry-mode loopback"
     
-  #   - name: Checks files
-  #     run: |
-  #       sudo apt install tree
-  #       tree
+    - name: Checks files
+      run: |
+        sudo apt install tree
+        tree
 
   test-choco:
     needs: test-enviroment-variabiles
