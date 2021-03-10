@@ -402,6 +402,8 @@ void login()
 	sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // WINDOWS
 
+	if (verbose)
+		printf("%s", execution_string);
 	system(execution_string);
 
 	if (verbose)
