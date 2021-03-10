@@ -124,7 +124,8 @@ char* choppy(char *s)
     char *n = malloc(MALLOC_MAX_SIXE); // max return size
     if( s )
         strcpy( n, s );
-    n[strlen(n)-1]='\0';
+	if(n[strlen(n)-1] == "\n")
+    	n[strlen(n)-1]='\0';
     return n;
 }
 
@@ -388,15 +389,15 @@ void login()
 
 	if (verbose)
 		//printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 SOURCES: %s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", &TEMP_TOKEN, TEMP_TOKEN_AUTO, &TEMP_SOURCES, &TEMP_ORGANIZATION_NAME, &TEMP_IGNORE);
-		printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", &TEMP_TOKEN, TEMP_TOKEN_AUTO, &TEMP_ORGANIZATION_NAME, &TEMP_IGNORE);
+		printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", choppy(&TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(&TEMP_ORGANIZATION_NAME), choppy(&TEMP_IGNORE));
 
 	// Save insert options
 	char execution_string[2048] = {'\0'};
 
 #ifdef UBUNTU
 	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
-	sprintf(execution_string, "sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
-	printf("sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	sprintf(execution_string, "sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
+	printf("sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
 #endif // UBUNTU
 #ifdef WINDOWS
 	//sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo sources=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
