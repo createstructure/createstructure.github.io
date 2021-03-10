@@ -281,6 +281,9 @@ void get_setup()
 	IGNORE = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'ignore'} | %{$_ -replace 'ignore=',''} | %{$_ -replace 'ignore= ',''} }\"");
 	IGNORE = str_replace(IGNORE, sizeof(IGNORE), TO_DELATE, "");
 #endif // WINDOWS
+	TOKEN = choppy(TOKEN);
+	ORGANIZATION_NAME = choppy(ORGANIZATION_NAME);
+	IGNORE = choppy(IGNORE);
 }
 
 void help(int argc, char **argv)
