@@ -265,10 +265,10 @@ void get_setup()
 		puts("\u2139 Getting setup");
 
 #ifdef UBUNTU
-	TOKEN = read_by_terminal("cat /etc/createstructure.conf | grep 'token' | sed 's/token=//' | sed 's/token= //'");
-	//SOURCES = read_by_terminal("cat /etc/createstructure.conf | grep 'sources' | sed 's/sources=//' | sed 's/sources= //'");
-	ORGANIZATION_NAME = read_by_terminal("cat /etc/createstructure.conf | grep 'organization_name' | sed 's/organization_name=//' | sed 's/organization_name= //'");
-	IGNORE = read_by_terminal("cat /etc/createstructure.conf | grep 'ignore' | sed 's/ignore=//' | sed 's/ignore= //'");
+	TOKEN = read_by_terminal("cat ~/createstructure.conf | grep 'token' | sed 's/token=//' | sed 's/token= //'");
+	//SOURCES = read_by_terminal("cat ~/createstructure.conf | grep 'sources' | sed 's/sources=//' | sed 's/sources= //'");
+	ORGANIZATION_NAME = read_by_terminal("cat ~/createstructure.conf | grep 'organization_name' | sed 's/organization_name=//' | sed 's/organization_name= //'");
+	IGNORE = read_by_terminal("cat ~/createstructure.conf | grep 'ignore' | sed 's/ignore=//' | sed 's/ignore= //'");
 #endif // UBUNTU
 #ifdef WINDOWS
     char* TO_DELATE = read_by_terminal("powershell -command \"& {echo ''}\"");
@@ -395,9 +395,9 @@ void login()
 	char execution_string[2048] = {'\0'};
 
 #ifdef UBUNTU
-	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
-	sprintf(execution_string, "sudo echo 'token=%s%s\\norganization_name=%s\\nignore=%s' > /etc/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
-	printf("sudo echo 'token=%s%s\\norganization_name=%s\\nignore=%s' > /etc/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
+	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > ~/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	sprintf(execution_string, "echo 'token=%s%s\\norganization_name=%s\\nignore=%s' > ~/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
+	printf("echo 'token=%s%s\\norganization_name=%s\\nignore=%s' > ~/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
 #endif // UBUNTU
 #ifdef WINDOWS
 	//sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo sources=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
