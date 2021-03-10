@@ -86,7 +86,7 @@ jobs:
         sudo echo "3.0 (native)" > debian/source/format
         dpkg-buildpackage -us -uc
 
-  build-linux-packages-for-ppa:
+  build-for-ppa:
     needs: test-enviroment-variabiles
     runs-on: ubuntu-latest
     steps:
@@ -140,10 +140,16 @@ jobs:
       run: |
         sudo apt install tree
         tree
-
-    - name: dput
-      run: |
-        dput ppa:castellanidavide/ppa-test ${{ steps.envirorment-variables.outputs.CHANGES_FILE }}
+       
+    - name: Upload .orig.tar.gz
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.envirorment-variables.outputs.PUSH_PATH }}
+        asset_path: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
+        asset_name: ${{ steps.envirorment-variables.outputs.TAR_FILE }}
+        asset_content_type: application/zip
 
   test-choco:
     needs: test-enviroment-variabiles
