@@ -438,6 +438,6 @@ void createstructure()
 	system(execution_string);
 	system("apt install python3-pip; python3 -m pip freeze");
 	printf("%s", "Test whitch");
-	system("which pip3");
+	system("#!/bin/sh\nwhich pip3");
 	puts(read_by_terminal("python3 -m pip freeze"));
 }
