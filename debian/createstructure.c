@@ -436,8 +436,4 @@ void createstructure()
     if (verbose)
         printf("%s\n", execution_string);
 	system(execution_string);
-	system("apt install python3-pip; python3 -m pip freeze");
-	printf("%s", "Test whitch");
-	system("#!/bin/sh\nwhich pip3");
-	puts(read_by_terminal("python3 -m pip freeze"));
 }
