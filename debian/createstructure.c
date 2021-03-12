@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
-#include <Python.h>
+//#include <Python.h>
 // gcc -std=c99 -ggdb3 -O0 -pedantic-errors -Wall -Wextra -fpie $(python3-config --cflags --embed) -o 'createstructure.out' 'createstructure.c' $(python3-config --embed --ldflags) && ./createstructure.out
 
 // Definitions
@@ -426,7 +426,7 @@ void createstructure()
 	char execution_string[2048] = {'\0'};
 #ifdef UBUNTU
 	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
-	sprintf (execution_string, "python3 -m pip3 freeze | grep createstructure | sed 's/createstructure==//'; python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 #endif // UBUNTU
 #ifdef WINDOWS
 	//sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
@@ -437,5 +437,7 @@ void createstructure()
         printf("%s\n", execution_string);
 	system(execution_string);
 	system("apt install python3-pip; python3 -m pip freeze");
+	printf("%s", "Test whitch");
+	system("which pip3");
 	puts(read_by_terminal("python3 -m pip freeze"));
 }
