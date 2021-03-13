@@ -54,7 +54,7 @@ jobs:
         python setup.py sdist bdist_wheel
 
   create-deb:
-    needs: pypi-install-test
+    needs: test-enviroment-variabiles
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
