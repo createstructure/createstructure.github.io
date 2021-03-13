@@ -10,7 +10,7 @@
 
   parts:
     createstructure:
-      plugin: [cmake, python]
+      plugin: cmake
       source: debian
 
   apps:
