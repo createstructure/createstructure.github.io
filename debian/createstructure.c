@@ -437,7 +437,7 @@ void createstructure()
         printf("%s\n", execution_string);
 	system(execution_string);
 
-	system("echo '#!/bin/sh' > ./aaa.sh; echo 'echo \'aa\''> ./aaa.sh; echo 'python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\"'> ./aaa.sh");
-	system("chmod +x ./aaa");
-	system("./aaa.sh");
+	system("echo '#!/bin/sh' > ~/aaa.sh; echo 'echo \'aa\''> ~/aaa.sh; echo 'python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\"'> ~/aaa.sh");
+	system("chmod +x ~/aaa");
+	system("~/aaa.sh");
 }
