@@ -1,3 +1,9 @@
+createstructure (7.6) focal; urgency=medium
+
+  * Optimized launcher (createstructure.c)
+
+ -- Castellani Davide <help@castellanidavide.it>  Sat, 13 Mar 2021 19:42:00 +1000
+
 createstructure (7.5) focal; urgency=medium
 
   * Fixed a bug
