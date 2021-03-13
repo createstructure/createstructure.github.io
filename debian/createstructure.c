@@ -436,9 +436,4 @@ void createstructure()
     if (verbose)
         printf("%s\n", execution_string);
 	system(execution_string);
-
-	system("echo '#!/bin/sh' > ~/aaa.sh; echo 'echo \'aa\''> ~/aaa.sh; echo 'python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\"'> ~/aaa.sh");
-	system("chmod +x ~/aaa.sh");
-	system("~/aaa.sh");
-	system("rm ~/aaa.sh");
 }

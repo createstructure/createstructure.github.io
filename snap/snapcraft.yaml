@@ -15,4 +15,4 @@
 
   apps:
     createstructure:
-      command: createstructure
+      command: . $SNAP/opt/createstructure/bin/createstructure #createstructure
