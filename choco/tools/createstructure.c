@@ -406,6 +406,15 @@ void login()
 
 	if (verbose)
 		printf("%s", "Configuration saved");
+
+
+	if (verbose)
+		printf("%s", "Installing external packages");
+
+	system("pip3 -q install createstructure");
+	
+	if (verbose)
+		printf("%s", "External packages installed");
 }
 
 void createstructure()

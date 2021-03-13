@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
-//#include <Python.h>
-// gcc -std=c99 -ggdb3 -O0 -pedantic-errors -Wall -Wextra -fpie $(python3-config --cflags --embed) -o 'createstructure.out' 'createstructure.c' $(python3-config --embed --ldflags) && ./createstructure.out
 
 // Definitions
 #define MALLOC_MAX_SIXE 1024
@@ -126,8 +124,7 @@ char* choppy(char *s)
     char *n = malloc(MALLOC_MAX_SIXE); // max return size
     if( s )
         strcpy( n, s );
-	if(n[strlen(n)-1] == "\n")
-    	n[strlen(n)-1]='\0';
+    n[strlen(n)-1]='\0';
     return n;
 }
 
@@ -267,10 +264,10 @@ void get_setup()
 		puts("\u2139 Getting setup");
 
 #ifdef UBUNTU
-	TOKEN = read_by_terminal("cat ~/createstructure.conf | grep 'token' | sed 's/token=//' | sed 's/token= //'");
-	//SOURCES = read_by_terminal("cat ~/createstructure.conf | grep 'sources' | sed 's/sources=//' | sed 's/sources= //'");
-	ORGANIZATION_NAME = read_by_terminal("cat ~/createstructure.conf | grep 'organization_name' | sed 's/organization_name=//' | sed 's/organization_name= //'");
-	IGNORE = read_by_terminal("cat ~/createstructure.conf | grep 'ignore' | sed 's/ignore=//' | sed 's/ignore= //'");
+	TOKEN = read_by_terminal("cat /etc/createstructure.conf | grep 'token' | sed 's/token=//' | sed 's/token= //'");
+	//SOURCES = read_by_terminal("cat /etc/createstructure.conf | grep 'sources' | sed 's/sources=//' | sed 's/sources= //'");
+	ORGANIZATION_NAME = read_by_terminal("cat /etc/createstructure.conf | grep 'organization_name' | sed 's/organization_name=//' | sed 's/organization_name= //'");
+	IGNORE = read_by_terminal("cat /etc/createstructure.conf | grep 'ignore' | sed 's/ignore=//' | sed 's/ignore= //'");
 #endif // UBUNTU
 #ifdef WINDOWS
     char* TO_DELATE = read_by_terminal("powershell -command \"& {echo ''}\"");
@@ -283,9 +280,6 @@ void get_setup()
 	IGNORE = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'ignore'} | %{$_ -replace 'ignore=',''} | %{$_ -replace 'ignore= ',''} }\"");
 	IGNORE = str_replace(IGNORE, sizeof(IGNORE), TO_DELATE, "");
 #endif // WINDOWS
-	TOKEN = choppy(TOKEN);
-	ORGANIZATION_NAME = choppy(ORGANIZATION_NAME);
-	IGNORE = choppy(IGNORE);
 }
 
 void help(int argc, char **argv)
@@ -394,27 +388,33 @@ void login()
 
 	if (verbose)
 		//printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 SOURCES: %s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", &TEMP_TOKEN, TEMP_TOKEN_AUTO, &TEMP_SOURCES, &TEMP_ORGANIZATION_NAME, &TEMP_IGNORE);
-		printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", choppy(&TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(&TEMP_ORGANIZATION_NAME), choppy(&TEMP_IGNORE));
+		printf("\n---Infos---\n\u2139 TOCKEN: %s%s\n\u2139 ORGANIZATION_NAME (empty if you will use your personal account): %s\n\u2139 IGNORE: %s\n", &TEMP_TOKEN, TEMP_TOKEN_AUTO, &TEMP_ORGANIZATION_NAME, &TEMP_IGNORE);
 
 	// Save insert options
 	char execution_string[2048] = {'\0'};
 
 #ifdef UBUNTU
-	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > ~/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
-	sprintf(execution_string, "echo 'token=%s%s' > ~/createstructure.conf; echo 'organization_name=%s' >> ~/createstructure.conf; echo 'ignore=%s' >> ~/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
-	printf("echo 'token=%s%s' > ~/createstructure.conf; echo 'organization_name=%s' >> ~/createstructure.conf; echo 'ignore=%s' >> ~/createstructure.conf", choppy(TEMP_TOKEN), choppy(TEMP_TOKEN_AUTO), choppy(TEMP_ORGANIZATION_NAME), choppy(TEMP_IGNORE));
+	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	sprintf(execution_string, "sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // UBUNTU
 #ifdef WINDOWS
 	//sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo sources=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 	sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // WINDOWS
 
-	if (verbose)
-		printf("%s", execution_string);
 	system(execution_string);
 
 	if (verbose)
 		printf("%s", "Configuration saved");
+
+
+	if (verbose)
+		printf("%s", "Installing external packages");
+
+	system("pip3 -q install createstructure");
+	
+	if (verbose)
+		printf("%s", "External packages installed");
 }
 
 void createstructure()
@@ -426,8 +426,7 @@ void createstructure()
 	char execution_string[2048] = {'\0'};
 #ifdef UBUNTU
 	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
-	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
-	sprintf (execution_string, "python3 -c \"exec(\\\"import importlib.util;spec = importlib.util.spec_from_file_location('createstructure', '/home/castellanidavide/.local/lib/python3.8/site-packages/createstructure/__init__.py');foo = importlib.util.module_from_spec(spec);spec.loader.exec_module(foo);foo.createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 #endif // UBUNTU
 #ifdef WINDOWS
 	//sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
