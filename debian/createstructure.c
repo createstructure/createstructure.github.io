@@ -426,7 +426,8 @@ void createstructure()
 	char execution_string[2048] = {'\0'};
 #ifdef UBUNTU
 	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
-	sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
+	sprintf (execution_string, "python3 -c \"exec(\\\"import importlib.util;foo = importlib.util.module_from_spec(importlib.util.spec_from_file_location(\\\"createstructure\\\", \\\"/home/castellanidavide/.local/lib/python3.8/site-packages/createstructure/__init__.py\\\"));spec.loader.exec_module(foo);foo.createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 #endif // UBUNTU
 #ifdef WINDOWS
 	//sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
