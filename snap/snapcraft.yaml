@@ -10,10 +10,9 @@
 
   parts:
     createstructure:
-      plugin: [cmake, python]
-      build-packages: g++
+      plugin: cmake
       source: debian
 
   apps:
     createstructure:
-      command: createstructure
+      command: "/snap/createstructure/current/bin/createstructure"
