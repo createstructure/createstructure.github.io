@@ -1,6 +1,6 @@
 name: createstructure
   version: '0.3'
-  summary: Template manager
+  summary: With this program, you can easily create a repository on GitHub with a basic template, personalized for your use
   description: |
     With this program, you can easily create a repository on GitHub with a basic template, personalized for your use.
     To see more visit: https://github.com/createstructure/createstructure/
