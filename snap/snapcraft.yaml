@@ -11,7 +11,7 @@ confinement: strict
 parts:
  createstructure:
   plugin: cmake
-  source: src
+  source: snap
 
 apps:
  createstructure:
