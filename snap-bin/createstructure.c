@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
-#include <Python.h>
-//gcc -std=c99 -ggdb3 -O0 -pedantic-errors -Wall -Wextra -fpie $(python3-config --cflags --embed) -o 'createstructure.out' 'createstructure.c' $(python3-config --embed --ldflags) && ./createstructure.out
 
 // Definitions
 #define MALLOC_MAX_SIXE 1024
