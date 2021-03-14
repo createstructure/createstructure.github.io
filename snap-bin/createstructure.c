@@ -407,8 +407,8 @@ void login()
 	sprintf(execution_string, "sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // UBUNTU
 #ifdef SNAP
-	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
-	sprintf(execution_string, "sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > ~/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	//sprintf(execution_string, "echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	sprintf(execution_string, "echo 'token=%s%s\norganization_name=%s\nignore=%s' > ~/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // SNAP
 #ifdef WINDOWS
 	//sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo sources=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
@@ -418,16 +418,16 @@ void login()
 	system(execution_string);
 
 	if (verbose)
-		printf("%s", "Configuration saved");
+		printf("%s\n", "Configuration saved");
 
 
 	if (verbose)
-		printf("%s", "Installing external packages");
+		printf("%s\n", "Installing external packages");
 
-	system("pip3 -q install createstructure");
+	system("pip -q install createstructure==7.6");
 	
 	if (verbose)
-		printf("%s", "External packages installed");
+		printf("%s\n", "External packages installed");
 }
 
 void createstructure()
