@@ -423,12 +423,12 @@ void login()
 
 #ifdef SNAP
 	if (verbose)
-		printf("%s\n", "Remeber to do : pip3 install createstructure==7.7");
+		printf("%s\n", "Remeber to do : pip3 install createstructure==7.8");
 #else
 	if (verbose)
 		printf("%s\n", "Installing external packages");
 
-	system("pip3 -q install createstructure==7.7");
+	system("pip3 -q install createstructure==7.8");
 	
 	if (verbose)
 		printf("%s\n", "External packages installed");

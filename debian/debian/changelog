@@ -1,3 +1,9 @@
+createstructure (7.8) focal; urgency=medium
+
+  * Fixed a bug
+
+ -- Castellani Davide <help@castellanidavide.it>  Sun, 14 Mar 2021 16:39:00 +1000
+
 createstructure (7.7) focal; urgency=medium
 
   * Added snap package
