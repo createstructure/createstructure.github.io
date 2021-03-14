@@ -2,7 +2,7 @@
 To check the correct funtionality try to:
  - By hash: write into PowerShell : Get-FileHash C:\Progra~1\createstructure\createstructure.exe
 	The result will be: 
-   	- 1D8E619D70463A6194E86E69AEEBF00F182CC6B07AD3021CA8C698E1AD1AED25
+   	- F45C0B3AF2BAC00EFDBFBAFE8B349E82FB109B14A16EF3EA19C3EED138180B76
  - Do the login "createstructure -l" in a shell as An Administrator.
  - Create a repository "createstructure" 
  - If you want you can check it manually with the source, you can found it in this link: https://github.com/createstructure/createstructure

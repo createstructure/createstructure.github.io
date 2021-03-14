@@ -1,3 +1,11 @@
+createstructure (7.7) focal; urgency=medium
+
+  * Added snap package
+  * Optimized README.md
+  * Optimized wiki
+
+ -- Castellani Davide <help@castellanidavide.it>  Sun, 14 Mar 2021 16:19:00 +1000
+
 createstructure (7.6) focal; urgency=medium
 
   * Optimized launcher (createstructure.c)

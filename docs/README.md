@@ -1,5 +1,5 @@
 # createstructure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.6-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.7-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
 
 ![](https://github.com/CastellaniDavide/createstructure/raw/master/docs/createstructure.png)
 
@@ -35,12 +35,13 @@ With this program, you can easily create a repository on GitHub :octocat: with a
 ![](https://dctacademy.com/wp-content/uploads/2016/12/install.jpeg)
   - Debian/ Ubuntu using apt:
     - ```sudo add-apt-repository ppa:castellanidavide/createstructure; sudo apt update; sudo apt install createstructure```
+  - Linux using snap:
+    - ```snap install createstructure; echo "alias createstructure='/snap/createstructure/current/bin/createstructure'" > ~/.bashrc```
+    - Refresh terminal
   - Windows (using choco):
     - ```choco install createstructure=7.0```
     - ```createstrucure.exe -l``` <- for the login
   - Manual by source:
-
-    **Attention: replace <SOME_WORDS> with your values**
     - [install git](https://git-scm.com/download)
     - download the repo ```git clone https://github.com/createstructure/createstructure.git```
     - [install python3](https://www.python.org/)
@@ -50,27 +51,37 @@ With this program, you can easily create a repository on GitHub :octocat: with a
       - name: createstructure
       - attribute: python3 \<ABSOLUTE_PATH_OF_REPO>/bin/createstructure.py -t=\<TOCKEN> -s=\<ARRAY_OF_SOURCES> -o=\<(optional)_ORGANIZATION> -i=\<(optional)_FOLDERS_TO_BE_IGNORED_FROM_TEMPLATE>
 
+  **Attention: replace <SOME_WORDS> with your values**
+
 ### Update
 ![](https://images.idgesg.net/images/article/2020/07/software_update_by_gocmen_gettyimages-1146311500_2400x1600-100852481-large.jpg)
   - Debian/ Ubuntu using apt:
     - ```sudo apt update; sudo apt upgrade```
+  - Linux using snap:
+    - ```snap refresh createstructure```
   - Windows (using choco):
     - ```choco upgrade createstructure --version=7.0```
   - Manual by source:
+    - In the repo core ```git pull```
+    - ```pip3 install --update createstructure```
 
   **Attention: replace <SOME_WORDS> with your values**
-    - ```cd <ABSOLUTE_PATH_OF_REPO>; git pull```
 
 ### Delate
 ![](http://cdn.onlinewebfonts.com/svg/img_105952.png)
   - Debian/ Ubuntu using apt:
     - ```sudo apt remove createstructure```
+  - Linux using snap:
+    - ```snap remove createstructure```
+    - delate ```alias createstructure='/snap/createstructure/current/bin/createstructure'``` in the ~/.bashrc file
   - Windows (using choco):
     - ```choco remove createstructure```
   - Manual by source:
+    - Remove the repository on your PC
+    - Remove alias
+    - ```pip3 uninstall createstructure```
 
   **Attention: replace <SOME_WORDS> with your values**
-    - ```cd <ABSOLUTE_PATH_OF_REPO>; git pull```
 
 ### How to use
 ![](https://www.animationvideo.co/wp-content/uploads/2017/12/How-to-video.jpg)
@@ -161,11 +172,17 @@ With this program, you can easily create a repository on GitHub :octocat: with a
     - README.md
   - requirements
     - requirements.txt
+  - snap
+    - snapcraft.yaml
+  - snap-bin
+    - CMakeLists.txt
+    - createstructure.c
   - setup.py
   - .gitignore
 
 ### Changelog
 ![](https://www.ashoka.org/sites/default/files/styles/medium_1600x1000/public/old_way_new_way.jpg?itok=3JnbJz4O)
+  - [7.7_2021-03-14](#76_2021-03-14)
   - [7.6_2021-03-13](#76_2021-03-13)
   - [7.5_2021-03-07](#75_2021-03-07)
   - [7.4_2021-03-07](#74_2021-03-07)
@@ -188,7 +205,12 @@ With this program, you can easily create a repository on GitHub :octocat: with a
   - [2.0_2020-03-24](#20_2020-03-24)
   - [1.0_2020-03-24](#10_2020-03-24)
 
-#### 7.5_2021-03-13
+#### 7.7_2021-03-13
+  - Added snap package
+  - Optimized README.md
+  - Optimized wiki
+
+#### 7.6_2021-03-13
   - Optimized launcher (createstructure.c)
 
 #### 7.5_2021-03-07

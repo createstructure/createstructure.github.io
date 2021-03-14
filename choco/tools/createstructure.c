@@ -8,8 +8,11 @@
 #define MALLOC_MAX_SIXE 1024
 #define SUCCESS (char *)haystack
 #define FAILURE (void *)NULL
+
+// Packaging method
 //#define UBUNTU
 #define WINDOWS
+//#define SNAP
 
 // Support functions
 void delay(int milliseconds);
@@ -269,6 +272,12 @@ void get_setup()
 	ORGANIZATION_NAME = read_by_terminal("cat /etc/createstructure.conf | grep 'organization_name' | sed 's/organization_name=//' | sed 's/organization_name= //'");
 	IGNORE = read_by_terminal("cat /etc/createstructure.conf | grep 'ignore' | sed 's/ignore=//' | sed 's/ignore= //'");
 #endif // UBUNTU
+#ifdef SNAP
+	TOKEN = read_by_terminal("cat ~/createstructure.conf | grep 'token' | sed 's/token=//' | sed 's/token= //'");
+	//SOURCES = read_by_terminal("cat ~/createstructure.conf | grep 'sources' | sed 's/sources=//' | sed 's/sources= //'");
+	ORGANIZATION_NAME = read_by_terminal("cat ~/createstructure.conf | grep 'organization_name' | sed 's/organization_name=//' | sed 's/organization_name= //'");
+	IGNORE = read_by_terminal("cat ~/createstructure.conf | grep 'ignore' | sed 's/ignore=//' | sed 's/ignore= //'");
+#endif // SNAP
 #ifdef WINDOWS
     char* TO_DELATE = read_by_terminal("powershell -command \"& {echo ''}\"");
 	TOKEN = read_by_terminal("powershell -command \"& {get-content $Env:HOMEDRIVE\\Progra~1\\createstructure\\createstructure.conf | where { $_ -match 'token'} | %{$_ -replace 'token=',''} | %{$_ -replace 'token= ',''} }\"");
@@ -287,13 +296,13 @@ void help(int argc, char **argv)
 	if (exist(argc, argv, "-v") || exist(argc, argv, "--verbose"))
 	{
 		printf("---Help---\n");
-#ifdef UBUNTU
+#if defined UBUNTU || defined SNAP
 		printf("Open man...\n");
-#endif // UBUNTU
+#endif // UBUNTU || SNAP
 	}
-#ifdef UBUNTU
+#if defined UBUNTU || defined SNAP
 	system("man createstructure");
-#endif // UBUNTU
+#endif // UBUNTU || SNAP
 #ifdef WINDOWS
 	printf("%s\n\t%s\n\n%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\n%s\n\t%s\n\n%s\n\t%s",
         "NAME",
@@ -325,16 +334,16 @@ void version()
 		printf("---Version---\n");
 
 	if (verbose)
-#ifdef UBUNTU
+#if defined UBUNTU || defined SNAP
 		system("apt-cache policy createstructure");
-#endif // UBUNTU
+#endif // UBUNTU || SNAP
 #ifdef WINDOWS
 		system("choco outdated | find \"createstructure\"");
 #endif // WINDOWS
 	else
-#ifdef UBUNTU
+#if defined UBUNTU || defined SNAP
 		system("dpkg -s createstructure | grep -i version | sed 's/Version: //'");
-#endif // UBUNTU
+#endif // UBUNTU || SNAP
 #ifdef WINDOWS
 		system("choco outdated | find \"createstructure|\"");
 #endif // WINDOWS
@@ -360,9 +369,9 @@ void login()
 		// Auto-generate token
 		char TEMP_CODE[50] = {'\0'};
 
-#ifdef UBUNTU
+#if defined UBUNTU || defined SNAP
 		system("sensible-browser 'https://github.com/login/oauth/authorize?client_id=9cf3c3790cc8c718aada&scope=user%20repo%20admin:org'");
-#endif // UBUNTU
+#endif // UBUNTU || SNAP
 #ifdef WINDOWS
 		system("powershell -command \"& {Start-Process 'https://github.com/login/oauth/authorize?client_id=9cf3c3790cc8c718aada&scope=user%20repo%20admin:org'}\"");
 #endif // WINDOWS
@@ -397,6 +406,10 @@ void login()
 	//sprintf(execution_string, "sudo echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 	sprintf(execution_string, "sudo echo 'token=%s%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 #endif // UBUNTU
+#ifdef SNAP
+	//sprintf(execution_string, "echo 'token=%s%s\nsources=%s\norganization_name=%s\nignore=%s' > /etc/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+	sprintf(execution_string, "echo 'token=%s%s\norganization_name=%s\nignore=%s' > ~/createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
+#endif // SNAP
 #ifdef WINDOWS
 	//sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo sources=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_SOURCES, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
 	sprintf(execution_string, "echo token=%s%s > %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo organization_name=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf && echo ignore=%s >> %HOMEDRIVE%\\Progra~1\\createstructure\\createstructure.conf", TEMP_TOKEN, TEMP_TOKEN_AUTO, TEMP_ORGANIZATION_NAME, TEMP_IGNORE);
@@ -405,16 +418,21 @@ void login()
 	system(execution_string);
 
 	if (verbose)
-		printf("%s", "Configuration saved");
+		printf("%s\n", "Configuration saved");
 
 
+#ifdef SNAP
 	if (verbose)
-		printf("%s", "Installing external packages");
+		printf("%s\n", "Remeber to do : pip3 install createstructure==7.7");
+#else
+	if (verbose)
+		printf("%s\n", "Installing external packages");
 
-	system("pip3 -q install createstructure");
+	system("pip3 -q install createstructure==7.7");
 	
 	if (verbose)
-		printf("%s", "External packages installed");
+		printf("%s\n", "External packages installed");
+#endif // SNAP
 }
 
 void createstructure()
@@ -424,10 +442,10 @@ void createstructure()
 
 	// Compose my string
 	char execution_string[2048] = {'\0'};
-#ifdef UBUNTU
+#if defined UBUNTU || defined SNAP
 	//sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 	sprintf (execution_string, "python3 -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
-#endif // UBUNTU
+#endif // UBUNTU || SNAP
 #ifdef WINDOWS
 	//sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -s=%s -o=%s -i=%s %s", TOKEN, SOURCES, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
 	sprintf (execution_string, "python.exe -c \"exec(\\\"from createstructure import createstructure;createstructure()\\\")\" -t=%s -o=%s -i=%s %s", TOKEN, ORGANIZATION_NAME, IGNORE, (verbose ? "-v" : ""));
