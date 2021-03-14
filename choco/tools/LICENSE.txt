@@ -1,4 +1,4 @@
-﻿From: https://github.com/CastellaniDavide/create_structure/blob/master/docs/LICENSE
+﻿From: https://github.com/createstructure/createstructure/blob/master/docs/LICENSE
 
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
