@@ -1,4 +1,4 @@
-# for snap
+# By Castellani Davide
 cmake_minimum_required(VERSION 3.1)
 project(createstructure)
 
