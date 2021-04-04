@@ -1,24 +1,5 @@
-﻿$ErrorActionPreference = 'Stop'; # stop on all errors
+﻿# Variabiles
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$fileLocation = Join-Path $toolsDir 'createstructure-setup.exe'
-
-$packageArgs = @{
-  packageName   = $env:ChocolateyPackageName
-  unzipLocation = $toolsDir
-  fileType      = 'EXE'
-  file         = $fileLocation
-
-  softwareName  = 'createstructure*'
-  validExitCodes= @(0, 3010, 1641)
-  silentArgs   = 'install'
-}
-Install-ChocolateyInstallPackage @packageArgs
-
-
-
-# Additional instructions
-
-# My personal variabiles
 $ppath = "C:\Progra~1\createstructure"
 $exepath = "$ppath\createstructure.exe"
 echo "My personal path is: $ppath"

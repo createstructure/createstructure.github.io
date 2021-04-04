@@ -14,7 +14,7 @@ from threading import Thread, active_count, Lock
 from sys import argv
 
 __author__ = "help@castellanidavide.it"
-__version__ = "7.1 2021-02-13"
+__version__ = "7.9 2021-04-04"
 
 class createstructure:
 	def __init__ (self, token=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
@@ -201,23 +201,27 @@ class createstructure:
 	def choose_template(self):
 		"""This helps to find the correct template
 		"""
-		# Add -template if not exists
-		if not self.ANSWERS['template'].endswith("-template"):
-			self.ANSWERS['template'] += "-template"
 
-		if "/" in self.ANSWERS['template']: # If it's yours
-			try:
-				self.template_name = self.g.get_repo(f"{self.ANSWERS['template']}").full_name
-				assert(self.g.get_repo(self.template_name).private == True)
-			except:
-				print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
-				self.template_name = "createstructure/default-template"
-		else: # If you want to use the template into createstructure Organization
-			try:
-				self.template_name = self.g.get_repo(f"createstructure/{self.ANSWERS['template']}").full_name
-			except:
-				print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
-				self.template_name = "createstructure/default-template"
+		if self.ANSWERS['template'] == "":
+			self.template_name = "createstructure/default-template"
+		else:
+			# Add -template if not exists
+			if not self.ANSWERS['template'].endswith("-template"):
+				self.ANSWERS['template'] += "-template"
+
+			if "/" in self.ANSWERS['template']: # If it's yours
+				try:
+					self.template_name = self.g.get_repo(f"{self.ANSWERS['template']}").full_name
+					assert(self.g.get_repo(self.template_name).private == True)
+				except:
+					print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
+					self.template_name = "createstructure/default-template"
+			else: # If you want to use the template into createstructure Organization
+				try:
+					self.template_name = self.g.get_repo(f"createstructure/{self.ANSWERS['template']}").full_name
+				except:
+					print(f"{self.get_emoji('i')}{self.ANSWERS['template']} not founded, now I want to use the default repo")
+					self.template_name = "createstructure/default-template"
 
 		self.template = self.g.get_repo(self.template_name)
 		print(f"{self.get_emoji('ok')}Template founded ({self.template_name})")

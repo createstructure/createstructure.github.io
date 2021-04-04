@@ -1,3 +1,11 @@
+createstructure (7.9) focal; urgency=medium
+
+  * Fixed a bug in the python code
+  * Optimized choco package
+  * Added envirorments for GitHub Action on every release
+
+ -- Castellani Davide <help@castellanidavide.it>  Sun, 04 Apr 2021 9:40:00 +1000
+
 createstructure (7.8) focal; urgency=medium
 
   * Fixed a bug

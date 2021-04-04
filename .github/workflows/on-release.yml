@@ -39,6 +39,9 @@ jobs:
   pypi:
     needs: test-enviroment-variabiles
     runs-on: ubuntu-latest
+    environment:
+      name: Pypi
+      url: https://pypi.org/project/createstructure/
 
     steps:
     - uses: actions/checkout@v2
@@ -81,6 +84,7 @@ jobs:
   create-and-update-deb:
     needs: pypi-install-test
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
@@ -121,9 +125,13 @@ jobs:
         asset_name: ${{ steps.envirorment-variables.outputs.DEB_FILE }}
         asset_content_type: application/zip
 
-  build-for-ppa:
+  ppa:
     needs: pypi-install-test
     runs-on: ubuntu-latest
+    environment:
+      name: ppa
+      url: https://launchpad.net/~castellanidavide/+archive/ubuntu/createstructure
+
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
@@ -214,6 +222,10 @@ jobs:
   publish-choco:
     needs: test-choco
     runs-on: windows-latest
+    environment:
+      name: choco
+      url: https://community.chocolatey.org/packages/createstructure
+
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2

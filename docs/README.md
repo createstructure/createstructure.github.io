@@ -1,5 +1,5 @@
 # createstructure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.8-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v7.9-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
 
 ![](https://github.com/CastellaniDavide/createstructure/raw/master/docs/createstructure.png)
 
@@ -205,6 +205,11 @@ With this program, you can easily create a repository on GitHub :octocat: with a
   - [3.0_2020-08-15](#30_2020-08-15)
   - [2.0_2020-03-24](#20_2020-03-24)
   - [1.0_2020-03-24](#10_2020-03-24)
+
+#### 7.9_2021-04-04
+  - Fixed a bug in the python code
+  - Optimized choco package
+  - Added envirorments for GitHub Action on every release
 
 #### 7.8_2021-03-13
   - Fixed a bug
