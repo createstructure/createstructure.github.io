@@ -12,12 +12,13 @@ from requests import get as wget
 from time import sleep
 from threading import Thread, active_count, Lock
 from sys import argv
+from os import system
 
 __author__ = "help@castellanidavide.it"
-__version__ = "7.9 2021-04-04"
+__version__ = "08.01 2021-04-15"
 
 class createstructure:
-	def __init__ (self, token=None, souces=['CastellaniDavide'], organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
+	def __init__ (self, token=None, organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
 		"""Main function
 		"""
 		# Set main variabiles
@@ -50,6 +51,9 @@ class createstructure:
 			
 			# Make all
 			self.scan_and_elaborate()
+
+			# Eventually download
+			self.download()
 
 	def initial_inputs(self):
 		"""Initial input read
@@ -88,7 +92,6 @@ class createstructure:
 			documentation = ["usage createstructure",
 							"\t[--ignore= | -i=]",
 							"\t[--organization= | -o=]",
-							"\t[--sources= | -s=]",
 							"\t[--template | -temp]"
 							"\t[--token= | -t=]",
 							"\t[--verbose | -v]",
@@ -96,7 +99,6 @@ class createstructure:
 							"These are the createstructure arguments:",
 							"\t--ignore= or -i=		(optional) The folders to be ignored",
 							"\t--organization= or -o=		(optional) The organization name, leave empty if you want to create repos in your personal account",
-							"\t--sources= or -s=		(optional) The array with your favourite sources, for eg. ['CastellaniDavide']",
 							"\t--token= or -t=			The GitHub tocken with repo and organization permission",
 							"\t--template= or -temp=		Create a template",
 							"\t--verbose or -v			Verbose option, you will see the main variabiles and lots more"
@@ -125,6 +127,7 @@ class createstructure:
 						["prefix",		"Insert a prefix for the repository (or don't insert anything): "],
 						["team",		"Do you want insert this repo into a team? [y/N]: "],
 						["private",		"Is that private? [y/N]: "],
+						["download",	"Want you download the repo? [Y/n]: "],
 						]
 			self.ANSWERS = {}
 			
@@ -296,10 +299,18 @@ class createstructure:
 		except:
 			print(f"There was an error to this file: {path}")
 
-	def is_positive(answer):
+	def download(self):
+		"""If requested download repo
+		"""
+		if createstructure.is_positive(self.ANSWERS["download"], empty=True):
+			while active_count() != 1: pass # Wait creation is ultimated
+			_ = system(f"git clone {self.repo.clone_url} --quiet")
+			print(f"{self.get_emoji('ok')}Downloaded repo")
+
+	def is_positive(answer, empty=False):
 		"""Returns true is the answer is affermative
 		"""
-		return answer in ["y", "Y", "yes", "Yes"]
+		return answer in ["y", "Y", "yes", "Yes"] or empty and answer == ""
 
 	def get_emoji(self, emoji):
 		"""Returns the selected emoji
