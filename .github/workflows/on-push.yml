@@ -184,6 +184,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install prerequirements
+      run: |
+        snap install snapcraft
     - name: Login
       run: |
         mkdir .snapcraft
