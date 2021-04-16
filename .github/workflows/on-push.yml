@@ -187,7 +187,8 @@ jobs:
     - name: Login
       run: |
         mkdir .snapcraft
-        echo ${{ secrets.SNAP_LOGIN }} | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+        echo "${{ secrets.SNAP_LOGIN }}" > s.txt
+        LC_ALL=C tr -cd 0-9a-fA-F < s.txt | xxd -r -p > .snapcraft/snapcraft.cfg
     - name: Build snap
       run: |
         snapcraft
