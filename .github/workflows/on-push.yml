@@ -184,19 +184,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install prerequirements
-      run: |
-        sudo snap install snapcraft --classic
-    - name: Login
-      run: |
-        mkdir .snapcraft
-        echo "${{ secrets.SNAP_LOGIN }}" > s.txt
-        LC_ALL=C tr -cd 0-9a-fA-F < s.txt | xxd -r -p > .snapcraft/snapcraft.cfg
-    - name: Build snap
-      run: |
-        snapcraft
-    - name: Publish
-      run: |
-        snapcraft push *.snap --release beta
-        #stable
+    - uses: snapcore/action-build@v1
+      id: build
+    - uses: snapcore/action-publish@v1
+      with:
+        store_login: ${{ secrets.SNAP_LOGIN }}
+        snap: ${{ steps.build.outputs.snap }}
+        release: edge
         
