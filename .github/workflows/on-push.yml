@@ -185,7 +185,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        sudo snap install snapcraft
+        sudo snap install snapcraft --classic
         mkdir .snapcraft
         echo "${{ secrets.SNAP_LOGIN }}" > s.txt
         LC_ALL=C tr -cd 0-9a-fA-F < s.txt | xxd -r -p | snapcraft login --with -
