@@ -177,7 +177,7 @@ jobs:
         move ./* ../
 
   snap:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     environment:
       name: snap
       url: https://snapcraft.io/createstructure
@@ -197,9 +197,9 @@ jobs:
         rm snapcraft.login
     - name: Build snap
       run: |
-        snapcraft
+        snapcraft --target-arch=i386
     - name: Publish
       run: |
-        snapcraft push *.snap --release beta
+        snapcraft upload *.snap --release beta
         #stable
         
