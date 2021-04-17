@@ -9,7 +9,7 @@ grade: stable
 confinement: strict
 architectures:
   - build-on: amd64
-    run-on: [amd64, i386]
+    run-on: [amd64, arm64, armhf, i386, ppc64el, s390x]
 
 parts:
  createstructure:
