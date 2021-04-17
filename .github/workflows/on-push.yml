@@ -197,7 +197,7 @@ jobs:
         rm snapcraft.login
     - name: Build snap
       run: |
-        snapcraft --target-arch=i386
+        snapcraft
     - name: Publish
       run: |
         snapcraft upload *.snap --release beta
