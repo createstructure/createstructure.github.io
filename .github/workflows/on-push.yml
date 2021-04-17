@@ -175,31 +175,4 @@ jobs:
         choco install python
         choco install createstructure -d-v -s . --pre -y --force
         move ./* ../
-
-  snap:
-    runs-on: ubuntu-16.04
-    environment:
-      name: snap
-      url: https://snapcraft.io/createstructure
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install prerequirements
-      run: |
-        sudo snap install snapcraft --classic
-    - name: Login
-      run: |
-        echo "[login.ubuntu.com]" > snapcraft.login
-        echo "macaroon = ${{ secrets.SNAP_MACAROON }}" >> snapcraft.login
-        echo "unbound_discharge = ${{ secrets.SNAP_UNBOUND_DISCARGE }}" >> snapcraft.login
-        echo "email = ${{ secrets.SNAP_EMAIL }}" >> snapcraft.login
-        cat snapcraft.login | snapcraft login --with -
-        rm snapcraft.login
-    - name: Build snap
-      run: |
-        snapcraft
-    - name: Publish
-      run: |
-        snapcraft upload *.snap --release beta
-        #stable
         

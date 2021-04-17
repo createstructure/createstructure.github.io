@@ -1,3 +1,9 @@
+createstructure (08.02) focal; urgency=medium
+
+  * On release push snap package as stable
+
+ -- Castellani Davide <help@castellanidavide.it>  Sat, 17 Apr 2021 7:51:00 +1000
+
 createstructure (08.01) focal; urgency=medium
 
   * Added the download option
