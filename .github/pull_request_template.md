@@ -4,8 +4,6 @@
 
 Please include a summary of the change and which issue is fixed.
 
-Fixes # (issue)
-
 ## Who did the changings?
  - [Your name](@your_github_tag)
  - [Another name](@github_tag)
