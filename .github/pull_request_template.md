@@ -4,13 +4,9 @@
 
 Please include a summary of the change and which issue is fixed.
 
-List any dependencies that are required for this change.
-
-Fixes # (issue)
-
 ## Who did the changings?
- - [Your name](@your_github_tag)
- - [Another name](@github_tag)
+ - @your_github_tag
+ - @github_tag
  - ...
 
 ## Correlated issue
