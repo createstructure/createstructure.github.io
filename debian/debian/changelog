@@ -1,3 +1,9 @@
+createstructure (08.03) focal; urgency=medium
+
+  * fixed a bug on ".github/workflows" folder scanning
+
+ -- Castellani Davide <help@castellanidavide.it>  Sat, 24 Apr 2021 20:15:00 +1000
+
 createstructure (08.02) focal; urgency=medium
 
   * On release push snap package as stable

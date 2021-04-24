@@ -15,7 +15,7 @@ from sys import argv
 from os import system
 
 __author__ = "help@castellanidavide.it"
-__version__ = "08.01 2021-04-15"
+__version__ = "08.03 2021-04-24"
 
 class createstructure:
 	def __init__ (self, token=None, organization_name="", IGNORE=[], verbose=False, template=False, answers=None):
@@ -238,9 +238,9 @@ class createstructure:
 		contents = self.template.get_contents(f"{loc}")
 		for content_file in sorted(contents, reverse=True, key=createstructure.name_of_path): # Put .folders at the end
 			if not content_file.path in [".createstructure", ""] + self.IGNORE:
-				if content_file.path == ".github/workflows": # Wait the end of others before do workflows
-					start_waiting = dt.now().timestamp()
-					while (active_count() != 2 and dt.now().timestamp() - start_waiting < 60): pass # Wait the end of processes or 60 seconds (a minute)
+				if content_file.path == ".github/workflows": # Wait the end of all others before push workflows folder
+					while active_count() != 2:
+						pass
 
 				if content_file.type == "file":
 					try:
@@ -248,7 +248,7 @@ class createstructure:
 					except: # If it's not a text file (eg. is an image)
 						Thread(target = self.create_file, args = (self.change(content_file.path), self.g.get_repo(self.template_name).get_contents(content_file.path).decoded_content)).start()
 				else:
-					Thread(target = self.scan_and_elaborate, args = (content_file.path, )).start()		
+					Thread(target = self.scan_and_elaborate, args = (content_file.path, )).start()	
 
 	def name_of_path(item):
 		"""For sorting the folders, gives the path attributes

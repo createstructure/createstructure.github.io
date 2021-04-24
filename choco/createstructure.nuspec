@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>createstructure</id>
-    <version>08.02</version>
+    <version>08.03</version>
     <title>createstructure</title>
     <authors>Castellani Davide</authors>
     <projectUrl>https://github.com/createstructure/createstructure</projectUrl>

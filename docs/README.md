@@ -209,6 +209,9 @@ With this program, you can easily create a repository on GitHub :octocat: with a
   - [2.0_2020-03-24](#20_2020-03-24)
   - [1.0_2020-03-24](#10_2020-03-24)
 
+#### 08.03_2021-04-17
+  - fixed a bug on ".github/workflows" folder scanning
+
 #### 08.02_2021-04-17
   - On release push snap package as stable
 
