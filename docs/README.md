@@ -1,5 +1,5 @@
 # createstructure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v08.03-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
+[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v08.04-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/createstructure/createstructure) ![PyPI](https://img.shields.io/pypi/v/createstructure)
 
 ![](https://github.com/CastellaniDavide/createstructure/raw/master/docs/createstructure.png)
 
@@ -182,6 +182,8 @@ With this program, you can easily create a repository on GitHub :octocat: with a
 
 ### Changelog
 ![](https://www.ashoka.org/sites/default/files/styles/medium_1600x1000/public/old_way_new_way.jpg?itok=3JnbJz4O)
+  - [08.04_2021-05-05](#0804_2021-05-05)
+  - [08.03_2021-04-17](#0803_2021-04-17)
   - [08.02_2021-04-17](#0802_2021-04-17)
   - [08.01_2021-04-15](#0801_2021-04-15)
   - [7.9_2021-04-04](#79_2021-04-04)
@@ -208,6 +210,9 @@ With this program, you can easily create a repository on GitHub :octocat: with a
   - [3.0_2020-08-15](#30_2020-08-15)
   - [2.0_2020-03-24](#20_2020-03-24)
   - [1.0_2020-03-24](#10_2020-03-24)
+
+#### 08.04_2021-05-05
+  - [#17](https://github.com/createstructure/createstructure/issues/17)
 
 #### 08.03_2021-04-17
   - fixed a bug on ".github/workflows" folder scanning

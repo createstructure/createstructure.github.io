@@ -15,7 +15,7 @@ from sys import argv
 from os import system
 
 __author__ = "help@castellanidavide.it"
-__version__ = "08.03 2021-04-24"
+__version__ = "08.04 2021-05-05"
 
 class createstructure:
 	def __init__ (self, token=None, organization_name="", IGNORE=[], verbose=False, template=False, answers=None):

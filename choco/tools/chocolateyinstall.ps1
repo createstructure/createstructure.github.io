@@ -19,4 +19,4 @@ if ($new_path -notlike "*$ppath*")
 }
 
 # Install pypi library
-pip install createstructure
+python.exe -m pip install createstructure==8.4

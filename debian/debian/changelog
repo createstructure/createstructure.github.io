@@ -1,3 +1,9 @@
+createstructure (08.04) focal; urgency=medium
+
+  * fixed https://github.com/createstructure/createstructure/issues/17
+
+ -- Castellani Davide <help@castellanidavide.it>  Wed, 05 May 2021 18:00:00 +1000
+
 createstructure (08.03) focal; urgency=medium
 
   * fixed a bug on ".github/workflows" folder scanning
