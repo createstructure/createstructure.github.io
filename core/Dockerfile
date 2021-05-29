@@ -12,8 +12,8 @@ RUN g++ core.cpp -o core -lcurl
 
 # Setup git
 RUN apt install git -y
-RUN git config --global user.email "contacts@castellanidavide.it"
-RUN git config --global user.name "createstructure"
+RUN git config user.email "contacts@castellanidavide.it"
+RUN git config user.name "createstructure"
 
 # Run the program output from the previous step
 ENTRYPOINT ["./core"]
