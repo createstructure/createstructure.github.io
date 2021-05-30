@@ -39,6 +39,21 @@ int main(int argc, char *argv[]) {
 		download(chooseTemplate(inputs["answers"]["template"].get<string>(), inputs["token"].get<string>(), inputs["username"].get<string>()), (string("/media/createstructure/") + inputs["username"].get<string>() + string("???") + inputs["answers"]["name"].get<string>()).c_str());
 
 		system("ls -R /media/createstructure");
+
+		upload(string("https:\u002F\u002F") +
+                        inputs["username"].get<string>() +
+                        string(":") +
+                        inputs["token"].get<string>() +
+                        string("@github.com/") +
+                        inputs["answers"]["org"].get<string>() +
+                        string("/") +
+                        inputs["answers"]["name"].get<string>(),
+
+			string("/media/createstructure/") +
+			inputs["username"].get<string>() +
+			string("???") +
+			inputs["answers"]["name"].get<string>()
+			);
 	} else {
 		cout << "Given uncorrect data " << getEmoji("sad") << endl;
 	}

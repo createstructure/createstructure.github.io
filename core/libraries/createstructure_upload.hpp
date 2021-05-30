@@ -1,10 +1,10 @@
-/* createstructure_split library
+/* createstructure_upload library
  * By Castellani Davide (@DavideC03)
  */
 
-#ifndef CREATESTRUCTURE_SPLIT
+#ifndef CREATESTRUCTURE_UPLOAD
 // If not imported yet
-#define CREATESTRUCTURE_SPLIT
+#define CREATESTRUCTURE_UPLOAD
 
 // Dependencies
 #include <bits/stdc++.h>
@@ -16,32 +16,30 @@ using namespace std;
 // #define DEBUG
 
 // Declared functions
-vector<string> split(string str, string del);
+void upload(string link, string pos);
 
 // Function(s)
-vector <string> split (string str, string del) {
+void upload(string link, string pos) {
         /* Split: split a string by a delimitator
          *
          * inputs:
-         *      - str: the string to elaborate
-         *      - del: the delimitator
-         *
-         * output:
-         *      - a vector containing the pieces of the slitted string
+         *      - link: repo link
+         *      - pos: local position
          */
-        // Local varible(s)
-        vector <string> splitted;
-        size_t pos;
+	system((
+                string("cd ") +
+                pos +
+                string("; ") +
+                string("rm -rf .git; ") +
+		string("git init; ") +
+		string("git branch -M main; ") +
+		string("git add *; ") +
+		string("git commit -m \"createstructure\"; ") +
+		string("git push ") +
+		link +
+                string(" -u main --set-upstream --force")
+        ).c_str());
 
-        // Split
-        while ((pos = str.find(del)) != string::npos) {
-                splitted.push_back(str.substr(0, pos));
-                str.erase(0, pos + del.length());
-        }
-        splitted.push_back(str);
-
-        // Return
-        return splitted;
 }
 
 
