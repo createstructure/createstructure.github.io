@@ -1,4 +1,4 @@
-/* createstructure_split library
+/* createstructure_positive library
  * By Castellani Davide (@DavideC03)
  */
 

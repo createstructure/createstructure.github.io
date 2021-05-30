@@ -1,10 +1,10 @@
-/* createstructure_split library
+/* createstructure_download library
  * By Castellani Davide (@DavideC03)
  */
 
-#ifndef CREATESTRUCTURE_SPLIT
+#ifndef CREATESTRUCTURE_DOWNLOAD
 // If not imported yet
-#define CREATESTRUCTURE_SPLIT
+#define CREATESTRUCTURE_DOWNLOAD
 
 // Dependencies
 #include <bits/stdc++.h>
@@ -16,32 +16,25 @@ using namespace std;
 // #define DEBUG
 
 // Declared functions
-vector<string> split(string str, string del);
+void download(string link, string position);
 
 // Function(s)
-vector <string> split (string str, string del) {
-        /* Split: split a string by a delimitator
+void download(string link, string position) {
+        /* Download: downloads the GitHub repo
          *
          * inputs:
-         *      - str: the string to elaborate
-         *      - del: the delimitator
-         *
-         * output:
-         *      - a vector containing the pieces of the slitted string
+         *      - link: the link of the repo
+         *      - position: the position to download the repo
          */
         // Local varible(s)
-        vector <string> splitted;
-        size_t pos;
-
-        // Split
-        while ((pos = str.find(del)) != string::npos) {
-                splitted.push_back(str.substr(0, pos));
-                str.erase(0, pos + del.length());
-        }
-        splitted.push_back(str);
-
-        // Return
-        return splitted;
+	system(
+			(
+				string("git clone ") +
+				link +
+				string(" ") +
+				position
+			).c_str()
+		);
 }
 
 

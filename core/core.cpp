@@ -35,18 +35,18 @@ int main(int argc, char *argv[]) {
 	cout << inputs.dump() << endl;
 #endif // DEBUG
 
-	json empty;
-	cout << chooseTemplate(inputs["answers"]["template"].get<string>(), inputs["token"].get<string>()) << endl;
-	cout << isPositive("Y") << isPositive("a") << isPositive("n") << endl;
-	cout << isNegative("Y") << isNegative("a") << isNegative("n") << endl;
+	if (inputCheck(inputs)) {
+		download(chooseTemplate(inputs["answers"]["template"].get<string>(), inputs["token"].get<string>(), inputs["username"].get<string>()), (string("/media/createstructure/") + inputs["username"].get<string>() + string("???") + inputs["answers"]["name"].get<string>()).c_str());
+
+		system("ls -R /media/createstructure");
+	} else {
+		cout << "Given uncorrect data " << getEmoji("sad") << endl;
+	}
 	/*
 	Thread(target = self.create_repo()).start()
 
 			# Get template
 			self.choose_template()
-
-			# Get changes
-			self.change_map()
 
 			# Make all
 			self.scan_and_elaborate()

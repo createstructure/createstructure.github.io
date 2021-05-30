@@ -20,7 +20,7 @@ using json = nlohmann::json;
 // Declared functions
 bool hasInit (string fullString, string init);
 bool hasEnding (string fullString, string ending);
-string chooseTemplate (string givenTemplate, string token);
+string chooseTemplate (string givenTemplate, string token, string username);
 
 // Function(s)
 bool hasInit (string fullString, string init) {
@@ -65,12 +65,13 @@ bool hasEnding (string fullString, string ending) {
 	}
 }
 
-string chooseTemplate (string givenTemplate, string token) {
+string chooseTemplate (string givenTemplate, string token, string username) {
         /* Choose Template: get the url of the choosed template
          *
          * inputs:
          *      - givenTemplate: the given template
          *      - token: to get access to the repo infos
+         *      - username: to get access to the repo infos
          *
          * output:
          *      - template url
@@ -89,16 +90,15 @@ string chooseTemplate (string givenTemplate, string token) {
 	}
 
 	// Add initial part of the url
-	json empty;
 	try {
 		if (urlTemplate.find('/') != string::npos) {
 			// External template
-			json data = jsonRequest(string("https:\u002F\u002Fapi.github.com/repos/") + urlTemplate, token, empty, "GET");
+			json data = jsonRequest(string("https:\u002F\u002Fapi.github.com/repos/") + urlTemplate, token, nullptr, "GET");
 			assert(data["private"].get<bool>());
-			urlTemplate = string("https:\u002F\u002Fgithub.com/") + urlTemplate;
+			urlTemplate = string("https:\u002F\u002F") + username + string(":") + token + string("@github.com/") + urlTemplate;
 		} else {
 			// Internal template
-			json data = jsonRequest(string("https:\u002F\u002Fapi.github.com/repos/createstructure/") + urlTemplate, token, empty, "GET");
+			json data = jsonRequest(string("https:\u002F\u002Fapi.github.com/repos/createstructure/") + urlTemplate, token, nullptr, "GET");
 			assert(!data["private"].get<bool>());
 			urlTemplate = string("https:\u002F\u002Fgithub.com/createstructure/") + urlTemplate;
 		}

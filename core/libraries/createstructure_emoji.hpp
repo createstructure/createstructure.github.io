@@ -1,4 +1,3 @@
-
 /* createstructure_emoji library
  * By Castellani Davide (@DavideC03)
  */

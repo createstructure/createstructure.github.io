@@ -1,47 +1,50 @@
-/* createstructure_split library
+/* createstructure_inputCheck library
  * By Castellani Davide (@DavideC03)
  */
 
-#ifndef CREATESTRUCTURE_SPLIT
+#ifndef CREATESTRUCTURE_INPUTCHECK
 // If not imported yet
-#define CREATESTRUCTURE_SPLIT
+#define CREATESTRUCTURE_INPUTCHECK
 
 // Dependencies
 #include <bits/stdc++.h>
+#include "json.hpp"
 
 // using ...
 using namespace std;
+using json = nlohmann::json;
 
 // Definitions
 // #define DEBUG
 
 // Declared functions
-vector<string> split(string str, string del);
+bool inputCheck(json input);
 
 // Function(s)
-vector <string> split (string str, string del) {
-        /* Split: split a string by a delimitator
+bool inputCheck(json input) {
+        /* Input Check: split a string by a delimitator
          *
          * inputs:
-         *      - str: the string to elaborate
-         *      - del: the delimitator
+         *      - input: the input to scan
          *
          * output:
-         *      - a vector containing the pieces of the slitted string
+         *      - true only if the input is ok
          */
-        // Local varible(s)
-        vector <string> splitted;
-        size_t pos;
+	try {
+		// Check if there are all the requirements
+		input["username"].get<string>();
+		input["token"].get<string>();
+		input["answers"]["name"].get<string>();
+		input["answers"]["descr"].get<string>();
+		input["answers"]["prefix"].get<string>();
+		input["answers"]["team"].get<string>();
+		input["answers"]["template"].get<string>();
+		input["answers"]["private"].get<bool>();
+	} catch (...) {
+		return false;
+	}
 
-        // Split
-        while ((pos = str.find(del)) != string::npos) {
-                splitted.push_back(str.substr(0, pos));
-                str.erase(0, pos + del.length());
-        }
-        splitted.push_back(str);
-
-        // Return
-        return splitted;
+	return true;
 }
 
 
