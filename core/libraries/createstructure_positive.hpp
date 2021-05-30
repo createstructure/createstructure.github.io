@@ -2,9 +2,9 @@
  * By Castellani Davide (@DavideC03)
  */
 
-#ifndef CREATESTRUCTURE_SPLIT
+#ifndef CREATESTRUCTURE_POSITIVE
 // If not imported yet
-#define CREATESTRUCTURE_SPLIT
+#define CREATESTRUCTURE_POSITIVE
 
 // Dependencies
 #include <bits/stdc++.h>
@@ -16,33 +16,40 @@ using namespace std;
 // #define DEBUG
 
 // Declared functions
-vector<string> split(string str, string del);
+bool isPositive(string str);
+bool isNegative(string str);
 
 // Function(s)
-vector <string> split (string str, string del) {
-        /* Split: split a string by a delimitator
+bool isPositive (string str) {
+        /* Is Positive: check if a string is positive
          *
          * inputs:
-         *      - str: the string to elaborate
-         *      - del: the delimitator
+         *      - str: the string to scan
          *
          * output:
-         *      - a vector containing the pieces of the slitted string
+         *      - true if the string is rappresents a positive value
          */
         // Local varible(s)
-        vector <string> splitted;
-        size_t pos;
+        vector <string> positive = {"Y", "y", "Yes", "yes", "YES", "1"};
 
-        // Split
-        while ((pos = str.find(del)) != string::npos) {
-                splitted.push_back(str.substr(0, pos));
-                str.erase(0, pos + del.length());
-        }
-        splitted.push_back(str);
-
-        // Return
-        return splitted;
+	// Return if the given string is contained in the vector of positive answers
+        return find(positive.begin(), positive.end(), str) != positive.end();
 }
 
+bool isNegative (string str) {
+        /* Is Negative: check if a string is negative
+         *
+         * inputs:
+         *      - str: the string to scan
+         *
+         * output:
+         *      - true if the string is rappresents a negative value
+         */
+        // Local varible(s)
+        vector <string> negative = {"N", "n", "No", "no", "NO", "0"};
+
+	// Return if the given string is contained in the vector of positive answers
+        return find(negative.begin(), negative.end(), str) != negative.end();
+}
 
 #endif

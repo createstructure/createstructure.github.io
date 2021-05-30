@@ -37,7 +37,8 @@ int main(int argc, char *argv[]) {
 
 	json empty;
 	cout << chooseTemplate(inputs["answers"]["template"].get<string>(), inputs["token"].get<string>()) << endl;
-	cout << "+" << "\t" << getEmoji("+") << endl;
+	cout << isPositive("Y") << isPositive("a") << isPositive("n") << endl;
+	cout << isNegative("Y") << isNegative("a") << isNegative("n") << endl;
 	/*
 	Thread(target = self.create_repo()).start()
 
