@@ -37,7 +37,8 @@ bool inputCheck(json input) {
 		input["answers"]["name"].get<string>();
 		input["answers"]["descr"].get<string>();
 		input["answers"]["prefix"].get<string>();
-		input["answers"]["org"].get<string>();
+		if(input["answers"]["isOrg"].get<bool>())
+			input["answers"]["org"].get<string>();
 		input["answers"]["team"].get<string>();
 		input["answers"]["template"].get<string>();
 		input["answers"]["private"].get<bool>();
