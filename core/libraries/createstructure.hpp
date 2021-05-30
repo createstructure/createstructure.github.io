@@ -13,6 +13,12 @@
 #include "createstructure_changes.hpp"
 #include "createstructure_elaborate.hpp"
 #include "createstructure_rest.hpp"
+#include "createstructure_inputCheck.hpp"
+#include "createstructure_chooseTemplate.hpp"
+#include "createstructure_download.hpp"
+#include "createstructure_upload.hpp"
+#include "createstructure_positive.hpp"
+#include "createstructure_emoji.hpp"
 
 // using ...
 using namespace std;

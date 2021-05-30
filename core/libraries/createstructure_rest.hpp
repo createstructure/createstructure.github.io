@@ -4,7 +4,7 @@
 
 #ifndef CREATESTRUCTURE_REST
 // If not imported yet
-# define CREATESTUCTURE_REST
+#define CREATESTRUCTURE_REST
 
 // Dependencies
 #include <bits/stdc++.h>

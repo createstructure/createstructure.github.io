@@ -4,7 +4,7 @@
 
 #ifndef CREATESTRUCTURE_ELABORATE
 // If not imported yet
-# define CREATESTUCTURE_ELABORATE
+#define CREATESTRUCTURE_ELABORATE
 
 // Dependencies
 #include <bits/stdc++.h>

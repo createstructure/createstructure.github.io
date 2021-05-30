@@ -32,10 +32,26 @@ int main(int argc, char *argv[]) {
 	inputs = json::parse(string(argv[1]));
 
 #ifdef DEBUG
-	for (auto& [key, value] : inputs.items())
-		cout << key << " : " << value << endl;
+	cout << inputs.dump() << endl;
 #endif // DEBUG
 
+	json empty;
+	cout << chooseTemplate(inputs["answers"]["template"].get<string>(), inputs["token"].get<string>()) << endl;
+	/*
+	Thread(target = self.create_repo()).start()
+
+			# Get template
+			self.choose_template()
+
+			# Get changes
+			self.change_map()
+
+			# Make all
+			self.scan_and_elaborate()
+
+			# Upload
+	*/
+/*
 	json o;
 	o["name"] = inputs["name"].get<string>();
 	o["private"] = false;
@@ -71,7 +87,7 @@ int main(int argc, char *argv[]) {
 #ifdef DEBUG
 	system((string("cat /media/createstructure/") + inputs["name"].get<string>() + string("/docs/README.md")).c_str());
 #endif // DEBUG
-
+*/
 	return 0;
 }
 

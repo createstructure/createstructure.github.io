@@ -4,7 +4,7 @@
 
 #ifndef CREATESTRUCTURE_REPLACE
 // If not imported yet
-# define CREATESTUCTURE_REPLACE
+#define CREATESTRUCTURE_REPLACE
 
 // Dependencies
 #include <bits/stdc++.h>
