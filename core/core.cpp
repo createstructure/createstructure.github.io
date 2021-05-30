@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
 
 	json empty;
 	cout << chooseTemplate(inputs["answers"]["template"].get<string>(), inputs["token"].get<string>()) << endl;
+	cout << "+" << "\t" << getEmoji("+") << endl;
 	/*
 	Thread(target = self.create_repo()).start()
 
