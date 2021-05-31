@@ -61,23 +61,45 @@ vector< pair <string, string> > getSpecialChanges(json inputs) {
          *      - a vector containing all the special changes
          */
         // Function variable(s)
-        vector <pair <string, string> > myChange;
 	struct tm* data = initData();
 
-        myChange.push_back(make_pair("username", inputs["username"].get<string>()));
-        myChange.push_back(make_pair("solnamesol", inputs["answers"]["name"].get<string>()));
-        myChange.push_back(make_pair("soldescrsol", inputs["answers"]["descr"].get<string>()));
-        myChange.push_back(make_pair("solprefixsol", inputs["answers"]["prefix"].get<string>()));
-        myChange.push_back(make_pair("solisorgsol", (inputs["answers"]["isOrg"].get<bool>() ? "true" : "false")));
-        myChange.push_back(make_pair("solownersol", (inputs["answers"]["isOrg"].get<bool>() ?  inputs["answers"]["org"].get<string>() : inputs["username"].get<string>())));
-        myChange.push_back(make_pair("solteamsol", inputs["answers"]["team"].get<string>()));
-        myChange.push_back(make_pair("soltemplatesol", inputs["answers"]["template"].get<string>()));
-        myChange.push_back(make_pair("solprivatesol", (inputs["answers"]["private"].get<bool>() ? "true" : "false")));
-        myChange.push_back(make_pair("soltime-nowsol", getData(data, string("%Y-%m-%d"))));
-        myChange.push_back(make_pair("soltime_nowsol", getData(data, string("%Y_%m_%d"))));
-        myChange.push_back(make_pair("soltimenowsol", getData(data, string("%Y%m%d"))));
+	// Return
+	return	{
+			// Input special changes
+			{"username", inputs["username"].get<string>()},
+			{"solnamesol", inputs["answers"]["name"].get<string>()},
+			{"soldescrsol", inputs["answers"]["descr"].get<string>()},
+			{"solprefixsol", inputs["answers"]["prefix"].get<string>()},
+			{"solisorgsol", (inputs["answers"]["isOrg"].get<bool>() ? "true" : "false")},
+			{"solownersol", (inputs["answers"]["isOrg"].get<bool>() ?  inputs["answers"]["org"].get<string>() : inputs["username"].get<string>())},
+			{"solteamsol", inputs["answers"]["team"].get<string>()},
+			{"soltemplatesol", inputs["answers"]["template"].get<string>()},
+			{"solprivatesol", (inputs["answers"]["private"].get<bool>() ? "true" : "false")},
 
-        return myChange;
+			// Data special changes
+		        {"soltime-nowsol", getData(data, string("%Y-%m-%d"))},
+		        {"soltime_nowsol", getData(data, string("%Y_%m_%d"))},
+		        {"soltimenowsol", getData(data, string("%Y%m%d"))},
+		        {"soltimeallsol", getData(data, string("%c"))},
+		        {"soltimeHMSsol", getData(data, string("%H%M%s"))},
+		        {"soltimeH-M-Ssol", getData(data, string("%H-%M-%S"))},
+		        {"soltimeH_M_Ssol", getData(data, string("%H_%M_%S"))},
+		        {"soltimeyearsol", getData(data, string("%Y"))},
+		        {"soltimeyearshortsol", getData(data, string("%y"))},
+		        {"soltimemonthsol", getData(data, string("%B"))},
+		        {"soltimemonthshortsol", getData(data, string("%b"))},
+		        {"soltimemonthnumsol", getData(data, string("%m"))},
+		        {"soltimeweekofyearsol", getData(data, string("%U"))},
+		        {"soltimedaysol", getData(data, string("%d"))},
+		        {"soltimedayofyearsol", getData(data, string("%j"))},
+		        {"soltimedayofweeksol", getData(data, string("%A"))},
+		        {"soltimedayofweekshortsol", getData(data, string("%a"))},
+		        {"soltimehoursol", getData(data, string("%H"))},
+		        {"soltimehour12sol", getData(data, string("%I"))},
+		        {"soltimeminutesol", getData(data, string("%M"))},
+		        {"soltimesecondsol", getData(data, string("%S"))},
+		        {"soltimeoffsetsol", getData(data, string("%z"))}
+		};
 }
 
 struct tm* initData () {
