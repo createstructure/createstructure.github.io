@@ -20,9 +20,11 @@ using json = nlohmann::json;
 // Declared functions
 vector< pair <string, string> > getChanges(json inputs, string changesFilename);
 vector< pair <string, string> > getSpecialChanges(json inputs);
+struct tm* initData ();
+string getData(struct tm* data, string pattern);
 
 // Function(s)
-vector< pair <string, string> > getChanges(json inputs, string changesFilename) {
+vector< pair <string, string> > getChanges (json inputs, string changesFilename) {
         /* Get Changes: return the vector containing all the changes
          *
 	 * inputs:
@@ -58,14 +60,54 @@ vector< pair <string, string> > getSpecialChanges(json inputs) {
          * output:
          *      - a vector containing all the special changes
          */
-        // Local varible(s)
+        // Function variable(s)
         vector <pair <string, string> > myChange;
+	struct tm* data = initData();
 
-        myChange.push_back(make_pair("solnamesol", inputs["name"].get<string>()));
-        myChange.push_back(make_pair("time__now", "2021-05-28"));
+        myChange.push_back(make_pair("username", inputs["username"].get<string>()));
+        myChange.push_back(make_pair("solnamesol", inputs["answers"]["name"].get<string>()));
+        myChange.push_back(make_pair("soldescrsol", inputs["answers"]["descr"].get<string>()));
+        myChange.push_back(make_pair("solprefixsol", inputs["answers"]["prefix"].get<string>()));
+        myChange.push_back(make_pair("solisorgsol", (inputs["answers"]["isOrg"].get<bool>() ? "true" : "false")));
+        myChange.push_back(make_pair("solownersol", (inputs["answers"]["isOrg"].get<bool>() ?  inputs["answers"]["org"].get<string>() : inputs["username"].get<string>())));
+        myChange.push_back(make_pair("solteamsol", inputs["answers"]["team"].get<string>()));
+        myChange.push_back(make_pair("soltemplatesol", inputs["answers"]["template"].get<string>()));
+        myChange.push_back(make_pair("solprivatesol", (inputs["answers"]["private"].get<bool>() ? "true" : "false")));
+        myChange.push_back(make_pair("soltime-nowsol", getData(data, string("%Y-%m-%d"))));
+        myChange.push_back(make_pair("soltime_nowsol", getData(data, string("%Y_%m_%d"))));
+        myChange.push_back(make_pair("soltimenowsol", getData(data, string("%Y%m%d"))));
 
         return myChange;
 }
 
+struct tm* initData () {
+        /* Init Data: initialize the data information
+         *
+         * output:
+         *      - a data structure
+         */
+	// Function variabile(s)
+	time_t rawtime;
 
+	time (&rawtime);
+	return localtime(&rawtime);
+}
+
+string getData(struct tm* data, string pattern) {
+        /* Get Data: return the data info
+         *
+	 * inputs:
+	 * 	- data: the data indicator
+	 * 	- pattern: the data pattern
+	 *
+         * output:
+         *      - the data in the given format
+         */
+	// Function variable(s)
+	char buffer[255];
+
+	strftime(buffer, sizeof(buffer), pattern.c_str(), data);
+
+	return string(buffer);
+}
 #endif

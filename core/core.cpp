@@ -10,9 +10,6 @@ using json = nlohmann::json;
 // Definitions
 #define DEBUG
 
-// Global viariabiles
-json inputs;
-
 // Declared functions
 int main(int argc, char *argv[]);
 
@@ -27,6 +24,9 @@ int main(int argc, char *argv[]) {
 	 * output:
 	 *	- a run code: if it works in the correct way it will return 0
 	 */
+	// Function viariable(s)
+	json inputs;
+	string path;
 
 	// Get the given input data
 	inputs = json::parse(string(argv[1]));
@@ -36,9 +36,44 @@ int main(int argc, char *argv[]) {
 #endif // DEBUG
 
 	if (inputCheck(inputs)) {
-		download(chooseTemplate(inputs["answers"]["template"].get<string>(), inputs["token"].get<string>(), inputs["username"].get<string>()), (string("/media/createstructure/") + inputs["username"].get<string>() + string("???") + inputs["answers"]["name"].get<string>()).c_str());
 
-		system("ls -R /media/createstructure");
+#ifdef DEBUG
+		cout << getEmoji("✓") << "\t" << "inputs checked" << endl;
+#endif // DEBUG
+
+		path = string("/media/createstructure/") +
+			inputs["username"].get<string>() +
+			string("???") +
+			inputs["answers"]["name"].get<string>();
+
+#ifdef DEBUG
+		cout << getEmoji("✓") << "\t" << "create path variable" << endl;
+#endif // DEBUG
+
+		download(
+				chooseTemplate(
+					inputs["answers"]["template"].get<string>(),
+					inputs["token"].get<string>(),
+					inputs["username"].get<string>()
+				),
+				path.c_str()
+			);
+
+#ifdef DEBUG
+		cout << getEmoji("✓") << "\t" << "choosed & downloaded template" << endl;
+#endif // DEBUG
+
+		elaborateAll(
+					path,
+					getChanges(
+						inputs,
+						path + "/.createstructure/change.json"
+					)
+				);
+
+#ifdef DEBUG
+		cout << getEmoji("✓") << "\t" << "getted changes and elaborated all" << endl;
+#endif // DEBUG
 
 		json o;
 		o["name"] = inputs["answers"]["name"].get<string>();
@@ -69,11 +104,14 @@ int main(int argc, char *argv[]) {
 			inputs["answers"]["name"].get<string>()
 			);
 
+#ifdef DEBUG
+		cout << getEmoji("✓") << "\t" << "uploaded repo" << endl;
+#endif // DEBUG
+
 	} else {
 		cout << "Given uncorrect data " << getEmoji("sad") << endl;
 	}
-/*
-*/
+
 	return 0;
 }
 
