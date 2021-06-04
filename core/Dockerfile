@@ -8,7 +8,8 @@ COPY . /usr/src/createstructure
 WORKDIR /usr/src/createstructure
 
 # Use GCC to compile the source file
-RUN g++ core.cpp -o core -lcurl
+#RUN g++ core.cpp -o core -lcurl
+RUN g++ manager.cpp -o manager -lcurl -lcrypto
 
 # Setup git
 RUN apt install git -y
@@ -17,4 +18,5 @@ RUN git config --global user.name "createstructure"
 RUN git config --global init.defaultBranch "main"
 
 # Run the program output from the previous step
-ENTRYPOINT ["./core"]
+#ENTRYPOINT ["./core"]
+ENTRYPOINT ["./manager"]
