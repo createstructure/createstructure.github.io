@@ -19,6 +19,7 @@
 #include "createstructure_upload.hpp"
 #include "createstructure_positive.hpp"
 #include "createstructure_emoji.hpp"
+#include "createstructure_cryptation.hpp"
 
 // using ...
 using namespace std;
