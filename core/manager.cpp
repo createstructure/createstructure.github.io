@@ -20,6 +20,14 @@ string gg() {
 	}
 }
 
+void stressTest(int t) {
+//	clock_t start = clock();
+	for (size_t i = 0; i < t; ++i)
+		system((string("docker run test2:09.01 '") +  json::parse(gg()).dump() + "' > /dev/null &").c_str());
+//	system("for job in `jobs -p`; do echo $job; wait $job; done _@#_@");
+//	cout << "Stress-test (" << t << ") used:" << (clock() - start) / (double) CLOCKS_PER_SEC << "s" << endl;
+}
+
 // Code
 int main(int argc, char *argv[]) {
 	/* Main: the start point of the code
@@ -27,12 +35,12 @@ int main(int argc, char *argv[]) {
 	 * inputs:
 	 * 	- argc: the number of command-line arguments
 	 *	- argv: an array containing all command-line arguments
-	 *
+ 	 *
 	 * output:
 	 *	- a run code: if it works in the correct way it will return 0
 	 */
 	// Function viariable(s)
-	json inputs;
+/*	json inputs;
 	string path;
 
 	// Get the given input data
@@ -53,9 +61,11 @@ int main(int argc, char *argv[]) {
 
 	string decrypted = decrypt(encrypted);
 	cout << "decrypted: " << decrypted << endl;
-
-	cout << "by web: " << gg() << endl;
-
+*/
+//	stressTest(1); // 5s
+	stressTest(10); // s
+//	stressTest(50); //
+//	stressTest(100); //
 	return 0;
 }
 

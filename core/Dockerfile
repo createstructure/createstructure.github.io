@@ -8,11 +8,11 @@ COPY . /usr/src/createstructure
 WORKDIR /usr/src/createstructure
 
 # Use GCC to compile the source file
-#RUN g++ core.cpp -o core -lcurl
+#RUN g++ core.cpp -o core -lcurl -lcrypto
 RUN g++ manager.cpp -o manager -lcurl -lcrypto
 
 # Setup git
-RUN apt install git -y
+RUN apt install git docker -y
 RUN git config --global user.email "contacts@castellanidavide.it"
 RUN git config --global user.name "createstructure"
 RUN git config --global init.defaultBranch "main"
