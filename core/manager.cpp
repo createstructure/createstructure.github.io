@@ -4,7 +4,9 @@
 #include "libraries/createstructure.hpp"
 
 // using ...
-using namespace std; using json = nlohmann::json;
+using namespace std;
+using namespace std::this_thread;
+using json = nlohmann::json;
 
 // Definitions
 #define DEBUG
@@ -16,14 +18,21 @@ string gg() {
 	try {
 		return decrypt(string(textRequest("https:\u002F\u002Fwww.castellanidavide.it/other/rest/gpg.php", "", nullptr, "GET")));
 	} catch (...) {
+		cout << "Failed web connection" << endl;
 		return gg();
 	}
 }
 
 void stressTest(int t) {
 //	clock_t start = clock();
-	for (size_t i = 0; i < t; ++i)
-		system((string("docker run test2:09.01 '") +  json::parse(gg()).dump() + "' > /dev/null &").c_str());
+	for (size_t i = 0; i < t; ++i) {
+		while (!okMemory()) {
+			cout << "P: " << percentageMemory() << "%" << endl;
+			sleep_for(1s);
+		}
+		system((string("docker run test2:09.01 '") +  json::parse(gg()).dump() + "'> /dev/null  &").c_str());
+		sleep_for(500ms);
+	}
 //	system("for job in `jobs -p`; do echo $job; wait $job; done _@#_@");
 //	cout << "Stress-test (" << t << ") used:" << (clock() - start) / (double) CLOCKS_PER_SEC << "s" << endl;
 }
@@ -62,10 +71,17 @@ int main(int argc, char *argv[]) {
 	string decrypted = decrypt(encrypted);
 	cout << "decrypted: " << decrypted << endl;
 */
+
+/*	cout << getEmoji("information") << "\tTotal memory: \t" << totalMemory() << endl;
+	cout << getEmoji("information") << "\tUsed memory: \t" << usedMemory() << endl;
+	cout << getEmoji("information") << "\tFree memory: \t" << freeMemory() << endl;
+	cout << getEmoji("information") << "\tTotal memory: \t" << percentageMemory() << "%" << endl;
+	cout << getEmoji("information") << "\tOK memory: \t" << okMemory() << endl;
+*/
 //	stressTest(1); // 5s
-	stressTest(10); // s
-//	stressTest(50); //
-//	stressTest(100); //
+	stressTest(10); // 13s
+//	stressTest(50); // 28s
+//	stressTest(100); // 55s
 	return 0;
 }
 
