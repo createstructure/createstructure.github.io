@@ -21,6 +21,7 @@
 #include "createstructure_emoji.hpp"
 #include "createstructure_cryptation.hpp"
 #include "createstructure_memory.hpp"
+#include "createstructure_work.hpp"
 
 // using ...
 using namespace std;

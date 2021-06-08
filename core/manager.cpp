@@ -14,23 +14,15 @@ using json = nlohmann::json;
 // Declared functions
 int main(int argc, char *argv[]);
 
-string gg() {
-	try {
-		return decrypt(string(textRequest("https:\u002F\u002Fwww.castellanidavide.it/other/rest/gpg.php", "", nullptr, "GET")));
-	} catch (...) {
-		cout << "Failed web connection" << endl;
-		return gg();
-	}
-}
-
 void stressTest(int t) {
 //	clock_t start = clock();
 	for (size_t i = 0; i < t; ++i) {
-		while (!okMemory()) {
-			cout << "P: " << percentageMemory() << "%" << endl;
-			sleep_for(1s);
-		}
-		system((string("docker run test2:09.01 '") +  json::parse(gg()).dump() + "'> /dev/null  &").c_str());
+		if (percentageMemory() > 50 || !okMemory())
+			while (!okMemory()) {
+				cout << "P: " << percentageMemory() << "%" << endl;
+				sleep_for(1s);
+			}
+		system((string("docker run test2:09.01 '") +  getWork()["data"].dump() + "'> /dev/null  &").c_str());
 		sleep_for(500ms);
 	}
 //	system("for job in `jobs -p`; do echo $job; wait $job; done _@#_@");
@@ -82,6 +74,9 @@ int main(int argc, char *argv[]) {
 	stressTest(10); // 13s
 //	stressTest(50); // 28s
 //	stressTest(100); // 55s
+//	getWork();
+//	cout << getWork()["data"].dump() << endl;
+
 	return 0;
 }
 
@@ -212,7 +207,7 @@ for ( ; *cp != '\0'; ++cp )
 }
 puts("\n");
 //printf("Encrypted length =%d\n",encrypted_length);
- 
+
 size_t decrypted_length = private_decrypt(
 					tmp,
 					strlen((char*)tmp),

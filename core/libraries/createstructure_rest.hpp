@@ -89,7 +89,7 @@ json jsonRequest (string link, string token, json data, string dataType) {
          *      - the web response in json format
          */
 
-	return json(json::parse(textRequest(link, token, data, dataType)));
+	return json::parse(textRequest(link, token, data, dataType));
 }
 
 void request (string link, string token, json data, string dataType) {
