@@ -14,6 +14,7 @@
 
 // using ...
 using namespace std;
+using namespace std::this_thread;
 using json = nlohmann::json;
 
 // Definitions
@@ -21,6 +22,7 @@ using json = nlohmann::json;
 
 // Declared functions
 json decodeWork();
+bool existsInJson(const json j, const string key);
 json getWork();
 
 // Function(s)
@@ -32,14 +34,20 @@ json decodeWork() {
          */
         // Local varible(s)
         json n;
+	n["server_id"] = ""; // insert server_id
+	n["server_code"] = ""; // insert server_code
+	assert (n["server_id"] != "" && n["server_code"] != "");
 
         try {
-                json message (jsonRequest(
+                json message( jsonRequest(
                                                 "https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/give_work.php",
                                                 "",
                                                 n,
                                                 "POST"
                                         ));
+
+		if (!existsInJson(message, "data"))
+			return n;
 
                 string decoded_message = "";
                 for (auto& element : message["data"]) {
@@ -58,6 +66,18 @@ json decodeWork() {
         }
 }
 
+bool existsInJson(const json j, const string key) {
+        /* Exist In Json: check if key exist in json
+         *
+	 * input:
+	 *	- j: the json object
+	 *	- key: the key to search
+	 *
+         * output:
+         *      - if disponible, work instructions
+         */
+	return j.find(key) != j.end();
+}
 
 json getWork() {
         /* Get Work: if disponible get work instructions
@@ -66,22 +86,13 @@ json getWork() {
          *      - if disponible, work instructions
          */
         // Local varible(s)
-        json data;
-
-	// Avariability check
-        if (
-                 jsonRequest(
-                                "https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/give_work.php",
-                                "",
-                                data,
-                                "POST"
-                )["code"].get<string>() != "assigned new work") {
-		// Return if there is no new work to do
-                return nullptr;
-        }
-
 	// Return if new work is assigned
-        return decodeWork();
+        json d(decodeWork());
+	if (d.empty()) {
+		sleep_for(5s);
+		return getWork();
+	}
+	return d;
 }
 
 #endif
