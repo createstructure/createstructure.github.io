@@ -28,11 +28,19 @@ void stressTest(int t) {
 				cout << "P: " << percentageMemory() << "%" << endl;
 				sleep_for(1s);
 			}
-		string data = getWork()["data"].dump();
+		json jData = getWork();
+		string data = jData["data"].dump();
 		eraseAllSubStr(data, "\\u0000");
-		cout << data << endl;
-		system((string("docker run test2:09.01 ") +  data + " > /dev/null &").c_str());
-		cout << "Runned process n°" << t << endl;
+		system((string("docker run test2:09.01 '") + data + "' > /dev/null &").c_str());
+		cout << "Runned process n°" << i << endl;
+		                // Set work as finished
+                json finishJson;
+                finishJson["server_id"] = jData["data"]["server_id"].get<string>();
+                finishJson["server_code"] = jData["data"]["server_code"].get<string>();
+                finishJson["work_id"] = jData["data"]["work_id"].get<string>();
+
+                string link("https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/finished_work.php");
+                cout << "Finished: " << textRequest(link, "", finishJson, "POST") << endl;
 		sleep_for(500ms);
 	}
 }
@@ -48,7 +56,7 @@ int main(int argc, char *argv[]) {
 	 * output:
 	 *	- a run code: if it works in the correct way it will return 0
 	 */
-	// Function viariable(s)
+	// Function variable(s)
 
 /*
 	// Memory info
@@ -60,10 +68,35 @@ int main(int argc, char *argv[]) {
 */
 
 	// Stree test(s)
-	stressTest(1); // 5s
+//	stressTest(1); // 5s
 //	stressTest(10); // 13s
 //	stressTest(50); // 28s
 //	stressTest(100); // 55s
 
+
+	int i = 0;
+
+	while (true) {
+		if (percentageMemory() > 50 || !okMemory())
+	                while (!okMemory()) {
+	                        cout << "P: " << percentageMemory() << "%" << endl;
+	                        sleep_for(1s);
+	                }
+	        json jData = getWork();
+	        string data = jData["data"].dump();
+	        eraseAllSubStr(data, "\\u0000");
+	        system((string("docker run test2:09.01 '") + data + "' > /dev/null &").c_str());
+	        cout << "Runned process n°" << i++ << endl;
+
+		// Set work as finished
+	        json finishJson;
+	        finishJson["server_id"] = jData["data"]["server_id"].get<string>();
+	        finishJson["server_code"] = jData["data"]["server_code"].get<string>();
+	        finishJson["work_id"] = jData["data"]["work_id"].get<string>();
+
+                string link("https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/finished_work.php");
+	        request(link, "", finishJson, "POST");
+	        sleep_for(500ms);
+	}
 	return 0;
 }

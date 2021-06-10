@@ -107,7 +107,16 @@ int main(int argc, char *argv[]) {
 #ifdef DEBUG
 		cout << getEmoji("✓") << "\t" << "uploaded repo" << endl;
 #endif // DEBUG
+/*
+		// Set work as finished
+		json finishJson;
+                finishJson["server_id"] = inputs["server_id"].get<string>();
+                finishJson["server_code"] = inputs["server_code"].get<string>();
+                finishJson["work_id"] = inputs["work_id"].get<string>();
 
+                string link = string("https:\u002F\u002Fwww.castellanidavide.it/rest/product/finished_wotk.php");
+                request(link, "", finishJson, "POST");
+*/
 	} else {
 		cout << "Given uncorrect data " << getEmoji("sad") << endl;
 	}

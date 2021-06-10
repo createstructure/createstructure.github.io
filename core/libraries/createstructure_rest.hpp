@@ -50,6 +50,8 @@ string textRequest (string link, string token, json data, string dataType) {
         struct curl_slist *slist1;
 	string d = data.dump();
 
+//	cout << "POST: " << d << endl;
+
 	// Setting header
         slist1 = NULL;
 	if (token != "")
