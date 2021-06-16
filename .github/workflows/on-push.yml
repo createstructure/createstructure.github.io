@@ -1,7 +1,8 @@
 name: Tests on every push
 
 on:
-  push
+  workflow_dispatch
+#  push
 
 jobs:
   test-enviroment-variabiles:
