@@ -1,5 +1,0 @@
-# These are the libraries that I use
-
-DateTime>=4.3
-PyGithub>=1.54
-requests>=2.24.0
