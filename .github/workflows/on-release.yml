@@ -1,9 +1,10 @@
 name: Action on every release
 
 on:
-  create:
-    tags:
-      - v*
+  workflow_dispatch
+#   create:
+#     tags:
+#       - v*
 
 jobs:
   test-enviroment-variabiles:
