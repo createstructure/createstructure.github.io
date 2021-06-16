@@ -28,6 +28,9 @@ int main(int argc, char *argv[]) {
 	json inputs;
 	string path;
 
+	// Assert the correct number of inputs
+	assert(argc ==  2); // name_of_program data(json)
+
 	// Get the given input data
 	inputs = json::parse(string(argv[1]));
 
@@ -107,16 +110,17 @@ int main(int argc, char *argv[]) {
 #ifdef DEBUG
 		cout << getEmoji("✓") << "\t" << "uploaded repo" << endl;
 #endif // DEBUG
-/*
+
 		// Set work as finished
 		json finishJson;
                 finishJson["server_id"] = inputs["server_id"].get<string>();
                 finishJson["server_code"] = inputs["server_code"].get<string>();
                 finishJson["work_id"] = inputs["work_id"].get<string>();
 
-                string link = string("https:\u002F\u002Fwww.castellanidavide.it/rest/product/finished_wotk.php");
-                request(link, "", finishJson, "POST");
-*/
+                string endLink("https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/finished_work.php");
+#ifdef DEBUG
+                cout << getEmoji("✓") << "\t" << textRequest(endLink, "", finishJson, "POST") << endl;
+#endif // DEBUG
 	} else {
 		cout << "Given uncorrect data " << getEmoji("sad") << endl;
 	}

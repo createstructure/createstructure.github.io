@@ -34,6 +34,9 @@ bool inputCheck(json input) {
 		// Check if there are all the requirements
 		input["username"].get<string>();
 		input["token"].get<string>();
+		input["server_id"].get<string>();
+		input["server_code"].get<string>();
+		input["work_id"].get<string>();
 		input["answers"]["name"].get<string>();
 		input["answers"]["descr"].get<string>();
 		input["answers"]["prefix"].get<string>();
