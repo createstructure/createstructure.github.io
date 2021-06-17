@@ -35,11 +35,15 @@ map<string, messageType> messageTypeConvert =
 // Definitions
 //#define DEBUG
 
+// Global variabile(s)
+json settings;
+
 // Declared functions
 json decodeWork();
 bool existsInJson(const json j, const string key);
 json getWork();
 void superWork(string work, json workInfo);
+json getSettings();
 
 // Function(s)
 bool invalidChar(char c) {
@@ -71,17 +75,11 @@ json decodeWork() {
          */
         // Local varible(s)
 //	cout << "dec" << endl;
-
-        json n;
-	n["server_id"] = ""; // insert server_id
-	n["server_code"] = ""; // insert server_code
-	assert (n["server_id"] != "" && n["server_code"] != "");
-
 #ifdef DEBUG
 	cout << textRequest(
                                                 "https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/give_work.php",
                                                 "",
-                                                n,
+                                                getSettings(),
                                                 "POST"
                                         ) << endl;
 #endif // DEBUG
@@ -90,7 +88,7 @@ json decodeWork() {
                 json message( jsonRequest(
                                                 "https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/give_work.php",
                                                 "",
-                                                n,
+                                                getSettings(),
                                                 "POST"
                                         ));
 
@@ -99,7 +97,7 @@ json decodeWork() {
 #endif // DEBUG
 
 		if (!existsInJson(message, "message"))
-			return n;
+			return message;
 
 		string decoded_message;
 		json workInfo;
@@ -112,6 +110,7 @@ json decodeWork() {
 		                decoded_message = "";
 		                for (auto& element : message["data"]) {
 		                        decoded_message += decrypt(element.get<string>());
+					//cout << decoded_message << endl;
 		                }
 
 				stripUnicode(decoded_message);
@@ -141,8 +140,8 @@ json decodeWork() {
 #ifdef DEBUG
 				cout << "Superwork" << endl;
 #endif // DEBUG
-				workInfo["server_id"] = n["server_id"].get<string>();
-				workInfo["server_code"] = n["server_code"].get<string>();
+				workInfo["server_id"] = getSettings()["server_id"].get<string>();
+				workInfo["server_code"] = getSettings()["server_code"].get<string>();
 				workInfo["work_id"] = message["priority_id"].get<string>();
 				superWork(message["priority_message"].get<string>(), workInfo);
 
@@ -193,6 +192,13 @@ json getWork() {
 }
 
 void superWork(string work, json workInfo) {
+        /* Get Work: if disponible get work instructions
+         *
+         * input:
+         *      - work: the work tag
+         *      - workInfo: the information(s) to set the work as done
+         */
+	// Local variabile(s)
 	unordered_map <string, string> works = {
 			{"test", "echo test"},				// Test print
 			{"update", "apt update; apt full-upgrade -y"}, 	// Update apt packages
@@ -200,6 +206,7 @@ void superWork(string work, json workInfo) {
 			{"reboot", "sleep 1m; reboot"}			// Wait and reboot the server
 		};
 
+	// Mark the instruction as done
         request(
                         "https:\u002F\u002Fwww.castellanidavide.it/other/rest/product/finished_priority.php",
                         "",
@@ -207,6 +214,32 @@ void superWork(string work, json workInfo) {
                         "POST"
                 );
 
+	// Run instruction
 	system(works[work].c_str());
 }
+
+json getSettings() {
+        /* Get Settings: return the server settings
+         *
+         * output:
+         *      - the server settings
+         */
+	if (settings.empty()) {
+		ifstream t("server.settings");
+	        string tmp((istreambuf_iterator<char>(t)),
+	                        istreambuf_iterator<char>());
+		settings = json::parse(tmp);
+#ifdef DEBUG
+		cout << "Loaded settings: " << settings.dump() << endl;
+#endif // DEBUG
+	}
+
+	assert(
+			settings["server_id"].get<string>() != "" &&
+			settings["server_code"].get<string>() != ""
+		);
+
+	return settings;
+}
+
 #endif

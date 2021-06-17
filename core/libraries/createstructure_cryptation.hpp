@@ -149,7 +149,7 @@ string encrypt(string original) {
 		stringstream hexString;
 		for(int i = 0; i < output_length; ++i) {
 			hexString << hex << setfill('0') << setw(sizeof(unsigned char) * 2) << (int) output[i];
-			//cout << hex << setfill('0') << setw(sizeof(unsigned char) *2) << (int) output[i] << endl;
+//			cout << hex << setfill('0') << setw(sizeof(unsigned char) *2) << (int) output[i] << endl;
 		}
 
 		// If encrypted is ok, send crypted text

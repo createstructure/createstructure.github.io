@@ -72,8 +72,15 @@ echo -e "\xE2\x9C\x94 Created settings"
 
 # Create key pair
 cd ./core
+
+# Create
 openssl genrsa -out private.pem 2048 > /dev/null
 openssl rsa -in private.pem -outform PEM -pubout -out public.pem > /dev/null
+
+# Make keys visible
+sudo chmod a+rwx private.pem
+sudo chmod a+rwx public.pem
+
 cd ./..
 
 echo -e "\xE2\x9C\x94 Created RSA pair key"
