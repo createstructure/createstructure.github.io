@@ -31,7 +31,7 @@ echo -e "\xE2\x9C\x94 Getted arguments"
 
 # Update & Upgrade
 apt update > /dev/null
-apt full-upgrade > /dev/null
+apt full-upgrade -y > /dev/null
 
 echo -e "\xE2\x9C\x94 Updated & Upgraded"
 
