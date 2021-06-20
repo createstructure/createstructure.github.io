@@ -90,6 +90,7 @@ echo -e "\xE2\x9C\x94 Given RSA public key"
 
 
 # Create on-startup service
+echo -e '#!/bin/bash\n\ncd "$(dirname "$0")"\n# Make to have the correcth rights\nif [[ $UID != 0 ]]; then\n    echo "Please run this script with sudo:"\n    echo "sudo $0 $* ..."\n    exit 1\nfi\nexec sudo manager >> log.txt\n' > ./manager.sh
 echo -e "[Unit]\nAfter=network.service\n\n[Service]\nExecStart=/bin/createstructure/manager.sh\n\n[Install]\nWantedBy=default.target\n" > /etc/systemd/system/createstructure.service
 chmod 664 /etc/systemd/system/createstructure.service
 systemctl enable createstructure.service > /dev/null
