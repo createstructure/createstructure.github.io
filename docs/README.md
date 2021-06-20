@@ -14,6 +14,8 @@
   - [Description](#description)
   - [repo-structure](#repo-structure)
   - [Requirements](#requirements)
+  - [Use it](#use-it)
+    - [Use the REST/API](#use-the-restapi)
   - [How to create your own template](#how-to-create-your-own-template)
     - [1. Use template option](#1-use-template-option)
     - [2. Personalize it](#2-personalize-it)
@@ -40,6 +42,31 @@ With this program, you can easily create a repository on GitHub :octocat: with a
   - [Subscribed in createstructure](https://github.com/marketplace/createstructure)
   - [Network connection]
 
+## Use it
+> Remeber that you previously need [these](#requirements).
+
+### Use the REST/API
+
+Run a web request to: [https://www.castellanidavide.it/other/rest/product/create_priority.php](https://www.castellanidavide.it/other/rest/product/create_priority.php)
+It needs this json as POST argument:
+```
+{
+  "token": "<Your_GitHub_token>",
+  "username": "<Your_GitHub_username>",
+  "answers": {
+    "name": "<The_new_repo_name>",
+    "template": "<The_template_to_use(eg. default or Owner/repo-template)>", # Remember that if you use your own template, the repo must to be private
+    "descr": "<Short_description>",
+    "prefix": "<The_prefix_of_the_repo>", # If you are not interested to use a prefix, leave this string empty ""
+    "private": <If_the_repo_is_private(true/false)>,
+    "isOrg": <If_you_want_your_repo_in_an_organization(true/false)>,
+    "org": "<Name_of_the_org>", # This is necessary only if "isOrg" = true
+    "team": "<The_name_of_the_team>"
+  }
+}
+```
+
+In the future there will be other methods to create the repository.
 
 ## How to create your own template
 ![](https://live.staticflickr.com/5213/5523800294_80f0687af7_b.jpg)
