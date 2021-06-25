@@ -32,8 +32,8 @@ With this program, you can easily create a repository on GitHub :octocat: with a
 - __*-createstructure__: createstructure's funtionallity (eg. server management, apps, etc.)
     - [__manager-createstructure__](https://github.com/createstructure/manager-createstructure): the repo where there is everything you need for server management
     - [__core-createstructure__](https://github.com/createstructure/core-createstructure): the repo where there is the docker source to be run by the manager-createstructure
-    - [__rest-createstructure__](https://github.com/createstructure/rest-createstructure): the repo cointaining the public part of the REST/ API
-    - [__librerias-createstructure__](https://github.com/createstructure/librerias-createstructure): the repo cointaining the library used by [core-createstructure](https://github.com/createstructure/core-createstructure) & [manager-createstructure](https://github.com/createstructure/manager-createstructure)
+    - [__rest-createstructure__](https://github.com/createstructure/rest-createstructure): the repo containing the public part of the REST/ API
+    - [__librerias-createstructure__](https://github.com/createstructure/librerias-createstructure): the repo containing the library used by [core-createstructure](https://github.com/createstructure/core-createstructure) & [manager-createstructure](https://github.com/createstructure/manager-createstructure)
 - __*-template__: the templates that can be used by anyone (eg. default-template)
     - [__default-template__](https://github.com/createstructure/default-template): this template is the reference point for all the others
 
