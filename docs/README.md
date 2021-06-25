@@ -91,9 +91,11 @@ In the future there will be other methods to create the repository.
 ![](https://assuredstudy.org/wp-content/uploads/2020/10/TRY.jpg)
   - Try to execute createstructure and check correct use of the template
 
+
 ---
-Made by Castellani Davide 
-If you have any problem or ask please contact me:
-  - [Discussion](https://github.com/createstructure/createstructure/discussions)
-  - [Issue](https://github.com/createstructure/createstructure/issues) 
-  - [help@castellanidavide.it](mailto:help@castellanidavide.it)
+Made w/ :love: by Castellani Davide 
+If you have any problem please contact me:
+- [Discussion](https://github.com/createstructure/createstructure/discussions/new)
+- [Issue](https://github.com/createstructure/createstructure/issues/new)
+- [help@castellanidavide.it](mailto:help@castellanidavide.it)
+
