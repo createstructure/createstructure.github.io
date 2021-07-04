@@ -66,9 +66,6 @@ It needs this json as POST argument:
   }
 }
 ```
-> Attention
->
-> Not all of the above variables are currently used, such as the private variable 
 
 In the future there will be other methods to create the repository.
 
