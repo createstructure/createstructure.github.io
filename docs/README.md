@@ -67,6 +67,10 @@ It needs this json as POST argument:
 }
 ```
 
+### Use the Android app
+[Android app](https://play.google.com/store/apps/details?id=it.castellanidavide.createstructure.createstructure)
+
+
 In the future there will be other methods to create the repository.
 
 ## How to create your own template
