@@ -41,33 +41,6 @@ jobs:
         if __name__ == "__main__":
           open("Home.md", "w+").write(str(get_content()))
         EOF
-    - name: Home2 file
-      run: |
-        cd wiki
-        python3 << EOF
-        import urllib.request
-        import json
-        from bs4 import BeautifulSoup
-        def get_json():
-          """ Returns the json with description
-          """
-          return json.loads(urllib.request.urlopen("$GITHUB_API_URL/repos/$GITHUB_REPOSITORY").read().decode())
-        def get_social_img():
-          """ Get social image
-          """
-          soup = BeautifulSoup(urllib.request.urlopen("$GITHUB_SERVER_URL/$GITHUB_REPOSITORY").read().decode(), 'html.parser')
-          return soup.find("meta", property="og:image")["content"]
-        def get_content():
-          """ Returns the file content
-          """
-          social_img = get_social_img()
-          file_content = "## :octocat: Description :octocat:\n"
-          file_content += get_json()["description"].replace(". ", ".\n\n").replace("wiki", "[wiki]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/wiki)") + "\n"
-          file_content += f"![$GITHUB_REPOSITORY]({social_img})\n"
-          return file_content
-        if __name__ == "__main__":
-          open("Home2.md", "w+").write(str(get_content()))
-        EOF
     - name: Repos structure file
       run: |
         cd wiki
@@ -81,8 +54,6 @@ jobs:
             "## :octocat: Description :octocat:\n": "",
           }
           file = urllib.request.urlopen(f"https://raw.githubusercontent.com/wiki/createstructure/{repo}/Home.md").read().decode()
-          for key, value in replacements.items():
-            file = file.replace(key, value)
           file = file.rstrip("\n")
           file += "\n\n"
           return file
@@ -90,9 +61,6 @@ jobs:
           """ Returns the repos structure
           """
           repos_structure = "## Repos structure\n\n"
-          for repo in repos:
-            repos_structure += f"### {repo}\n"
-            repos_structure += get_content(repo)
           return repos_structure
         if __name__ == "__main__":
           open("Repos-structure.md", "w+").write(get_repos_structure(["$GITHUB_REPOSITORY"]))
