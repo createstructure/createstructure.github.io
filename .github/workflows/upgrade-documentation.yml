@@ -41,6 +41,45 @@ jobs:
         if __name__ == "__main__":
           open("Home.md", "w+").write(str(get_content()))
         EOF
+    - name: Repos structure file
+      run: |
+        cd wiki
+        python3 << EOF
+        import urllib.request
+        import json
+        def get_content(repo):
+          """ Returns the file content
+          """
+          replacements = {
+            "## :octocat: Description :octocat:\n": "",
+          }
+          file = urllib.request.urlopen(f"https://raw.githubusercontent.com/wiki/createstructure/{repo}/Home.md").read().decode()
+          for key, value in replacements.items():
+            file = file.replace(key, value)
+          file = file.rstrip("\n")
+          file += "\n\n"
+          return file
+        def get_repos_structure(repos):
+          """ Returns the repos structure
+          """
+          repos_structure = "## Repos structure\n\n"
+          for repo in repos:
+            repos_structure += f"### {repo}\n"
+            repos_structure += get_content(repo)
+          return repos_structure
+        if __name__ == "__main__":
+          repos = [
+            "app-createstructure",
+            "debian-createstructure",
+            "rest-createstructure",
+            "createstructure.github.io",
+            "manager-createstructure",
+            "core-createstructure",
+            "librerias-createstructure",
+            "default-template"
+          ]
+          open("Repos-structure.md", "w+").write(get_repos_structure(repos))
+        EOF
     - name: Directory structure file
       run: |
         cd wiki
