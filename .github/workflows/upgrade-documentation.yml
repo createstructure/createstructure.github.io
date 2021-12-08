@@ -108,6 +108,12 @@ jobs:
         echo "## :octocat: Code of conduct :octocat:" > CODE-OF-CONDUCT.md
         echo "" >> CODE-OF-CONDUCT.md
         cat ../repo/CODE_OF_CONDUCT.md >> CODE-OF-CONDUCT.md
+    - name: Subscription to the service file
+      run: |
+        cd wiki
+        echo "## :octocat: Subscription to the service :octocat:" > subscription-to-the-service.md
+        echo "" >> subscription-to-the-service.md
+        cat ../repo/subscription-to-the-service.md >> subscription-to-the-service.md
     - name: _Footer file
       run: |
         cd wiki
@@ -148,7 +154,7 @@ jobs:
             "  - [Table of contents](#table-of-contents)",
             "  - [General description](#general-description)",
             "  - [Repo description](#repo-description)",
-            "  - [Subsciption of the service](#subsciption-of-the-service)",
+            "  - [subscription to the service](#subscription-of-the-service)",
             "  - [How to contribute](#how-to-contribute)",
             "  - [Privacy Policy](#privacy-policy)",
             "  - [Repos structure](#repos-structure)",
@@ -176,12 +182,10 @@ jobs:
           description += repo["description"]
           description += "\n\n"
           return description
-        def get_subsciption_of_the_service():
-          """ Returns the subsciption of the service
+        def get_subscription_to_the_service():
+          """ Returns the subscription to the service
           """
-          subsciption_of_the_service = "## Subsciption of the service\n"
-          subsciption_of_the_service += "\n\n"
-          return subsciption_of_the_service
+          return open("../wiki/subscription-to-the-service.md", "r+").read()
         def get_how_to_contribute():
           """ Returns the how to contribute
           """
@@ -192,6 +196,7 @@ jobs:
           """ Returns the privacy policy
           """
           privacy_policy = "## Privacy policy\n"
+          privacy_policy += "Press the image below to see the privacy policy.\n"
           privacy_policy += "[![Privacy policy](https://media.istockphoto.com/vectors/privacy-policy-beauteous-vector-halftone-isometric-illustration-vector-id1145198292?k=20&m=1145198292&s=612x612&w=0&h=rBMrJ-rDliLqSnkQHkUXg2j2Z4MIBH9CsaijSwZ5FxU=)](./Privacy-Policy.md)"
           privacy_policy += "\n\n"
           return privacy_policy
@@ -226,7 +231,7 @@ jobs:
           readme += get_table_of_contents(repos)
           readme += get_description()
           readme += get_repo_description()
-          readme += get_subsciption_of_the_service()
+          readme += get_subscription_to_the_service()
           readme += get_how_to_contribute()
           readme += get_privacy_policy()
           readme += get_repos_structure()
