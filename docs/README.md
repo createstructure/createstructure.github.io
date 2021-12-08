@@ -16,6 +16,7 @@
   - [Requirements](#requirements)
   - [Use it](#use-it)
     - [Use the REST/API](#use-the-restapi)
+    - [Use the Android app](#use-the-android-app)
   - [How to create your own template](#how-to-create-your-own-template)
     - [1. Use template option](#1-use-template-option)
     - [2. Personalize it](#2-personalize-it)
@@ -24,6 +25,7 @@
 ## Description
 ![](https://aimhigherafrica.com/wp-content/uploads/2018/09/o6.png)
 This is the :octocat: bot :octocat: made w/ :love: by Castellani Davide.
+This is 
 
 With this program, you can easily create a repository on GitHub :octocat: with a basic template, personalized for your use.
 
