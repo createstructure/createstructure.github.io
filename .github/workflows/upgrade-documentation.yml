@@ -90,6 +90,12 @@ jobs:
         tree ../repo >> Directory-Structure.md
         echo "\`\`\`" >> Directory-Structure.md
         sed -i 's/docs/docs # documentation/g' Directory-Structure.md
+    - name: LICENSE file
+      run: |
+        cd wiki
+        echo "## :octocat: License :octocat:" > LICENSE.md
+        echo "" >> LICENSE.md
+        cat ../repo/LICENSE >> LICENSE.md
     - name: _Footer file
       run: |
         cd wiki
