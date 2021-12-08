@@ -118,6 +118,11 @@ jobs:
         cd wiki
         cat ../repo/how-to-contribute.md >> How-to-contribute.md
         sed -i 's/## How to contribute/## :octocat: How to contribute :octocat:/g' How-to-contribute.md
+    - name: How to use file
+      run: |
+        cd wiki
+        cat ../repo/how-to-use.md >> How-to-use.md
+        sed -i 's/## How to use/## :octocat: How to use :octocat:/g' How-to-use.md
     - name: _Footer file
       run: |
         cd wiki
@@ -159,6 +164,7 @@ jobs:
             "  - [General description](#general-description)",
             "  - [Repo description](#repo-description)",
             "  - [subscription to the service](#subscription-of-the-service)",
+            "  - [How to use](#how-to-use)",
             "  - [How to contribute](#how-to-contribute)",
             "  - [Privacy Policy](#privacy-policy)",
             "  - [Repos structure](#repos-structure)",
@@ -194,6 +200,10 @@ jobs:
           """ Returns the how to contribute
           """
           return open("./how-to-contribute.md", "r+").read()
+        def get_how_to_use():
+          """ Returns the how to use
+          """
+          return open("./how-to-use.md", "r+").read()
         def get_privacy_policy():
           """ Returns the privacy policy
           """
@@ -234,6 +244,7 @@ jobs:
           readme += get_description()
           readme += get_repo_description()
           readme += get_subscription_to_the_service()
+          readme += get_how_to_use()
           readme += get_how_to_contribute()
           readme += get_privacy_policy()
           readme += get_repos_structure()
