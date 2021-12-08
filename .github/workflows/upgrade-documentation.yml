@@ -150,6 +150,7 @@ jobs:
             "  - [Repo description](#repo-description)",
             "  - [Subsciption of the service](#subsciption-of-the-service)",
             "  - [How to contribute](#how-to-contribute)",
+            "  - [Privacy Policy](#privacy-policy)",
             "  - [Repos structure](#repos-structure)",
           ]
           table_of_contents = "## Table of Contents\n"
@@ -187,6 +188,13 @@ jobs:
           how_to_contribute = "## How to contribute\n"
           how_to_contribute += "\n\n"
           return how_to_contribute
+        def get_privacy_policy():
+          """ Returns the privacy policy
+          """
+          privacy_policy = "## Privacy policy\n"
+          privacy_policy += "[![Privacy policy](https://media.istockphoto.com/vectors/privacy-policy-beauteous-vector-halftone-isometric-illustration-vector-id1145198292?k=20&m=1145198292&s=612x612&w=0&h=rBMrJ-rDliLqSnkQHkUXg2j2Z4MIBH9CsaijSwZ5FxU=)](./Privacy-Policy.md)"
+          privacy_policy += "\n\n"
+          return privacy_policy
         def get_repos_structure():
           """ Returns the repos structure
           """
