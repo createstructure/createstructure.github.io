@@ -7,6 +7,7 @@
   - [Repo description](#repo-description)
   - [Subsciption of the service](#subsciption-of-the-service)
   - [How to contribute](#how-to-contribute)
+  - [Privacy Policy](#privacy-policy)
   - [Repos structure](#repos-structure)
     - [app-createstructure](#app-createstructure)
     - [debian-createstructure](#debian-createstructure)
