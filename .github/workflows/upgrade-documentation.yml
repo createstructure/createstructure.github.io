@@ -113,6 +113,11 @@ jobs:
         cd wiki
         cat ../repo/subscription-to-the-service.md >> Subscription-to-the-service.md
         sed -i 's/## Subscription to the service/## :octocat: Subscription to the service :octocat:/g' Subscription-to-the-service.md
+    - name: How to contribute file
+      run: |
+        cd wiki
+        cat ../repo/how-to-contribute.md >> How-to-contribute.md
+        sed -i 's/## How to contribute/## :octocat: How to contribute :octocat:/g' How-to-contribute.md
     - name: _Footer file
       run: |
         cd wiki
@@ -188,9 +193,7 @@ jobs:
         def get_how_to_contribute():
           """ Returns the how to contribute
           """
-          how_to_contribute = "## How to contribute\n"
-          how_to_contribute += "\n\n"
-          return how_to_contribute
+          return open("./how-to-contribute.md", "r+").read()
         def get_privacy_policy():
           """ Returns the privacy policy
           """
