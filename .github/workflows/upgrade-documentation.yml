@@ -78,7 +78,7 @@ jobs:
             "librerias-createstructure",
             "default-template"
           ]
-          open("Repos-structure.md", "w+").write(str(get_repos_structure(repos)))
+          open("Repos-structure.md", "w+").write(get_repos_structure(repos))
         EOF
     - name: Directory structure file
       run: |
