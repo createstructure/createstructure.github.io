@@ -41,6 +41,134 @@ jobs:
         if __name__ == "__main__":
           open("Home.md", "w+").write(str(get_content()))
         EOF
+    - name: Directory structure file
+      run: |
+        cd wiki
+        sudo apt install tree -y
+        echo "## :octocat: Directory structure :octocat:" > Directory-Structure.md
+        echo "" >> Directory-Structure.md
+        echo "\`\`\`" >> Directory-Structure.md
+        tree ../repo >> Directory-Structure.md
+        echo "\`\`\`" >> Directory-Structure.md
+       sed -i 's/docs/docs # documentation/g' Directory-Structure.md
+    - name: _Footer file
+      run: |
+        cd wiki
+        echo "---" > _Footer.md
+        echo "Made w/ :heart: by Castellani Davide" >> _Footer.md
+        echo "" >> _Footer.md
+        echo "If you want to contribute you can start with:" >> _Footer.md
+        echo "- [Discussion]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/discussions)" >> _Footer.md
+        echo "- [Issue]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/issues/new)" >> _Footer.md
+    - name: _Header file
+      run: |
+        cd wiki
+        echo "# createstructure" > _Header.md
+        echo "[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/$(echo ${GITHUB_REF#refs/heads/})/docs/LICENSE)" >> _Header.md
+        echo "![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat)" >> _Header.md
+        echo "![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-all-blue?style=flat) " >> _Header.md
+        echo "[![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/tree/$(echo ${GITHUB_REF#refs/heads/}))" >> _Header.md
+        echo "" >> _Header.md
+    - name: Recreate README.md
+      run: |
+        cd repo
+        python3 << EOF
+        import urllib.request
+        import json
+        def get_link_table_of_contents(repo, spaces=4):
+          """ Returns the table of contents for the repo
+          """
+          return spaces * " " + f"- [{repo}](#{repo})\n"
+        def get_intro():
+          """ Returns the intro
+          """
+          return "# createstructure\n\n"
+        def get_table_of_contents(repos):
+          """ Returns the table of contents
+          """
+          default = [
+            "- [createstructure](#createstructure)",
+            "  - [Table of contents](#table-of-contents)",
+            "  - [General description](#general-description)",
+            "  - [Repo description](#repo-description)",
+            "  - [Subsciption of the service](#subsciption-of-the-service)",
+            "  - [How to contribute](#how-to-contribute)",
+            "  - [Repos structure](#repos-structure)",
+          ]
+          table_of_contents = "## Table of Contents\n"
+          for d in default:
+            table_of_contents += d + "\n"
+          for repo in repos:
+            table_of_contents += get_link_table_of_contents(repo)
+          table_of_contents += "\n"
+          return table_of_contents
+        def get_description():
+          """ Returns the description
+          """
+          description = "## General description\n"
+          org = json.loads(urllib.request.urlopen("https://api.github.com/orgs/createstructure").read().decode())
+          description += org["description"]
+          description += "\n\n"
+          return description
+        def get_repo_description():
+          """ Returns the repo description
+          """
+          description = "## Repo description\n"
+          repo = json.loads(urllib.request.urlopen("https://api.github.com/repos/createstructure/createstructure.github.io").read().decode())
+          description += repo["description"]
+          description += "\n\n"
+          return description
+        def get_subsciption_of_the_service():
+          """ Returns the subsciption of the service
+          """
+          subsciption_of_the_service = "## Subsciption of the service\n"
+          subsciption_of_the_service += "\n\n"
+          return subsciption_of_the_service
+        def get_how_to_contribute():
+          """ Returns the how to contribute
+          """
+          how_to_contribute = "## How to contribute\n"
+          how_to_contribute += "\n\n"
+          return how_to_contribute
+        def get_repos_structure(repos):
+          """ Returns the repos structure
+          """
+          return "aaa" #open("../wiki/Repos-structure.md", "r+").read()
+        def get_outro():
+          """ Returns the outro
+          """
+          outro = "---\n"
+          outro += "Made with ❤️ by @DavideC03\n\n"
+          outro += "If you have any questions, please contact my community and me:\n\n"
+          outro += "- [Discussion](https://github.com/createstructure/createstructure/discussions/new)\n"
+          outro += "- [Issues](https://github.com/createstructure/createstructure/issues/new)\n"
+          outro += "- [Mail](mailto:help@castellanidavide.it)\n"
+          return outro
+        def get_readme():
+          """ Returns the readme
+          """
+          repos = [
+            "app-createstructure",
+            "debian-createstructure",
+            "rest-createstructure",
+            "createstructure.github.io",
+            "manager-createstructure",
+            "core-createstructure",
+            "librerias-createstructure",
+            "default-template"
+          ]
+          readme = get_intro()
+          readme += get_table_of_contents(repos)
+          readme += get_description()
+          readme += get_repo_description()
+          readme += get_subsciption_of_the_service()
+          readme += get_how_to_contribute()
+          readme += get_repos_structure()
+          readme += get_outro()
+          return readme
+        if __name__ == "__main__":
+          open("README.md", "w").write(get_readme())
+        EOF
     - name: git add & commit & upload wiki
       continue-on-error: true
       run: |
