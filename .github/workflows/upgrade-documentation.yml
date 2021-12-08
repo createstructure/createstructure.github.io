@@ -50,9 +50,7 @@ jobs:
         def get_content(repo):
           """ Returns the file content
           """
-          replacements = {
-            "## :octocat: Description :octocat:\n": "",
-          }
+          replacements = {"## :octocat: Description :octocat:\n": "",}
           file = urllib.request.urlopen(f"https://raw.githubusercontent.com/wiki/createstructure/{repo}/Home.md").read().decode()
           file = file.rstrip("\n")
           file += "\n\n"
