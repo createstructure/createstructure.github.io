@@ -39,7 +39,7 @@ jobs:
           file_content += f"![$GITHUB_REPOSITORY]({social_img})\n"
           return file_content
         if __name__ == "__main__":
-          open("Home.md", "w+").write(str(get_content()))                    
+          open("Home.md", "w+").write(str(get_content()))
         EOF
     - name: Repos structure file
       run: |
@@ -66,7 +66,7 @@ jobs:
           for repo in repos:
             repos_structure += f"### {repo}\n"
             repos_structure += get_content(repo)
-          return repos_structure        
+          return repos_structure
         if __name__ == "__main__":
           repos = [
             "app-createstructure",
@@ -78,7 +78,7 @@ jobs:
             "librerias-createstructure",
             "default-template"
           ]
-          open("Repos-structure.md", "w+").write(str(get_repos_structure(repos)))                    
+          open("Repos-structure.md", "w+").write(str(get_repos_structure(repos)))
         EOF
     - name: Directory structure file
       run: |
