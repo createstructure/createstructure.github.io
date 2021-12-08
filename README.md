@@ -46,16 +46,8 @@ To get more info about how it works and how can you can contribute, please go to
 ![createstructure/rest-createstructure](https://opengraph.githubassets.com/cad05156c359e8665206bdb005420539bb843cba414c759a62ce06acf3376749/createstructure/rest-createstructure)
 
 ### createstructure.github.io
-# createstructure
-[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)](https://github.com/createstructure/createstructure/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat)
-
-![](https://github.com/CastellaniDavide/createstructure/raw/master/docs/createstructure.png)
-
-## Description
-![](https://aimhigherafrica.com/wp-content/uploads/2018/09/o6.png)
-This is the :octocat: bot :octocat: made w/ :love: by Castellani Davide.
-
-With this program, you can easily create a repository on GitHub :octocat: with a basic template, personalized for your use.
+This repo is it made to make easier to contain all the documentation of the createstructure project.
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/37be22f2b20205bbbd0c18d6979c9ab0310dd22c6f4b2fa033961bc35f92e8ab/createstructure/createstructure.github.io)
 
 ### manager-createstructure
 Repo for managing the creation of the repos
@@ -80,4 +72,3 @@ If you have any questions, please contact my community and me:
 - [Discussion](https://github.com/createstructure/createstructure/discussions/new)
 - [Issues](https://github.com/createstructure/createstructure/issues/new)
 - [Mail](mailto:help@castellanidavide.it)
-
