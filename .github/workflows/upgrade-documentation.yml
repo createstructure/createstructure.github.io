@@ -228,6 +228,7 @@ jobs:
           readme += get_repo_description()
           readme += get_subsciption_of_the_service()
           readme += get_how_to_contribute()
+          readme += get_privacy_policy()
           readme += get_repos_structure()
           readme += get_outro()
           return readme
