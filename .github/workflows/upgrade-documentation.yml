@@ -111,9 +111,8 @@ jobs:
     - name: Subscription to the service file
       run: |
         cd wiki
-        echo "## :octocat: Subscription to the service :octocat:" > subscription-to-the-service.md
-        echo "" >> subscription-to-the-service.md
-        cat ../repo/subscription-to-the-service.md >> subscription-to-the-service.md
+        cat ../repo/subscription-to-the-service.md >> Subscription-to-the-service.md
+        sed -i 's/## Subscription to the service/## :octocat: Subscription to the service :octocat:/g' Subscription-to-the-service.md
     - name: _Footer file
       run: |
         cd wiki
@@ -185,7 +184,7 @@ jobs:
         def get_subscription_to_the_service():
           """ Returns the subscription to the service
           """
-          return open("../wiki/subscription-to-the-service.md", "r+").read()
+          return open("./subscription-to-the-service.md", "r+").read()
         def get_how_to_contribute():
           """ Returns the how to contribute
           """
