@@ -80,12 +80,6 @@ jobs:
           ]
           open("Repos-structure.md", "w+").write(str(get_repos_structure(repos)))                    
         EOF
-    - name: CHANGELOG file
-      run: |
-        cp repo/CHANGELOG.md wiki/
-        cd wiki
-        sed -i 's/Changelog/:octocat: Changelog :octocat:/g' CHANGELOG.md
-        sed -i 's/# /## /g' CHANGELOG.md
     - name: Directory structure file
       run: |
         cd wiki
