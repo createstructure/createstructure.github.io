@@ -169,10 +169,10 @@ jobs:
           how_to_contribute = "## How to contribute\n"
           how_to_contribute += "\n\n"
           return how_to_contribute
-        def get_repos_structure(repos):
+        def get_repos_structure():
           """ Returns the repos structure
           """
-          return "aaa" #open("../wiki/Repos-structure.md", "r+").read()
+          return open("../wiki/Repos-structure.md", "r+").read()
         def get_outro():
           """ Returns the outro
           """
