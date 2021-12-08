@@ -30,6 +30,9 @@ This repo is it made to make easier to contain all the documentation of the crea
 ## How to contribute
 
 
+## Privacy policy
+[![Privacy policy](https://media.istockphoto.com/vectors/privacy-policy-beauteous-vector-halftone-isometric-illustration-vector-id1145198292?k=20&m=1145198292&s=612x612&w=0&h=rBMrJ-rDliLqSnkQHkUXg2j2Z4MIBH9CsaijSwZ5FxU=)](./Privacy-Policy.md)
+
 ## Repos structure
 
 ### app-createstructure
