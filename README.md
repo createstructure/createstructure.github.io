@@ -24,8 +24,6 @@ createstructure is a service to make it easier and faster the setup for any IT p
 ## Repo description
 This repo is it made to make easier to contain all the documentation of the createstructure project.
 
-## :octocat: Subscription to the service :octocat:
-
 ## Subscription to the service
 
 ### How to subscribe to the service
