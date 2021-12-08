@@ -47,21 +47,8 @@ jobs:
         python3 << EOF
         import urllib.request
         import json
-        def get_content(repo):
-          """ Returns the file content
-          """
-          replacements = {"## :octocat: Description :octocat:\n": "",}
-          file = urllib.request.urlopen(f"https://raw.githubusercontent.com/wiki/createstructure/{repo}/Home.md").read().decode()
-          file = file.rstrip("\n")
-          file += "\n\n"
-          return file
-        def get_repos_structure(repos):
-          """ Returns the repos structure
-          """
-          repos_structure = "## Repos structure\n\n"
-          return repos_structure
         if __name__ == "__main__":
-          open("Repos-structure.md", "w+").write(get_repos_structure(["$GITHUB_REPOSITORY"]))
+          open("Repos-structure.md", "w+").write("## :octocat: Repos structure :octocat:\n")
         EOF
     - name: Directory structure file
       run: |
