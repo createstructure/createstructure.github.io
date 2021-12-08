@@ -123,6 +123,11 @@ jobs:
         cd wiki
         cat ../repo/how-to-use.md >> How-to-use.md
         sed -i 's/## How to use/## :octocat: How to use :octocat:/g' How-to-use.md
+    - name: How to create your own template file
+      run: |
+        cd wiki
+        cat ../repo/how-to-create-your-own-template.md >> How-to-create-your-own-template.md
+        sed -i 's/## How to create your own template/## :octocat: How to create your own template :octocat:/g' How-to-create-your-own-template.md
     - name: _Footer file
       run: |
         cd wiki
@@ -165,6 +170,7 @@ jobs:
             "  - [Repo description](#repo-description)",
             "  - [subscription to the service](#subscription-of-the-service)",
             "  - [How to use](#how-to-use)",
+            "  - [How to create your own template](#how-to-create-your-own-template)",
             "  - [How to contribute](#how-to-contribute)",
             "  - [Privacy Policy](#privacy-policy)",
             "  - [Repos structure](#repos-structure)",
@@ -204,6 +210,10 @@ jobs:
           """ Returns the how to use
           """
           return open("./how-to-use.md", "r+").read()
+        def get_how_to_create_your_own_template():
+          """ Returns the how to create your own template
+          """
+          return open("./how-to-create-your-own-template.md", "r+").read()
         def get_privacy_policy():
           """ Returns the privacy policy
           """
@@ -245,6 +255,7 @@ jobs:
           readme += get_repo_description()
           readme += get_subscription_to_the_service()
           readme += get_how_to_use()
+          readme += get_how_to_create_your_own_template()
           readme += get_how_to_contribute()
           readme += get_privacy_policy()
           readme += get_repos_structure()
