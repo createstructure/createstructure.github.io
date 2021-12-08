@@ -96,6 +96,18 @@ jobs:
         echo "## :octocat: License :octocat:" > LICENSE.md
         echo "" >> LICENSE.md
         cat ../repo/LICENSE >> LICENSE.md
+    - name: Privacy policy file
+      run: |
+        cd wiki
+        echo "## :octocat: Privacy policy :octocat:" > Privacy-policy.md
+        echo "" >> Privacy-policy.md
+        cat ../repo/Privacy-Policy.md >> Privacy-policy.md
+    - name: CODE-OF-CONDUCT file
+      run: |
+        cd wiki
+        echo "## :octocat: Code of conduct :octocat:" > CODE-OF-CONDUCT.md
+        echo "" >> CODE-OF-CONDUCT.md
+        cat ../repo/CODE_OF_CONDUCT.md >> CODE-OF-CONDUCT.md
     - name: _Footer file
       run: |
         cd wiki
