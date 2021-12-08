@@ -6,6 +6,7 @@
   - [General description](#general-description)
   - [Repo description](#repo-description)
   - [subscription to the service](#subscription-of-the-service)
+  - [How to use](#how-to-use)
   - [How to contribute](#how-to-contribute)
   - [Privacy Policy](#privacy-policy)
   - [Repos structure](#repos-structure)
@@ -49,6 +50,59 @@ This repo is it made to make easier to contain all the documentation of the crea
 - In the plan box select press the "Cancel this plan" link
 - In the alert box, press the "OK" button
 - Now you are unsubscribed from the service
+## How to use the createstructure service
+
+> To use the createstructure service, you need to be [subscribed to the createstructure service](./subscription-to-the-service.md).
+
+### Mobile app
+Use the mobile app is the easiest way to use the createstructure service.
+At the moment it's disponible for Android (>= 8).
+
+The steps to install the app are:
+- [Download the app](https://play.google.com/store/apps/details?id=it.castellanidavide.createstructure.createstructure)
+- Follow the tutorial on the app
+
+The steps to upgrade the app are:
+- [Go to Playstore](https://play.google.com/store/apps/details?id=it.castellanidavide.createstructure.createstructure)
+- Update the app
+
+The steps to uninstall the app are:
+- [Go to Playstore](https://play.google.com/store/apps/details?id=it.castellanidavide.createstructure.createstructure)
+- Uninstall the app
+
+### Ubuntu/ Debian app
+The Ubuntu/ Debian app is a tool to use the createstructure service on the command line.
+
+The steps to install the app are:
+- Ubuntu
+
+```    
+sudo add-apt-repository ppa:castellanidavide/createstructure
+sudo apt-get update
+sudo apt-get install createstructure
+```
+
+- Debian
+  - Download the last .deb file from the [Release page](https://github.com/createstructure/debian-createstructure/releases)
+  - `sudo apt-get install <filename>.deb`
+
+The steps to update the app are:
+- Ubuntu
+  - `sudo apt-get update`
+  - `sudo apt-get upgrade`
+- Debian
+  - Download the last .deb file from the [Release page](https://github.com/createstructure/debian-createstructure/releases)
+  - `sudo apt-get install <filename>.deb`
+
+The steps to uninstall the app are:
+- `sudo apt-get remove createstructure`
+
+### REST API
+The REST API is a web service that allows you to use the createstructure service. It didn't need to be installed on the computer to use the service.
+
+The steps to use it are:
+- Create a [GitHub token](https://github.com/settings/tokens/new) with the scope `repo`, `org:admin` and `user`
+- Follow the [REST API documentation](https://github.com/createstructure/rest-createstructure/wiki/REST-Actions)
 ## How to contribute
 
 ### Use the service
@@ -94,7 +148,7 @@ To get more info about how it works and how can you can contribute, please go to
 
 ### createstructure.github.io
 This repo is it made to make easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/37be22f2b20205bbbd0c18d6979c9ab0310dd22c6f4b2fa033961bc35f92e8ab/createstructure/createstructure.github.io)
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/2909ff28f99e65bb9093289fd82b9576a94f919fab0fcc1a904ea500b68b9e68/createstructure/createstructure.github.io)
 
 ### manager-createstructure
 Repo for managing the creation of the repos
