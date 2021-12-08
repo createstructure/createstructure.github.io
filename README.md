@@ -5,7 +5,7 @@
   - [Table of contents](#table-of-contents)
   - [General description](#general-description)
   - [Repo description](#repo-description)
-  - [Subsciption of the service](#subsciption-of-the-service)
+  - [subscription to the service](#subscription-of-the-service)
   - [How to contribute](#how-to-contribute)
   - [Privacy Policy](#privacy-policy)
   - [Repos structure](#repos-structure)
@@ -24,13 +24,38 @@ createstructure is a service to make it easier and faster the setup for any IT p
 ## Repo description
 This repo is it made to make easier to contain all the documentation of the createstructure project.
 
-## Subsciption of the service
+## :octocat: Subscription to the service :octocat:
 
+## Subscription to the service
 
+### How to subscribe to the service
+- Go to the [subscription page](https://github.com/marketplace/createstructure)
+- Go to the end of the page
+- From the left menu, select the plan you want to subscribe to
+- Press the "Subscribe" button, the text can be different depending on the plan
+- If the plan it's not free, you will be asked to enter your credit card details
+- Press the "Complete" button, the text can be different depending on the plan
+- Now you can use the service
+
+### How to change the subscription
+- Go to the [subscription page](https://github.com/marketplace/createstructure)
+- Press the "Edit your plan" button and select your username
+- In the plan box select the plan you want to subscribe to
+- If the plan it's not free, you will be asked to enter your credit card details
+- Press the "Complete" button, the text can be different depending on the plan
+- Now you can use the service with the new plan
+
+### How to unsubscribe from the service
+- Go to the [subscription page](https://github.com/marketplace/createstructure)
+- Press the "Edit your plan" button and select your username
+- In the plan box select press the "Cancel this plan" link
+- In the alert box, press the "OK" button
+- Now you are unsubscribed from the service
 ## How to contribute
 
 
 ## Privacy policy
+Press the image below to see the privacy policy.
 [![Privacy policy](https://media.istockphoto.com/vectors/privacy-policy-beauteous-vector-halftone-isometric-illustration-vector-id1145198292?k=20&m=1145198292&s=612x612&w=0&h=rBMrJ-rDliLqSnkQHkUXg2j2Z4MIBH9CsaijSwZ5FxU=)](./Privacy-Policy.md)
 
 ## Repos structure
