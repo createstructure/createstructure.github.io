@@ -50,7 +50,7 @@ jobs:
         echo "\`\`\`" >> Directory-Structure.md
         tree ../repo >> Directory-Structure.md
         echo "\`\`\`" >> Directory-Structure.md
-       sed -i 's/docs/docs # documentation/g' Directory-Structure.md
+        sed -i 's/docs/docs # documentation/g' Directory-Structure.md
     - name: _Footer file
       run: |
         cd wiki
