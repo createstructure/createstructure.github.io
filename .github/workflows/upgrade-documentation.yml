@@ -68,17 +68,7 @@ jobs:
             repos_structure += get_content(repo)
           return repos_structure
         if __name__ == "__main__":
-          repos = [
-            "app-createstructure",
-            "debian-createstructure",
-            "rest-createstructure",
-            "createstructure.github.io",
-            "manager-createstructure",
-            "core-createstructure",
-            "librerias-createstructure",
-            "default-template"
-          ]
-          open("Repos-structure.md", "w+").write(get_repos_structure(repos))
+          open("Repos-structure.md", "w+").write(get_repos_structure(["$GITHUB_REPOSITORY"]))
         EOF
     - name: Directory structure file
       run: |
