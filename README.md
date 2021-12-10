@@ -174,8 +174,8 @@ To get more info about how it works and how can you can contribute, please go to
 ![createstructure/rest-createstructure](https://opengraph.githubassets.com/cad05156c359e8665206bdb005420539bb843cba414c759a62ce06acf3376749/createstructure/rest-createstructure)
 
 ### createstructure.github.io
-This repo is it made to make easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/2909ff28f99e65bb9093289fd82b9576a94f919fab0fcc1a904ea500b68b9e68/createstructure/createstructure.github.io)
+This repo is made to make it easier to contain all the documentation of the createstructure project.
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/c4db4fe857ca4132c0f56eb814e7eda68abedf37dc372f4ef44842b0096a81d2/createstructure/createstructure.github.io)
 
 ### manager-createstructure
 Repo for managing the creation of the repos
@@ -190,7 +190,8 @@ Repo containing the library used by core-createstructure  manager-createstructur
 ![createstructure/libraries-createstructure](https://opengraph.githubassets.com/72364e818bfdd65899ba491f253da3377f2e9cf314ae5c443bb79478a0cb5e75/createstructure/libraries-createstructure)
 
 ### default-template
-Welcome to the default-template wiki!
+This is the default template
+![createstructure/default-template](https://opengraph.githubassets.com/0d7c1a77feb8ec0c3726bdb77551f3b86461536a3c85705fa8c74f16e6945d22/createstructure/default-template)
 
 ---
 Made with ❤️ by @DavideC03
