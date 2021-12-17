@@ -102,7 +102,7 @@ The steps to uninstall the app are:
 The REST API is a web service that allows you to use the createstructure service. It didn't need to be installed on the computer to use the service.
 
 The steps to use it are:
-- Create a [GitHub token](https://github.com/settings/tokens/new) with the scope `repo`, `org:admin` and `user`
+- Create a [GitHub token](https://github.com/settings/tokens/new) with the scope `repo`, `workflow`, `org:admin` and `user`
 - Follow the [REST API documentation](https://github.com/createstructure/rest-createstructure/wiki/REST-Actions)
 ## How to create your own template
 
@@ -161,17 +161,17 @@ Press the image below to see the privacy policy.
 
 ### app-createstructure
 Mobile app to use createstructure service
-![createstructure/app-createstructure](https://opengraph.githubassets.com/f4c4090ca30cdd10d02102d88530d7a55fd08410fe735d047eabb85c082c86df/createstructure/app-createstructure)
+![createstructure/app-createstructure](https://opengraph.githubassets.com/33608e92cf3c93b5d86d6acd3a0b8d06af6617a91cab453a87f79802846aea07/createstructure/app-createstructure)
 
 ### debian-createstructure
 Debian client app
-![createstructure/debian-createstructure](https://opengraph.githubassets.com/ffec71b52f5a8aad89c032753b480a607568cc335e0d8769b84c26c05163c2ad/createstructure/debian-createstructure)
+![createstructure/debian-createstructure](https://opengraph.githubassets.com/442ddaeca9a28fa92376eaf7c02c0d8606a088d595e74bb586700444ca5fe8bf/createstructure/debian-createstructure)
 
 ### rest-createstructure
 This repository contains the REST API created for the createstructure service.
 
 To get more info about how it works and how can you can contribute, please go to the [wiki](https://github.com/createstructure/rest-createstructure/wiki).
-![createstructure/rest-createstructure](https://opengraph.githubassets.com/cad05156c359e8665206bdb005420539bb843cba414c759a62ce06acf3376749/createstructure/rest-createstructure)
+![createstructure/rest-createstructure](https://opengraph.githubassets.com/d68d67aaa0ae089ee1c96bf0e0d6a3286f92f09cf6cc0ff6c984223f79f3f0be/createstructure/rest-createstructure)
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
@@ -179,19 +179,19 @@ This repo is made to make it easier to contain all the documentation of the crea
 
 ### manager-createstructure
 Repo for managing the creation of the repos
-![createstructure/manager-createstructure](https://opengraph.githubassets.com/5b8f42991e48d1ad0f54a18e131b5af3a7bebd750d1924e17639d072d69b7fc5/createstructure/manager-createstructure)
+![createstructure/manager-createstructure](https://opengraph.githubassets.com/b32807e23c34019668b895f64e67df529055ac4e8711c540ef47d8cc3ce5fd09/createstructure/manager-createstructure)
 
 ### core-createstructure
 Repo where there's the source to create the repo(s)
-![createstructure/core-createstructure](https://opengraph.githubassets.com/e99289000e1828d3876752cd2ab7c13d1a5a87d45d8e788629ab13b0c6e1616e/createstructure/core-createstructure)
+![createstructure/core-createstructure](https://opengraph.githubassets.com/4ccea45ac776d2b90f2eb314b540266601c2febce9e389ff8e0f06ccbdd6563c/createstructure/core-createstructure)
 
 ### librerias-createstructure
 Repo containing the library used by core-createstructure  manager-createstructure
-![createstructure/libraries-createstructure](https://opengraph.githubassets.com/72364e818bfdd65899ba491f253da3377f2e9cf314ae5c443bb79478a0cb5e75/createstructure/libraries-createstructure)
+![createstructure/libraries-createstructure](https://opengraph.githubassets.com/442ddaeca9a28fa92376eaf7c02c0d8606a088d595e74bb586700444ca5fe8bf/createstructure/libraries-createstructure)
 
 ### default-template
 This is the default template
-![createstructure/default-template](https://opengraph.githubassets.com/0d7c1a77feb8ec0c3726bdb77551f3b86461536a3c85705fa8c74f16e6945d22/createstructure/default-template)
+![createstructure/default-template](https://opengraph.githubassets.com/e6c4a2eb3399dda1633a0cc19d2f1a57a9fabefc59601798a855ae20d99ae772/createstructure/default-template)
 
 ---
 Made with ❤️ by @DavideC03
