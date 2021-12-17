@@ -1,0 +1,283 @@
+name: Upgrade documentation (Wiki + README.md)
+on: [workflow_dispatch, push]
+
+jobs:
+  upgrade-documentation:
+    runs-on: ubuntu-latest
+    environment:
+      name: documentation
+    steps:
+    - name: Initial setup
+      run: |
+        sudo apt update -y
+        sudo pip install BeautifulSoup4
+        git clone --recurse-submodules --depth 1 https://$.GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.wiki.git wiki
+        git clone --recurse-submodules --depth 1 https://$.GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git -b $(echo ${GITHUB_REF#refs/heads/}) repo
+        rm -f wiki/*.md
+    - name: Home file
+      run: |
+        cd wiki
+        python3 << EOF
+        import urllib.request
+        import json
+        from bs4 import BeautifulSoup
+        def get_json():
+          """ Returns the json with description
+          """
+          return json.loads(urllib.request.urlopen("$GITHUB_API_URL/repos/$GITHUB_REPOSITORY").read().decode())
+        def get_social_img():
+          """ Get social image
+          """
+          soup = BeautifulSoup(urllib.request.urlopen("$GITHUB_SERVER_URL/$GITHUB_REPOSITORY").read().decode(), 'html.parser')
+          return soup.find("meta", property="og:image")["content"]
+        def get_content():
+          """ Returns the file content
+          """
+          social_img = get_social_img()
+          file_content = "## :octocat: Description :octocat:\n"
+          file_content += get_json()["description"].replace(". ", ".\n\n").replace("wiki", "[wiki]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/wiki)") + "\n"
+          file_content += f"![$GITHUB_REPOSITORY]({social_img})\n"
+          return file_content
+        if __name__ == "__main__":
+          open("Home.md", "w+").write(str(get_content()))
+        EOF
+    - name: Repos structure file
+      run: |
+        cd wiki
+        python3 << EOF
+        import urllib.request
+        import json
+        def get_content(repo):
+          """ Returns the file content
+          """
+          replacements = {
+            "## :octocat: Description :octocat:\n": "",
+          }
+          file = urllib.request.urlopen(f"https://raw.githubusercontent.com/wiki/createstructure/{repo}/Home.md").read().decode()
+          for key, value in replacements.items():
+            file = file.replace(key, value)
+          file = file.rstrip("\n")
+          file += "\n\n"
+          return file
+        def get_repos_structure(repos):
+          """ Returns the repos structure
+          """
+          repos_structure = "## Repos structure\n\n"
+          for repo in repos:
+            repos_structure += f"### {repo}\n"
+            repos_structure += get_content(repo)
+          return repos_structure
+        if __name__ == "__main__":
+          repos = [
+            "app-createstructure",
+            "debian-createstructure",
+            "rest-createstructure",
+            "createstructure.github.io",
+            "manager-createstructure",
+            "core-createstructure",
+            "librerias-createstructure",
+            "default-template"
+          ]
+          open("Repos-structure.md", "w+").write(get_repos_structure(repos))
+        EOF
+    - name: Directory structure file
+      run: |
+        cd wiki
+        sudo apt install tree -y
+        echo "## :octocat: Directory structure :octocat:" > Directory-Structure.md
+        echo "" >> Directory-Structure.md
+        echo "\`\`\`" >> Directory-Structure.md
+        tree ../repo >> Directory-Structure.md
+        echo "\`\`\`" >> Directory-Structure.md
+        sed -i 's/docs/docs # documentation/g' Directory-Structure.md
+    - name: LICENSE file
+      run: |
+        cd wiki
+        echo "## :octocat: License :octocat:" > LICENSE.md
+        echo "" >> LICENSE.md
+        cat ../repo/LICENSE >> LICENSE.md
+    - name: Privacy policy file
+      run: |
+        cd wiki
+        echo "## :octocat: Privacy policy :octocat:" > Privacy-policy.md
+        echo "" >> Privacy-policy.md
+        cat ../repo/Privacy-Policy.md >> Privacy-policy.md
+    - name: CODE-OF-CONDUCT file
+      run: |
+        cd wiki
+        echo "## :octocat: Code of conduct :octocat:" > CODE-OF-CONDUCT.md
+        echo "" >> CODE-OF-CONDUCT.md
+        cat ../repo/CODE_OF_CONDUCT.md >> CODE-OF-CONDUCT.md
+    - name: Subscription to the service file
+      run: |
+        cd wiki
+        cat ../repo/subscription-to-the-service.md >> Subscription-to-the-service.md
+        sed -i 's/## Subscription to the service/## :octocat: Subscription to the service :octocat:/g' Subscription-to-the-service.md
+    - name: How to contribute file
+      run: |
+        cd wiki
+        cat ../repo/how-to-contribute.md >> How-to-contribute.md
+        sed -i 's/## How to contribute/## :octocat: How to contribute :octocat:/g' How-to-contribute.md
+    - name: How to use file
+      run: |
+        cd wiki
+        cat ../repo/how-to-use.md >> How-to-use.md
+        sed -i 's/## How to use/## :octocat: How to use :octocat:/g' How-to-use.md
+    - name: How to create your own template file
+      run: |
+        cd wiki
+        cat ../repo/how-to-create-your-own-template.md >> How-to-create-your-own-template.md
+        sed -i 's/## How to create your own template/## :octocat: How to create your own template :octocat:/g' How-to-create-your-own-template.md
+    - name: _Footer file
+      run: |
+        cd wiki
+        echo "---" > _Footer.md
+        echo "Made w/ :heart: by Castellani Davide" >> _Footer.md
+        echo "" >> _Footer.md
+        echo "If you want to contribute you can start with:" >> _Footer.md
+        echo "- [Discussion]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/discussions)" >> _Footer.md
+        echo "- [Issue]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/issues/new)" >> _Footer.md
+    - name: _Header file
+      run: |
+        cd wiki
+        echo "# createstructure" > _Header.md
+        echo "[![GitHub license](https://img.shields.io/badge/license-GNU-green?style=flat)]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/$(echo ${GITHUB_REF#refs/heads/})/docs/LICENSE)" >> _Header.md
+        echo "![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat)" >> _Header.md
+        echo "![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-all-blue?style=flat) " >> _Header.md
+        echo "" >> _Header.md
+    - name: Recreate README.md
+      run: |
+        cd repo
+        python3 << EOF
+        import urllib.request
+        import json
+        def get_link_table_of_contents(repo, spaces=4):
+          """ Returns the table of contents for the repo
+          """
+          return spaces * " " + f"- [{repo}](#{repo})\n"
+        def get_intro():
+          """ Returns the intro
+          """
+          return "# createstructure\n\n"
+        def get_table_of_contents(repos):
+          """ Returns the table of contents
+          """
+          default = [
+            "- [createstructure](#createstructure)",
+            "  - [Table of contents](#table-of-contents)",
+            "  - [General description](#general-description)",
+            "  - [Repo description](#repo-description)",
+            "  - [subscription to the service](#subscription-of-the-service)",
+            "  - [How to use](#how-to-use)",
+            "  - [How to create your own template](#how-to-create-your-own-template)",
+            "  - [How to contribute](#how-to-contribute)",
+            "  - [Privacy Policy](#privacy-policy)",
+            "  - [Repos structure](#repos-structure)",
+          ]
+          table_of_contents = "## Table of Contents\n"
+          for d in default:
+            table_of_contents += d + "\n"
+          for repo in repos:
+            table_of_contents += get_link_table_of_contents(repo)
+          table_of_contents += "\n"
+          return table_of_contents
+        def get_description():
+          """ Returns the description
+          """
+          description = "## General description\n"
+          org = json.loads(urllib.request.urlopen("https://api.github.com/orgs/createstructure").read().decode())
+          description += org["description"]
+          description += "\n\n"
+          return description
+        def get_repo_description():
+          """ Returns the repo description
+          """
+          description = "## Repo description\n"
+          repo = json.loads(urllib.request.urlopen("https://api.github.com/repos/createstructure/createstructure.github.io").read().decode())
+          description += repo["description"]
+          description += "\n\n"
+          return description
+        def get_subscription_to_the_service():
+          """ Returns the subscription to the service
+          """
+          return open("./subscription-to-the-service.md", "r+").read()
+        def get_how_to_contribute():
+          """ Returns the how to contribute
+          """
+          return open("./how-to-contribute.md", "r+").read()
+        def get_how_to_use():
+          """ Returns the how to use
+          """
+          return open("./how-to-use.md", "r+").read()
+        def get_how_to_create_your_own_template():
+          """ Returns the how to create your own template
+          """
+          return open("./how-to-create-your-own-template.md", "r+").read()
+        def get_privacy_policy():
+          """ Returns the privacy policy
+          """
+          privacy_policy = "## Privacy policy\n"
+          privacy_policy += "Press the image below to see the privacy policy.\n"
+          privacy_policy += "[![Privacy policy](https://media.istockphoto.com/vectors/privacy-policy-beauteous-vector-halftone-isometric-illustration-vector-id1145198292?k=20&m=1145198292&s=612x612&w=0&h=rBMrJ-rDliLqSnkQHkUXg2j2Z4MIBH9CsaijSwZ5FxU=)](./Privacy-Policy.md)"
+          privacy_policy += "\n\n"
+          return privacy_policy
+        def get_repos_structure():
+          """ Returns the repos structure
+          """
+          return open("../wiki/Repos-structure.md", "r+").read()
+        def get_outro():
+          """ Returns the outro
+          """
+          outro = "---\n"
+          outro += "Made with ❤️ by @DavideC03\n\n"
+          outro += "If you have any questions, please contact my community and me:\n\n"
+          outro += "- [Discussion](https://github.com/createstructure/createstructure/discussions/new)\n"
+          outro += "- [Issues](https://github.com/createstructure/createstructure/issues/new)\n"
+          outro += "- [Mail](mailto:help@castellanidavide.it)\n"
+          return outro
+        def get_readme():
+          """ Returns the readme
+          """
+          repos = [
+            "app-createstructure",
+            "debian-createstructure",
+            "rest-createstructure",
+            "createstructure.github.io",
+            "manager-createstructure",
+            "core-createstructure",
+            "librerias-createstructure",
+            "default-template"
+          ]
+          readme = get_intro()
+          readme += get_table_of_contents(repos)
+          readme += get_description()
+          readme += get_repo_description()
+          readme += get_subscription_to_the_service()
+          readme += get_how_to_use()
+          readme += get_how_to_create_your_own_template()
+          readme += get_how_to_contribute()
+          readme += get_privacy_policy()
+          readme += get_repos_structure()
+          readme += get_outro()
+          return readme
+        if __name__ == "__main__":
+          open("README.md", "w").write(get_readme())
+        EOF
+    - name: git add & commit & upload wiki
+      continue-on-error: true
+      run: |
+        cd wiki
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "help@castellanidavide.it"
+        git add *
+        git commit -m "Upgrade by automatic action"
+        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.wiki.git
+    - name: git add & commit & upload repo
+      continue-on-error: true
+      run: |
+        cd repo
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "help@castellanidavide.it"
+        git add *
+        git commit -m "Upgrade by automatic action"
+        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
