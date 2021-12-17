@@ -49,5 +49,5 @@ The steps to uninstall the app are:
 The REST API is a web service that allows you to use the createstructure service. It didn't need to be installed on the computer to use the service.
 
 The steps to use it are:
-- Create a [GitHub token](https://github.com/settings/tokens/new) with the scope `repo`, `org:admin` and `user`
+- Create a [GitHub token](https://github.com/settings/tokens/new) with the scope `repo`, `workflow`, `org:admin` and `user`
 - Follow the [REST API documentation](https://github.com/createstructure/rest-createstructure/wiki/REST-Actions)
