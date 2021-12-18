@@ -24,3 +24,4 @@ There are some special keys whict starts and ends with `sol`, the list is [this]
 
 - Push the repository
 - Try the created template
+

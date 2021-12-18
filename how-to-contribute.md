@@ -21,3 +21,4 @@ So the steps to contribute to the code are:
   - [ ] Why did you make the changes/ What was the problem?
   - [ ] How did you solve the problem?
   - [ ] Any other information you want to share
+
