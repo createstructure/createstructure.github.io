@@ -23,8 +23,22 @@
 ## General description
 createstructure is a service to make it easier and faster the setup for any IT project.
 
-## Repo description
+## :octocat: Description :octocat:
 This repo is made to make it easier to contain all the documentation of the createstructure project.
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/5aaa608033843dd6609340c88d4516a4ee22dc7682b9b0eb99a6efd0d979e6cc/createstructure/createstructure.github.io)
+![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
+
+Made by Castellani Davide
+Template base for the BMC (Business Model Canvas): Strategyzer AG
+
+Icons taken by Flavicon:
+- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)
+- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)
+- [https://www.flaticon.com/authors/eucalyp](https://www.flaticon.com/authors/eucalyp)
+- [https://www.flaticon.com/authors/ultimatearm](https://www.flaticon.com/authors/ultimatearm)
+- [https://www.freepik.com](https://www.freepik.com)
+
+
 
 ## Subscription to the service
 
@@ -179,8 +193,18 @@ To get more info about how it works and how can you can contribute, please go to
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/a43544810b6116cfdc1e35b59f79f6b1ae0d0de044f27cb8f2a87a21264f36db/createstructure/createstructure.github.io)
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/4159abd81a1ebf3750620cef588507948224fa1133d48de778ca4407bce69821/createstructure/createstructure.github.io)
 ![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
+
+Made by Castellani Davide
+Template base for the BMC (Business Model Canvas): Strategyzer AG
+
+Icons taken by Flavicon:
+- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)
+- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)
+- [https://www.flaticon.com/authors/eucalyp](https://www.flaticon.com/authors/eucalyp)
+- [https://www.flaticon.com/authors/ultimatearm](https://www.flaticon.com/authors/ultimatearm)
+- [https://www.freepik.com](https://www.freepik.com)
 
 ### manager-createstructure
 Repo for managing the creation of the repos
