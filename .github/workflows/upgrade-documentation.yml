@@ -34,7 +34,7 @@ jobs:
           """ Get BMC description
           """
           description = "Made by Castellani Davide\n"
-          description += "Template base for the BMC (Business Model Canvas): Strategyzer AG\n"
+          description += "Template base for the BMC (Business Model Canvas): Strategyzer AG\n\n"
           description += "Icons taken by Flavicon:\n"
           description += "- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)\n"
           description += "- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)\n"
