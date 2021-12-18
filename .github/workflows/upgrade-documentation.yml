@@ -208,8 +208,7 @@ jobs:
           """ Returns the repo description
           """
           description = "## Repo description\n"
-          repo = json.loads(urllib.request.urlopen("https://api.github.com/repos/createstructure/createstructure.github.io").read().decode())
-          description += repo["description"]
+          description = open("../wiki/Home.md", "r+").read()
           description += "\n\n"
           return description
         def get_subscription_to_the_service():
