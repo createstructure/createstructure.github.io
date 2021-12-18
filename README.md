@@ -23,6 +23,7 @@
 ![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
 
 Made by Castellani Davide
+
 Template base for the BMC (Business Model Canvas): Strategyzer AG
 
 Icons taken by Flavicon:
