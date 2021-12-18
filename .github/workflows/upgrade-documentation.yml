@@ -30,6 +30,18 @@ jobs:
           """
           soup = BeautifulSoup(urllib.request.urlopen("$GITHUB_SERVER_URL/$GITHUB_REPOSITORY").read().decode(), 'html.parser')
           return soup.find("meta", property="og:image")["content"]
+        def get_bmc_description():
+          """ Get BMC description
+          """
+          description = "Made by Castellani Davide\n"
+          description += "Template base for the BMC (Business Model Canvas): Strategyzer AG\n"
+          description += "Icons taken by Flavicon:\n"
+          description += "- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)\n"
+          description += "- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)\n"
+          description += "- [https://www.flaticon.com/authors/eucalyp](https://www.flaticon.com/authors/eucalyp)\n"
+          description += "- [https://www.flaticon.com/authors/ultimatearm](https://www.flaticon.com/authors/ultimatearm)\n"
+          description += "- [https://www.freepik.com](https://www.freepik.com)\n\n"
+          return description
         def get_content():
           """ Returns the file content
           """
@@ -38,6 +50,7 @@ jobs:
           file_content += get_json()["description"].replace(". ", ".\n\n").replace("wiki", "[wiki]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/wiki)") + "\n"
           file_content += f"![$GITHUB_REPOSITORY]({social_img})\n"
           file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)\n\n"
+          file_content += get_bmc_description()
           return file_content
         if __name__ == "__main__":
           open("Home.md", "w+").write(str(get_content()))
