@@ -11,7 +11,11 @@ jobs:
       run: |
         sudo apt update -y
         sudo pip install BeautifulSoup4
-        git clone --recurse-submodules --depth 1 https://$.GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.wiki.git wiki
+        {
+          git clone --recurse-submodules --depth 1 https://$.GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.wiki.git wiki
+        } || {
+          mkdir wiki
+        }
         git clone --recurse-submodules --depth 1 https://$.GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git -b $(echo ${GITHUB_REF#refs/heads/}) repo
         rm -f wiki/*.md
     - name: Home file
@@ -270,12 +274,16 @@ jobs:
     - name: git add & commit & upload wiki
       continue-on-error: true
       run: |
-        cd wiki
-        git config user.name "$GITHUB_ACTOR"
-        git config user.email "help@castellanidavide.it"
-        git add *
-        git commit -m "Upgrade by automatic action"
-        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.wiki.git
+        {
+          ls wiki/.git/
+        } && {
+          cd wiki
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "help@castellanidavide.it"
+          git add *
+          git commit -m "Upgrade by automatic action"
+          git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.wiki.git
+        }
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
