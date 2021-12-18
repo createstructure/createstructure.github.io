@@ -51,6 +51,7 @@ This repo is made to make it easier to contain all the documentation of the crea
 - In the plan box select press the "Cancel this plan" link
 - In the alert box, press the "OK" button
 - Now you are unsubscribed from the service
+
 ## How to use the createstructure service
 
 > To use the createstructure service, you need to be [subscribed to the createstructure service](./subscription-to-the-service.md).
@@ -104,6 +105,7 @@ The REST API is a web service that allows you to use the createstructure service
 The steps to use it are:
 - Create a [GitHub token](https://github.com/settings/tokens/new) with the scope `repo`, `workflow`, `org:admin` and `user`
 - Follow the [REST API documentation](https://github.com/createstructure/rest-createstructure/wiki/REST-Actions)
+
 ## How to create your own template
 
 With createstructure service you can also use your own template.
@@ -130,6 +132,7 @@ There are some special keys whict starts and ends with `sol`, the list is [this]
 
 - Push the repository
 - Try the created template
+
 ## How to contribute
 
 ### Use the service
@@ -153,6 +156,7 @@ So the steps to contribute to the code are:
   - [ ] Why did you make the changes/ What was the problem?
   - [ ] How did you solve the problem?
   - [ ] Any other information you want to share
+
 ## Privacy policy
 Press the image below to see the privacy policy.
 [![Privacy policy](https://media.istockphoto.com/vectors/privacy-policy-beauteous-vector-halftone-isometric-illustration-vector-id1145198292?k=20&m=1145198292&s=612x612&w=0&h=rBMrJ-rDliLqSnkQHkUXg2j2Z4MIBH9CsaijSwZ5FxU=)](./Privacy-Policy.md)
