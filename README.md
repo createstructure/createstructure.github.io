@@ -187,9 +187,8 @@ To get more info about how it works and how can you can contribute, please go to
 ![createstructure/rest-createstructure](https://opengraph.githubassets.com/d68d67aaa0ae089ee1c96bf0e0d6a3286f92f09cf6cc0ff6c984223f79f3f0be/createstructure/rest-createstructure)
 
 ### createstructure.github.io
-## :octocat: Description :octocat:
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure.github.io](https://opengraph.githubassets.com/1b9f4087c49e7a2be7afebb51d703b7e5c1536d244d1d717d0b8323b2bad0233/createstructure/createstructure.github.io)
+![createstructure.github.io](https://opengraph.githubassets.com/3f342cf5dfa48440f4b8c833bee7a77e8cc85f55b87455508e79065572d5e916/createstructure/createstructure.github.io)
 ### manager-createstructure
 Repo for managing the creation of the repos
 ![createstructure/manager-createstructure](https://opengraph.githubassets.com/b32807e23c34019668b895f64e67df529055ac4e8711c540ef47d8cc3ce5fd09/createstructure/manager-createstructure)
