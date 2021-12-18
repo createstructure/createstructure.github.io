@@ -187,19 +187,9 @@ To get more info about how it works and how can you can contribute, please go to
 ![createstructure/rest-createstructure](https://opengraph.githubassets.com/d68d67aaa0ae089ee1c96bf0e0d6a3286f92f09cf6cc0ff6c984223f79f3f0be/createstructure/rest-createstructure)
 
 ### createstructure.github.io
-![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
-
-Made by Castellani Davide
-
-Template base for the BMC (Business Model Canvas): Strategyzer AG
-
-Icons taken by Flavicon:
-- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)
-- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)
-- [https://www.flaticon.com/authors/eucalyp](https://www.flaticon.com/authors/eucalyp)
-- [https://www.flaticon.com/authors/ultimatearm](https://www.flaticon.com/authors/ultimatearm)
-- [https://www.freepik.com](https://www.freepik.com)
-
+## :octocat: Description :octocat:
+This repo is made to make it easier to contain all the documentation of the createstructure project.
+![createstructure.github.io](https://opengraph.githubassets.com/1b9f4087c49e7a2be7afebb51d703b7e5c1536d244d1d717d0b8323b2bad0233/createstructure/createstructure.github.io)
 ### manager-createstructure
 Repo for managing the creation of the repos
 ![createstructure/manager-createstructure](https://opengraph.githubassets.com/b32807e23c34019668b895f64e67df529055ac4e8711c540ef47d8cc3ce5fd09/createstructure/manager-createstructure)
