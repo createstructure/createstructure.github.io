@@ -18,7 +18,7 @@ jobs:
       run: |
         cd wiki
         python3 << EOF
-         def get_bmc_description():
+        def get_bmc_description():
           """ Get BMC description
           """
           description = "Made by Castellani Davide\n"
