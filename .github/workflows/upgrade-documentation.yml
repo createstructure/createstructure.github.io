@@ -78,7 +78,9 @@ jobs:
             "librerias-createstructure",
             "default-template"
           ]
-          open("Repos-structure.md", "w+").write(get_repos_structure(repos))
+          content = get_repos_structure(repos)
+          content += "![BMC createstructure](./BMC.jpg)\n\n"
+          open("Repos-structure.md", "w+").write(content)
         EOF
     - name: Directory structure file
       run: |
@@ -250,6 +252,7 @@ jobs:
           ]
           readme = get_intro()
           readme += get_table_of_contents(repos)
+
           readme += get_description()
           readme += get_repo_description()
           readme += get_subscription_to_the_service()
