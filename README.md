@@ -187,11 +187,10 @@ To get more info about how it works and how can you can contribute, please go to
 ![createstructure/rest-createstructure](https://opengraph.githubassets.com/d68d67aaa0ae089ee1c96bf0e0d6a3286f92f09cf6cc0ff6c984223f79f3f0be/createstructure/rest-createstructure)
 
 ### createstructure.github.io
-This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/22b02239d6d37c8519311329bf43ffc0e3ed1d07c996b0a08ee173abc520ca57/createstructure/createstructure.github.io)
 ![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
 
 Made by Castellani Davide
+
 Template base for the BMC (Business Model Canvas): Strategyzer AG
 
 Icons taken by Flavicon:
