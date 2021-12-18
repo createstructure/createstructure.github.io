@@ -18,19 +18,7 @@ jobs:
       run: |
         cd wiki
         python3 << EOF
-        import urllib.request
-        import json
-        from bs4 import BeautifulSoup
-        def get_json():
-          """ Returns the json with description
-          """
-          return json.loads(urllib.request.urlopen("$GITHUB_API_URL/repos/$GITHUB_REPOSITORY").read().decode())
-        def get_social_img():
-          """ Get social image
-          """
-          soup = BeautifulSoup(urllib.request.urlopen("$GITHUB_SERVER_URL/$GITHUB_REPOSITORY").read().decode(), 'html.parser')
-          return soup.find("meta", property="og:image")["content"]
-        def get_bmc_description():
+         def get_bmc_description():
           """ Get BMC description
           """
           description = "Made by Castellani Davide\n"
@@ -45,10 +33,7 @@ jobs:
         def get_content():
           """ Returns the file content
           """
-          social_img = get_social_img()
           file_content = "## :octocat: Description :octocat:\n"
-          file_content += get_json()["description"].replace(". ", ".\n\n").replace("wiki", "[wiki]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/wiki)") + "\n"
-          file_content += f"![$GITHUB_REPOSITORY]({social_img})\n"
           file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)\n\n"
           file_content += get_bmc_description()
           return file_content
@@ -180,8 +165,7 @@ jobs:
           default = [
             "- [createstructure](#createstructure)",
             "  - [Table of contents](#table-of-contents)",
-            "  - [General description](#general-description)",
-            "  - [Repo description](#repo-description)",
+            "  - [Description](#description)",
             "  - [subscription to the service](#subscription-of-the-service)",
             "  - [How to use](#how-to-use)",
             "  - [How to create your own template](#how-to-create-your-own-template)",
@@ -199,15 +183,7 @@ jobs:
         def get_description():
           """ Returns the description
           """
-          description = "## General description\n"
-          org = json.loads(urllib.request.urlopen("https://api.github.com/orgs/createstructure").read().decode())
-          description += org["description"]
-          description += "\n\n"
-          return description
-        def get_repo_description():
-          """ Returns the repo description
-          """
-          description = open("../wiki/Home.md", "r+").read().replace(":octocat:", "").replace("Description", "Repo description")
+          description = open("../wiki/Home.md", "r+").read().replace(":octocat:", "")
           description += "\n\n"
           return description
         def get_subscription_to_the_service():
@@ -265,7 +241,6 @@ jobs:
           readme += get_table_of_contents(repos)
 
           readme += get_description()
-          readme += get_repo_description()
           readme += get_subscription_to_the_service()
           readme += get_how_to_use()
           readme += get_how_to_create_your_own_template()
