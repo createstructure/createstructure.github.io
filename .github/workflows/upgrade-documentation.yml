@@ -46,18 +46,35 @@ jobs:
         python3 << EOF
         import urllib.request
         import json
+        from bs4 import BeautifulSoup
+        def get_json(repo):
+          """ Returns the json with REST description
+          """
+          return json.loads(urllib.request.urlopen(f"$GITHUB_API_URL/repos/{repo}").read().decode())
+        def get_social_img(repo):
+          """ Get social image
+          """
+          soup = BeautifulSoup(urllib.request.urlopen(f"$GITHUB_SERVER_URL/{repo}").read().decode(), 'html.parser')
+          return soup.find("meta", property="og:image")["content"]
         def get_content(repo):
           """ Returns the file content
           """
-          replacements = {
-            "## :octocat: Description :octocat:\n": "",
-          }
-          file = urllib.request.urlopen(f"https://raw.githubusercontent.com/wiki/createstructure/{repo}/Home.md").read().decode()
-          for key, value in replacements.items():
-            file = file.replace(key, value)
-          file = file.rstrip("\n")
-          file += "\n\n"
-          return file
+          if repo in ["createstructure.github.io"]:
+            social_img = get_social_img(repo)
+            file_content = "## :octocat: Description :octocat:\n"
+            file_content += get_json(repo)["description"].replace(". ", ".\n\n").replace("wiki", f"[wiki]($GITHUB_SERVER_URL/{repo}/wiki)") + "\n"
+            file_content += f"![{repo}]({social_img})\n"
+            return file_content
+          else:
+            replacements = {
+              "## :octocat: Description :octocat:\n": "",
+            }
+            file = urllib.request.urlopen(f"https://raw.githubusercontent.com/wiki/createstructure/{repo}/Home.md").read().decode()
+            for key, value in replacements.items():
+              file = file.replace(key, value)
+            file = file.rstrip("\n")
+            file += "\n\n"
+            return file
         def get_repos_structure(repos):
           """ Returns the repos structure
           """
@@ -239,7 +256,6 @@ jobs:
           ]
           readme = get_intro()
           readme += get_table_of_contents(repos)
-
           readme += get_description()
           readme += get_subscription_to_the_service()
           readme += get_how_to_use()
