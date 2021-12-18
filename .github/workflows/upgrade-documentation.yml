@@ -37,6 +37,7 @@ jobs:
           file_content = "## :octocat: Description :octocat:\n"
           file_content += get_json()["description"].replace(". ", ".\n\n").replace("wiki", "[wiki]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/wiki)") + "\n"
           file_content += f"![$GITHUB_REPOSITORY]({social_img})\n"
+          file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)\n\n"
           return file_content
         if __name__ == "__main__":
           open("Home.md", "w+").write(str(get_content()))
@@ -79,7 +80,6 @@ jobs:
             "default-template"
           ]
           content = get_repos_structure(repos)
-          content += "![BMC createstructure](./BMC.jpg)\n\n"
           open("Repos-structure.md", "w+").write(content)
         EOF
     - name: Directory structure file
