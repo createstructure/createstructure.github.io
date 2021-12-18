@@ -161,7 +161,7 @@ Press the image below to see the privacy policy.
 
 ### app-createstructure
 Mobile app to use createstructure service
-![createstructure/app-createstructure](https://opengraph.githubassets.com/33608e92cf3c93b5d86d6acd3a0b8d06af6617a91cab453a87f79802846aea07/createstructure/app-createstructure)
+![createstructure/app-createstructure](https://opengraph.githubassets.com/c5dfdfe93552cf69da096f9cade28748052753560d13d98551002cc71ee5f1e4/createstructure/app-createstructure)
 
 ### debian-createstructure
 Debian client app
@@ -175,7 +175,7 @@ To get more info about how it works and how can you can contribute, please go to
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/c4db4fe857ca4132c0f56eb814e7eda68abedf37dc372f4ef44842b0096a81d2/createstructure/createstructure.github.io)
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/1e543d86f8c84c4335808d47e9cf222269ff943eb03d531deb7ea03a249c60b8/createstructure/createstructure.github.io)
 
 ### manager-createstructure
 Repo for managing the creation of the repos
@@ -183,7 +183,7 @@ Repo for managing the creation of the repos
 
 ### core-createstructure
 Repo where there's the source to create the repo(s)
-![createstructure/core-createstructure](https://opengraph.githubassets.com/4ccea45ac776d2b90f2eb314b540266601c2febce9e389ff8e0f06ccbdd6563c/createstructure/core-createstructure)
+![createstructure/core-createstructure](https://opengraph.githubassets.com/7035b95d9d5caff317149956d17309b6e1bcbc3708f8ac73f109010b717f3e44/createstructure/core-createstructure)
 
 ### librerias-createstructure
 Repo containing the library used by core-createstructure  manager-createstructure
@@ -191,7 +191,9 @@ Repo containing the library used by core-createstructure  manager-createstructur
 
 ### default-template
 This is the default template
-![createstructure/default-template](https://opengraph.githubassets.com/e6c4a2eb3399dda1633a0cc19d2f1a57a9fabefc59601798a855ae20d99ae772/createstructure/default-template)
+![createstructure/default-template](https://opengraph.githubassets.com/ede353e5b0cd0c99011ba32e2e191acd874518372032faf6c604cd49286042fe/createstructure/default-template)
+
+![BMC createstructure](./BMC.jpg)
 
 ---
 Made with ❤️ by @DavideC03
