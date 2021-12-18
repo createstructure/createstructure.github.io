@@ -21,7 +21,7 @@ jobs:
         def get_bmc_description():
           """ Get BMC description
           """
-          description = "Made by Castellani Davide\n"
+          description = "Made by Castellani Davide\n\n"
           description += "Template base for the BMC (Business Model Canvas): Strategyzer AG\n\n"
           description += "Icons taken by Flavicon:\n"
           description += "- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)\n"
