@@ -207,8 +207,7 @@ jobs:
         def get_repo_description():
           """ Returns the repo description
           """
-          description = "## Repo description\n"
-          description += open("../wiki/Home.md", "r+").read().replace(":octocat:", "")
+          description = open("../wiki/Home.md", "r+").read().replace(":octocat:", "").replace("Description", "Repo description")
           description += "\n\n"
           return description
         def get_subscription_to_the_service():
