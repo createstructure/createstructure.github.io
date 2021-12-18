@@ -175,7 +175,8 @@ To get more info about how it works and how can you can contribute, please go to
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/582baf63fdc95c268bb4dd86a6c2bb3d9294a3eaac0dfdd86006ee1a111e5c6d/createstructure/createstructure.github.io)
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/a43544810b6116cfdc1e35b59f79f6b1ae0d0de044f27cb8f2a87a21264f36db/createstructure/createstructure.github.io)
+![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
 
 ### manager-createstructure
 Repo for managing the creation of the repos
