@@ -3,8 +3,7 @@
 ## Table of Contents
 - [createstructure](#createstructure)
   - [Table of contents](#table-of-contents)
-  - [General description](#general-description)
-  - [Repo description](#repo-description)
+  - [Description](#description)
   - [subscription to the service](#subscription-of-the-service)
   - [How to use](#how-to-use)
   - [How to create your own template](#how-to-create-your-own-template)
@@ -20,12 +19,7 @@
     - [librerias-createstructure](#librerias-createstructure)
     - [default-template](#default-template)
 
-## General description
-createstructure is a service to make it easier and faster the setup for any IT project.
-
-##  Repo description 
-This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/22b02239d6d37c8519311329bf43ffc0e3ed1d07c996b0a08ee173abc520ca57/createstructure/createstructure.github.io)
+##  Description 
 ![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
 
 Made by Castellani Davide
@@ -193,7 +187,7 @@ To get more info about how it works and how can you can contribute, please go to
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/5aaa608033843dd6609340c88d4516a4ee22dc7682b9b0eb99a6efd0d979e6cc/createstructure/createstructure.github.io)
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/22b02239d6d37c8519311329bf43ffc0e3ed1d07c996b0a08ee173abc520ca57/createstructure/createstructure.github.io)
 ![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
 
 Made by Castellani Davide
