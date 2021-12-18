@@ -23,9 +23,9 @@
 ## General description
 createstructure is a service to make it easier and faster the setup for any IT project.
 
-##  Description 
+##  Repo description 
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure/createstructure.github.io](https://opengraph.githubassets.com/dcca98f537458c9916f467b92a527064fa6a66630636c7722692d7e81e0a953c/createstructure/createstructure.github.io)
+![createstructure/createstructure.github.io](https://opengraph.githubassets.com/22b02239d6d37c8519311329bf43ffc0e3ed1d07c996b0a08ee173abc520ca57/createstructure/createstructure.github.io)
 ![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
 
 Made by Castellani Davide
