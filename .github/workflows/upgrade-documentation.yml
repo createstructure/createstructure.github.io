@@ -61,8 +61,7 @@ jobs:
           """
           if repo in ["createstructure.github.io"]:
             social_img = get_social_img(repo)
-            file_content = "## :octocat: Description :octocat:\n"
-            file_content += get_json(repo)["description"].replace(". ", ".\n\n").replace("wiki", f"[wiki]($GITHUB_SERVER_URL/createstructure/{repo}/wiki)") + "\n"
+            file_content = get_json(repo)["description"].replace(". ", ".\n\n").replace("wiki", f"[wiki]($GITHUB_SERVER_URL/createstructure/{repo}/wiki)") + "\n"
             file_content += f"![{repo}]({social_img})\n"
             return file_content
           else:
