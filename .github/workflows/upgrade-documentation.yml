@@ -275,7 +275,7 @@ jobs:
       continue-on-error: true
       run: |
         {
-          ls wiki/.git/
+          ls wiki/.git/ > /dev/null
         } && {
           cd wiki
           git config user.name "$GITHUB_ACTOR"
