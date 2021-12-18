@@ -50,11 +50,11 @@ jobs:
         def get_json(repo):
           """ Returns the json with REST description
           """
-          return json.loads(urllib.request.urlopen(f"$GITHUB_API_URL/repos/{repo}").read().decode())
+          return json.loads(urllib.request.urlopen(f"$GITHUB_API_URL/repos/createstructure/{repo}").read().decode())
         def get_social_img(repo):
           """ Get social image
           """
-          soup = BeautifulSoup(urllib.request.urlopen(f"$GITHUB_SERVER_URL/{repo}").read().decode(), 'html.parser')
+          soup = BeautifulSoup(urllib.request.urlopen(f"$GITHUB_SERVER_URL/createstructure/{repo}").read().decode(), 'html.parser')
           return soup.find("meta", property="og:image")["content"]
         def get_content(repo):
           """ Returns the file content
@@ -62,7 +62,7 @@ jobs:
           if repo in ["createstructure.github.io"]:
             social_img = get_social_img(repo)
             file_content = "## :octocat: Description :octocat:\n"
-            file_content += get_json(repo)["description"].replace(". ", ".\n\n").replace("wiki", f"[wiki]($GITHUB_SERVER_URL/{repo}/wiki)") + "\n"
+            file_content += get_json(repo)["description"].replace(". ", ".\n\n").replace("wiki", f"[wiki]($GITHUB_SERVER_URL/createstructure/{repo}/wiki)") + "\n"
             file_content += f"![{repo}]({social_img})\n"
             return file_content
           else:
