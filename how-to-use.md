@@ -1,4 +1,4 @@
-## How to use the createstructure service
+## How to use
 
 > To use the createstructure service, you need to be [subscribed to the createstructure service](./subscription-to-the-service.md).
 
