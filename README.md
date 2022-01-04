@@ -61,7 +61,7 @@ Icons taken by Flavicon:
 - In the alert box, press the "OK" button
 - Now you are unsubscribed from the service
 
-## How to use the createstructure service
+## How to use
 
 > To use the createstructure service, you need to be [subscribed to the createstructure service](./subscription-to-the-service.md).
 
@@ -174,7 +174,7 @@ Press the image below to see the privacy policy.
 
 ### app-createstructure
 Mobile app to use createstructure service
-![createstructure/app-createstructure](https://opengraph.githubassets.com/4d0cb294bcf12b2d38688b6d33a117768bfbf2b1f5b81ec0e7cf0eecf0d91a8f/createstructure/app-createstructure)
+![createstructure/app-createstructure](https://opengraph.githubassets.com/a0aff21f8d25368a0b1b5a9ea2a2fab41bdc9f552a42de8745ea3e798a522b3e/createstructure/app-createstructure)
 
 ### debian-createstructure
 Debian client app
@@ -188,7 +188,7 @@ To get more info about how it works and how can you can contribute, please go to
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure.github.io](https://opengraph.githubassets.com/b485efe027fef98a19fd69e4fb8706e1bebf2078e95f11982671964a0fcc6a72/createstructure/createstructure.github.io)
+![createstructure.github.io](https://opengraph.githubassets.com/7404edd5926161dd72086d17d4fa0b7a1ccf722e5f99a53fbf8c670d61d97510/createstructure/createstructure.github.io)
 ### manager-createstructure
 Repo for managing the creation of the repos
 ![createstructure/manager-createstructure](https://opengraph.githubassets.com/d79a61fd25d4fb869c5fcfb91eff71db5ea9bf83a77c0e0a1f836d936345f21d/createstructure/manager-createstructure)
