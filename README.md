@@ -188,14 +188,14 @@ To get more info about how it works and how can you can contribute, please go to
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure.github.io](https://opengraph.githubassets.com/7404edd5926161dd72086d17d4fa0b7a1ccf722e5f99a53fbf8c670d61d97510/createstructure/createstructure.github.io)
+![createstructure.github.io](https://opengraph.githubassets.com/27a9869871c6a27ec276d09acadde89045e6f0b900e347c332ea920543f474e7/createstructure/createstructure.github.io)
 ### manager-createstructure
 Repo for managing the creation of the repos
 ![createstructure/manager-createstructure](https://opengraph.githubassets.com/d79a61fd25d4fb869c5fcfb91eff71db5ea9bf83a77c0e0a1f836d936345f21d/createstructure/manager-createstructure)
 
 ### core-createstructure
 Repo where there's the source to create the repo(s)
-![createstructure/core-createstructure](https://opengraph.githubassets.com/c6ff0516de990fd249e56fceb3599bb81da1114531b9c484b3d3a88cb417f05b/createstructure/core-createstructure)
+![createstructure/core-createstructure](https://opengraph.githubassets.com/7540cb255eb569afb18af42c5b713f462a36541cf99fb7a47f4546e6527a134f/createstructure/core-createstructure)
 
 ### librerias-createstructure
 Repo containing the library used by core-createstructure  manager-createstructure
@@ -203,7 +203,7 @@ Repo containing the library used by core-createstructure  manager-createstructur
 
 ### default-template
 This is the default template
-![createstructure/default-template](https://opengraph.githubassets.com/d57966ae448b8fc09a3ead520dcec768acda9f5bfc112b4128294b159552c805/createstructure/default-template)
+![createstructure/default-template](https://opengraph.githubassets.com/cf4891d1ca34cb9699f58b62ad889f1b369fad174bbb7dc2b3abfa7b482580a6/createstructure/default-template)
 
 ---
 Made with ❤️ by @DavideC03
