@@ -4,7 +4,8 @@ on: [workflow_dispatch, push]
 jobs:
   UML-export:
     runs-on: ubuntu-latest
-    environment: UML
+    environment:
+      name: UML
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
