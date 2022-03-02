@@ -2,6 +2,27 @@ name: Upgrade documentation (Wiki + README.md)
 on: [workflow_dispatch, push]
 
 jobs:
+  UML-export:
+    runs-on: ubuntu-latest
+    environment: UML
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo snap install drawio
+      - name: Export UML as SVG
+        run: |
+          draw.io -x -f svg -p 1 -o test.svg createstructure.github.io.drawio
+      - name: git add & commit & upload repo
+      continue-on-error: true
+      run: |
+        cd repo
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "help@castellanidavide.it"
+        git add *
+        git commit -m "Exported UML automatically"
+        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
+
   upgrade-documentation:
     runs-on: ubuntu-latest
     environment:
