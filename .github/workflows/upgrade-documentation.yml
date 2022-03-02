@@ -8,18 +8,14 @@ jobs:
       name: UML
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        sudo snap install drawio
-    - name: Export UML as SVG
-      run: |
-        sudo mkdir /run/user/1001
-        sudo chmod a+rwx /run/user/1001
-        drawio -x -p 1 -f svg -o test.svg createstructure.github.io.drawio
+    - name: Convert digramm to png
+      uses: Burnett01/actions-drawio@1.2
+      with:
+        src: createstructure.github.io.drawio
+        dest: BMC.svg
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
-        cd repo
         git config user.name "$GITHUB_ACTOR"
         git config user.email "help@castellanidavide.it"
         git add *
