@@ -14,9 +14,9 @@ jobs:
         sudo apt -y install wget curl
         curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep browser_download_url | grep '\.deb' | cut -d '"' -f 4 | wget -i -
         sudo apt -f install ./drawio-*.deb
-    - name: Export UML as SVG
+    - name: Export UML as PNG
       run: |
-        drawio -x -p 1 -f svg -o test.svg createstructure.github.io.drawio
+        drawio -x -p 1 -f png -o test.png createstructure.github.io.drawio
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
