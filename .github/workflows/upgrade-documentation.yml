@@ -58,7 +58,7 @@ jobs:
           """ Returns the file content
           """
           file_content = "## :octocat: Description :octocat:\n"
-          file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)\n\n"
+          file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.svg)\n\n"
           file_content += get_bmc_description()
           return file_content
         if __name__ == "__main__":
