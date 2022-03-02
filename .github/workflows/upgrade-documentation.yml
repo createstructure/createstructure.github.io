@@ -14,7 +14,7 @@ jobs:
       run: |
         sudo mkdir /run/user/1001
         sudo chmod a+rwx /run/user/1001
-        drawio -x -f svg -o test.svg createstructure.github.io.drawio
+        drawio -x -p 1 -f svg -o test.svg createstructure.github.io.drawio
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
