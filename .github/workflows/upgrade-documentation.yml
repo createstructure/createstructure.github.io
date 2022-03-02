@@ -16,7 +16,7 @@ jobs:
         sudo apt -f install ./drawio-*.deb
     - name: Export UML as PNG
       run: |
-        drawio -V
+        sudo drawio -V
         drawio -x -p 1 -f png -o test.png createstructure.github.io.drawio
     - name: git add & commit & upload repo
       continue-on-error: true
