@@ -12,7 +12,7 @@ jobs:
         sudo snap install drawio
     - name: Export UML as SVG
       run: |
-        draw.io -x -f svg -p 1 -o test.svg createstructure.github.io.drawio
+        drawio -x -f svg -p 1 -o test.svg createstructure.github.io.drawio
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
