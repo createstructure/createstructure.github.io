@@ -8,11 +8,15 @@ jobs:
       name: UML
     steps:
     - uses: actions/checkout@v2
-    - name: Convert digramm to png
-      uses: Burnett01/actions-drawio@1.2
-      with:
-        src: createstructure.github.io.drawio
-        dest: BMC.svg
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt -y install wget curl
+        curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep browser_download_url | grep '\.deb' | cut -d '"' -f 4 | wget -i -
+        sudo apt -f install ./drawio-*.deb
+    - name: Export UML as SVG
+      run: |
+        drawio -x -p 1 -f svg -o test.svg createstructure.github.io.drawio
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
@@ -58,7 +62,7 @@ jobs:
           """ Returns the file content
           """
           file_content = "## :octocat: Description :octocat:\n"
-          file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.svg)\n\n"
+          file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)\n\n"
           file_content += get_bmc_description()
           return file_content
         if __name__ == "__main__":
