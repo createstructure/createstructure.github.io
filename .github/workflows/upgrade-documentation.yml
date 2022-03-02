@@ -7,6 +7,7 @@ jobs:
     environment:
       name: UML
     steps:
+    - uses: actions/checkout@v2
     - name: Install dependencies
       run: |
         sudo snap install drawio
@@ -14,7 +15,7 @@ jobs:
       run: |
         sudo mkdir /run/user/1001
         sudo chmod a+rwx /run/user/1001
-        drawio -x -p 1 -f png -o test.png createstructure.github.io.drawio
+        drawio -x -p 1 -f svg -o test.svg createstructure.github.io.drawio
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
