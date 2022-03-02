@@ -20,7 +20,7 @@
     - [default-template](#default-template)
 
 ##  Description 
-![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
+![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.svg)
 
 Made by Castellani Davide
 
