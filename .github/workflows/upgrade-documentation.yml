@@ -12,9 +12,11 @@ jobs:
       run: |
         choco install drawio -y
         & 'C:\Program Files\draw.io\draw.io.exe' -V
-    - name: Export UML as SVG
+    - name: Export UML
       run: |
+        & 'C:\Program Files\draw.io\draw.io.exe' -V
         & 'C:\Program Files\draw.io\draw.io.exe' -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
+        dir
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
