@@ -8,16 +8,18 @@ jobs:
       name: UML
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
+    - name: Render .drawio files
+      uses: docker://ghcr.io/racklet/render-drawio-action:v1
+      with: # Showcasing the default values here
+        formats: 'svg'
+        sub-dirs: '.'
+        skip-dirs: '.git'
+        # files: '' # unset, specify `dest-file=src-file` mappings here
+        log-level: 'info'
+      id: render
+    - name: List the rendered files
       run: |
-        sudo apt update
-        sudo apt -y install wget curl
-        curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep browser_download_url | grep '\.deb' | cut -d '"' -f 4 | wget -i -
-        sudo apt -f install ./drawio-*.deb
-    - name: Export UML as PNG
-      run: |
-        sudo drawio -V
-        drawio -x -p 1 -f png -o test.png createstructure.github.io.drawio
+        'ls -l ${{ steps.render.outputs.rendered-files }}'
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
