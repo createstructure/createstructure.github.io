@@ -17,10 +17,7 @@ jobs:
         # files: '' # unset, specify `dest-file=src-file` mappings here
         log-level: 'info'
       id: render
-    - name: List the rendered files
-      run: |
-        'ls -l ${{ steps.render.outputs.rendered-files }}'
-    - name: git add & commit & upload repo
+   - name: git add & commit & upload repo
       continue-on-error: true
       run: |
         git config user.name "$GITHUB_ACTOR"
