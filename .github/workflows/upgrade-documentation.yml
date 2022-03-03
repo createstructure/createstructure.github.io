@@ -3,14 +3,14 @@ on: [workflow_dispatch, push]
 
 jobs:
   UML-export:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     environment:
       name: UML
     steps:
     - uses: actions/checkout@v2
     - name: Download requirements
       run: |
-        sudo snap install drawio
+        choco install drawio
         drawio -V
     - name: git add & commit & upload repo
       continue-on-error: true
