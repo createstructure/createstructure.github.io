@@ -8,14 +8,10 @@ jobs:
       name: UML
     steps:
     - uses: actions/checkout@v2
-    - name: Render .drawio files
-      uses: docker://ghcr.io/racklet/render-drawio-action:v1
-      with: # Showcasing the default values here
-        formats: 'svg'
-        sub-dirs: '.'
-        skip-dirs: '.git'
-        # files: '' # unset, specify `dest-file=src-file` mappings here
-        log-level: 'info'
+    - name: Download requirements
+      run: |
+        snap install drawio
+        drawio -V
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
