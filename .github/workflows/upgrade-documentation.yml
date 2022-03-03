@@ -16,8 +16,7 @@ jobs:
         skip-dirs: '.git'
         # files: '' # unset, specify `dest-file=src-file` mappings here
         log-level: 'info'
-      id: render
-   - name: git add & commit & upload repo
+    - name: git add & commit & upload repo
       continue-on-error: true
       run: |
         git config user.name "$GITHUB_ACTOR"
