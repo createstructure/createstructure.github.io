@@ -11,7 +11,7 @@ jobs:
     - name: Download requirements
       run: |
         choco install drawio -y
-        'C:\Program Files\draw.io\draw.io.exe' -V
+        & 'C:\Program Files\draw.io\draw.io.exe' -V
     - name: Export UML as PNG
       run: |
         drawio -x -p 1 -f png -o test.png createstructure.github.io.drawio
