@@ -18,11 +18,11 @@ jobs:
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
-        git config user.name '$GITHUB_ACTOR'
-        git config user.email 'help@castellanidavide.it'
+        git config user.name $GITHUB_ACTOR
+        git config user.email "help@castellanidavide.it"
         git add *
         git commit -m "Exported UML automatically"
-        git push 'https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git'
+        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
 
   upgrade-documentation:
     runs-on: ubuntu-latest
