@@ -20,18 +20,9 @@
     - [default-template](#default-template)
 
 ##  Description 
-![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
+![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/UML-beta/img/createstructure.github.io-BMC.svg)
 
 Made by Castellani Davide
-
-Template base for the BMC (Business Model Canvas): Strategyzer AG
-
-Icons taken by Flavicon:
-- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)
-- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)
-- [https://www.flaticon.com/authors/eucalyp](https://www.flaticon.com/authors/eucalyp)
-- [https://www.flaticon.com/authors/ultimatearm](https://www.flaticon.com/authors/ultimatearm)
-- [https://www.freepik.com](https://www.freepik.com)
 
 
 
