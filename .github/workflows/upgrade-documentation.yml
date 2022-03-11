@@ -3,22 +3,19 @@ on: [workflow_dispatch, push]
 
 jobs:
   UML-export:
-    runs-on: ubuntu-latest
     environment:
       name: UML
     steps:
     - uses: actions/checkout@v2
     - name: Download requirements
       run: |
-        docker run -it rlespinasse/drawio-export --help
-        docker run -it -v $(pwd):/data rlespinasse/drawio-export
+        # docker run -it rlespinasse/drawio-export --help
+        # docker run -it -v $(pwd):/data rlespinasse/drawio-export
          # choco install drawio -y
-    - name: Export UML
-      run: |
-        # "C:\Program Files\draw.io\draw.io.exe" -V
-        # "C:\Program Files\draw.io\draw.io.exe" -h
-        # "C:\Program Files\draw.io\draw.io.exe" -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
-        # dir
+    - name: Export UML    
+      uses: docker://rlespinasse/drawio-export:latest
+      with:
+        args: --help
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
