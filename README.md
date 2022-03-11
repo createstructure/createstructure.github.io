@@ -20,7 +20,7 @@
     - [default-template](#default-template)
 
 ##  Description 
-![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/UML-beta/img/createstructure.github.io-BMC.svg)
+![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/img/createstructure.github.io-BMC.svg)
 
 
 
