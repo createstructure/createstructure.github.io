@@ -22,8 +22,6 @@
 ##  Description 
 ![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/UML-beta/img/createstructure.github.io-BMC.svg)
 
-Made by Castellani Davide
-
 
 
 ## Subscription to the service
