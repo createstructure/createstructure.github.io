@@ -10,7 +10,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Export UML    
       uses: docker://rlespinasse/drawio-export:latest
-      args: -f svg -o ./
+      with:
+        args: -f svg -o ./
     - name: Check files
       run: |
         ls
