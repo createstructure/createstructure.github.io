@@ -10,17 +10,18 @@ jobs:
     - uses: actions/checkout@v2
     - name: Export UML    
       uses: docker://rlespinasse/drawio-export:latest
+      args: -f svg -o ./
     - name: Check files
       run: |
         ls
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
-        git config user.name "$env:GITHUB_ACTOR"
+        git config user.name "$GITHUB_ACTOR"
         git config user.email "help@castellanidavide.it"
         git add *
         git commit -m "Exported UML automatically"
-        git push https://$env:GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$env:GITHUB_REPOSITORY.git
+        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
 
   upgrade-documentation:
     runs-on: ubuntu-latest
