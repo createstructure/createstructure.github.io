@@ -13,9 +13,12 @@ jobs:
         # choco install drawio -y
         # cp 'C:\Program Files\draw.io\draw.io.exe' .\drawio.exe
         # .\drawio.exe -V
+        sudo apt update
+        sudo apt install snapd
         sudo snap install drawio
         drawio -h
         drawio -v
+      shell: bash
     - name: Export UML
       run: |
         # .\drawio.exe -V
