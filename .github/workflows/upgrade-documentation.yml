@@ -14,8 +14,11 @@ jobs:
         # cp 'C:\Program Files\draw.io\draw.io.exe' .\drawio.exe
         # .\drawio.exe -V
         sudo apt update
-        sudo apt install snapd
-        sudo snap install drawio
+        sudo apt-get install -y libappindicator3-1
+        sudo apt -y install wget
+        wget https://github.com/jgraph/drawio-desktop/releases/download/v12.3.2/draw.io-amd64-12.3.2.deb
+        sudo dpkg -i draw.io-amd64-12.3.2.deb
+        sudo apt -y -f install
         drawio -h
         drawio -v
       shell: bash
