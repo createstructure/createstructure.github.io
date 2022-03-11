@@ -14,10 +14,10 @@ jobs:
         & 'C:\Program Files\draw.io\draw.io.exe' -V
     - name: Export UML
       run: |
-        & 'C:\Program Files\draw.io\draw.io.exe' -V
-        & 'C:\Program Files\draw.io\draw.io.exe' -h
-        & 'C:\Program Files\draw.io\draw.io.exe' -o BMC.svg createstructure.github.io.drawio
-        & 'C:\Program Files\draw.io\draw.io.exe' -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
+        && 'C:\Program Files\draw.io\draw.io.exe' -V
+        && 'C:\Program Files\draw.io\draw.io.exe' -h
+        && 'C:\Program Files\draw.io\draw.io.exe' -o BMC.svg createstructure.github.io.drawio
+        && 'C:\Program Files\draw.io\draw.io.exe' -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
         dir
     - name: git add & commit & upload repo
       continue-on-error: true
