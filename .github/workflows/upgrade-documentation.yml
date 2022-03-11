@@ -12,8 +12,10 @@ jobs:
       run: |
         choco install drawio -y
         $env:Path += ';C:\Program Files\draw.io\draw.io.exe'
+        draw.io.exe -V
     - name: Export UML
       run: |
+        $env:Path += ';C:\Program Files\draw.io\draw.io.exe'
         draw.io.exe -V
         draw.io.exe -h
         draw.io.exe -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
