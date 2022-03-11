@@ -20,18 +20,7 @@
     - [default-template](#default-template)
 
 ##  Description 
-![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)
-
-Made by Castellani Davide
-
-Template base for the BMC (Business Model Canvas): Strategyzer AG
-
-Icons taken by Flavicon:
-- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)
-- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)
-- [https://www.flaticon.com/authors/eucalyp](https://www.flaticon.com/authors/eucalyp)
-- [https://www.flaticon.com/authors/ultimatearm](https://www.flaticon.com/authors/ultimatearm)
-- [https://www.freepik.com](https://www.freepik.com)
+![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/UML-beta/img/createstructure.github.io-BMC.svg)
 
 
 
@@ -174,32 +163,32 @@ Press the image below to see the privacy policy.
 
 ### app-createstructure
 Mobile app to use createstructure service
-![createstructure/app-createstructure](https://opengraph.githubassets.com/a0aff21f8d25368a0b1b5a9ea2a2fab41bdc9f552a42de8745ea3e798a522b3e/createstructure/app-createstructure)
+![createstructure/app-createstructure](https://opengraph.githubassets.com/cd4b1adef0fc08f45b5cce4cb1ffbbda58a554763de0cb9812ba85faf0823d5e/createstructure/app-createstructure)
 
 ### debian-createstructure
 Debian client app
-![createstructure/debian-createstructure](https://opengraph.githubassets.com/b8a2389af51272111faaea6956fb028fea316d51d0886736f4b8a40ab5c8050c/createstructure/debian-createstructure)
+![createstructure/debian-createstructure](https://opengraph.githubassets.com/634d64ce9dfd157de1c6e92e1a82de53df01e6e29e960bf700ed6dd8c68c153e/createstructure/debian-createstructure)
 
 ### rest-createstructure
 This repository contains the REST API created for the createstructure service.
 
 To get more info about how it works and how can you can contribute, please go to the [wiki](https://github.com/createstructure/rest-createstructure/wiki).
-![createstructure/rest-createstructure](https://opengraph.githubassets.com/5f19a54e539fc8c74e4ec545a1a2e24b07f033926221341cb306a7e7600917d5/createstructure/rest-createstructure)
+![createstructure/rest-createstructure](https://opengraph.githubassets.com/2dca08a12f82905c32a6cc1f6e5870e24eb6edd6d5d3b4f2e2796c769689d9b4/createstructure/rest-createstructure)
 
 ### createstructure.github.io
 This repo is made to make it easier to contain all the documentation of the createstructure project.
-![createstructure.github.io](https://opengraph.githubassets.com/27a9869871c6a27ec276d09acadde89045e6f0b900e347c332ea920543f474e7/createstructure/createstructure.github.io)
+![createstructure.github.io](https://opengraph.githubassets.com/0c4381254fd5d35c59220c0600186566eddbe21ce8e0bd23199a4519078f33db/createstructure/createstructure.github.io)
 ### manager-createstructure
 Repo for managing the creation of the repos
-![createstructure/manager-createstructure](https://opengraph.githubassets.com/d79a61fd25d4fb869c5fcfb91eff71db5ea9bf83a77c0e0a1f836d936345f21d/createstructure/manager-createstructure)
+![createstructure/manager-createstructure](https://opengraph.githubassets.com/9ee759ce22abcdf96e8e25dc294bc96221a11239c38a58625a518e680a707ece/createstructure/manager-createstructure)
 
 ### core-createstructure
 Repo where there's the source to create the repo(s)
-![createstructure/core-createstructure](https://opengraph.githubassets.com/7540cb255eb569afb18af42c5b713f462a36541cf99fb7a47f4546e6527a134f/createstructure/core-createstructure)
+![createstructure/core-createstructure](https://opengraph.githubassets.com/9b2fad5928b5deecd16dc94ce790de61ed86ce0ae1d52fa66f2e2b6c10d90fd8/createstructure/core-createstructure)
 
 ### librerias-createstructure
 Repo containing the library used by core-createstructure  manager-createstructure
-![createstructure/libraries-createstructure](https://opengraph.githubassets.com/46f142ce2daef618a3705ff1a66cfee43feb49461ff2c751205b7cc9690f3d03/createstructure/libraries-createstructure)
+![createstructure/libraries-createstructure](https://opengraph.githubassets.com/626e3b763debefc0fcbda458a379f3cc00c23e7debc2fc61a135bb00872358ec/createstructure/libraries-createstructure)
 
 ### default-template
 This is the default template

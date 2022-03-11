@@ -2,6 +2,25 @@ name: Upgrade documentation (Wiki + README.md)
 on: [workflow_dispatch, push]
 
 jobs:
+  UML-export:
+    runs-on: ubuntu-latest
+    environment:
+      name: UML
+    steps:
+    - uses: actions/checkout@v2
+    - name: Export UML    
+      uses: docker://rlespinasse/drawio-export:latest
+      with:
+        args: -f svg -o img
+    - name: git add & commit & upload repo
+      continue-on-error: true
+      run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "help@castellanidavide.it"
+        git add *
+        git commit -m "Exported UML automatically"
+        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
+
   upgrade-documentation:
     runs-on: ubuntu-latest
     environment:
@@ -22,24 +41,11 @@ jobs:
       run: |
         cd wiki
         python3 << EOF
-        def get_bmc_description():
-          """ Get BMC description
-          """
-          description = "Made by Castellani Davide\n\n"
-          description += "Template base for the BMC (Business Model Canvas): Strategyzer AG\n\n"
-          description += "Icons taken by Flavicon:\n"
-          description += "- [https://www.flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik)\n"
-          description += "- [https://www.flaticon.com/authors/gowi](https://www.flaticon.com/authors/gowi)\n"
-          description += "- [https://www.flaticon.com/authors/eucalyp](https://www.flaticon.com/authors/eucalyp)\n"
-          description += "- [https://www.flaticon.com/authors/ultimatearm](https://www.flaticon.com/authors/ultimatearm)\n"
-          description += "- [https://www.freepik.com](https://www.freepik.com)\n\n"
-          return description
         def get_content():
           """ Returns the file content
           """
           file_content = "## :octocat: Description :octocat:\n"
-          file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/main/BMC.jpg)\n\n"
-          file_content += get_bmc_description()
+          file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/$(echo ${GITHUB_REF#refs/heads/})/img/createstructure.github.io-BMC.svg)\n\n"
           return file_content
         if __name__ == "__main__":
           open("Home.md", "w+").write(str(get_content()))
