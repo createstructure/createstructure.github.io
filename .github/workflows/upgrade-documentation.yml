@@ -3,7 +3,7 @@ on: [workflow_dispatch, push]
 
 jobs:
   UML-export:
-    runs-on: linux-latest
+    runs-on: ubuntu-latest
     environment:
       name: UML
     steps:
