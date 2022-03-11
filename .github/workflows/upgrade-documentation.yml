@@ -3,22 +3,25 @@ on: [workflow_dispatch, push]
 
 jobs:
   UML-export:
-    runs-on: windows-latest
+    runs-on: linux-latest
     environment:
       name: UML
     steps:
     - uses: actions/checkout@v2
     - name: Download requirements
       run: |
-        choco install drawio -y
-        cp 'C:\Program Files\draw.io\draw.io.exe' .\drawio.exe
-        .\drawio.exe -V
+        # choco install drawio -y
+        # cp 'C:\Program Files\draw.io\draw.io.exe' .\drawio.exe
+        # .\drawio.exe -V
+        sudo snap install drawio
+        drawio -h
+        drawio -v
     - name: Export UML
       run: |
-        .\drawio.exe -V
-        .\drawio.exe -h
-        .\drawio.exe -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
-        dir
+        # .\drawio.exe -V
+        # .\drawio.exe -h
+        # .\drawio.exe -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
+        # dir
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
