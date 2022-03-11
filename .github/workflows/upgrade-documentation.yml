@@ -11,10 +11,7 @@ jobs:
     - name: Export UML    
       uses: docker://rlespinasse/drawio-export:latest
       with:
-        args: -f svg -o ./
-    - name: Check files
-      run: |
-        ls
+        args: -f svg -o img
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
