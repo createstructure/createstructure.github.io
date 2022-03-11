@@ -41,17 +41,11 @@ jobs:
       run: |
         cd wiki
         python3 << EOF
-        def get_bmc_description():
-          """ Get BMC description
-          """
-          description = "Made by Castellani Davide\n\n"
-          return description
         def get_content():
           """ Returns the file content
           """
           file_content = "## :octocat: Description :octocat:\n"
           file_content += "![BMC createstructure](https://raw.githubusercontent.com/createstructure/createstructure.github.io/$(echo ${GITHUB_REF#refs/heads/})/img/createstructure.github.io-BMC.svg)\n\n"
-          file_content += get_bmc_description()
           return file_content
         if __name__ == "__main__":
           open("Home.md", "w+").write(str(get_content()))
