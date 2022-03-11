@@ -14,7 +14,7 @@ jobs:
         sudo apt -y install wget curl
         curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep browser_download_url | grep '\.deb' | cut -d '"' -f 4 | wget -i -
         sudo apt -f install ./drawio-amd64-*.deb
-        sudo draw.io -V
+        drawio --help
          # choco install drawio -y
     - name: Export UML
       run: |
