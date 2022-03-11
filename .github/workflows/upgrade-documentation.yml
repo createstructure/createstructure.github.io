@@ -3,20 +3,25 @@ on: [workflow_dispatch, push]
 
 jobs:
   UML-export:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment:
       name: UML
     steps:
     - uses: actions/checkout@v2
     - name: Download requirements
       run: |
-        choco install drawio -y
+        sudo apt update
+        sudo apt -y install wget curl
+        curl -s https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep browser_download_url | grep '\.deb' | cut -d '"' -f 4 | wget -i -
+        sudo apt -f install ./drawio-amd64-*.deb
+        drawio --version
+         # choco install drawio -y
     - name: Export UML
       run: |
-        "C:\Program Files\draw.io\draw.io.exe" -V
-        "C:\Program Files\draw.io\draw.io.exe" -h
-        "C:\Program Files\draw.io\draw.io.exe" -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
-        dir
+        # "C:\Program Files\draw.io\draw.io.exe" -V
+        # "C:\Program Files\draw.io\draw.io.exe" -h
+        # "C:\Program Files\draw.io\draw.io.exe" -x -p 1 -f svg -o BMC.svg createstructure.github.io.drawio
+        # dir
     - name: git add & commit & upload repo
       continue-on-error: true
       run: |
